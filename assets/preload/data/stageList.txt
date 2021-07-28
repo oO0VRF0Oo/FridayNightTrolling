@@ -6,4 +6,8 @@ mall
 mallEvil
 school
 schoolEvil
-wood
+street-sunny
+street-rain
+street-abandon
+street-unused
+void

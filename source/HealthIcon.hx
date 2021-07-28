@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxG;
 import flixel.FlxSprite;
 
 class HealthIcon extends FlxSprite
@@ -12,10 +13,17 @@ class HealthIcon extends FlxSprite
 	public function new(char:String = 'bf', isPlayer:Bool = false)
 	{
 		super();
-		
-		loadGraphic(Paths.image('iconGrid'), true, 150, 150);
 
-		antialiasing = true;
+		if(FlxG.save.data.antialiasing)
+			{
+				antialiasing = true;
+			}
+		if (char == 'sm')
+		{
+			loadGraphic(Paths.image("stepmania-icon"));
+			return;
+		}
+		loadGraphic(Paths.image('iconGrid'), true, 150, 150);
 		animation.add('bf', [0, 1, 0], 0, false, isPlayer);
 		animation.add('bf-1', [0, 1, 0], 0, false, isPlayer);
 		animation.add('bf-car', [0, 1, 0], 0, false, isPlayer);
@@ -41,8 +49,8 @@ class HealthIcon extends FlxSprite
 		animation.add('monster-christmas', [19, 20, 20], 0, false, isPlayer);
 		animation.add('trollge01', [12, 13, 13], 0, false, isPlayer);
 		animation.add('trollge02', [12, 13, 13], 0, false, isPlayer);
+		animation.add('trollge02s', [12, 13, 13], 0, false, isPlayer);
 		animation.add('trollge03', [12, 13, 13], 0, false, isPlayer);
-		
 		animation.play(char);
 
 		switch(char)

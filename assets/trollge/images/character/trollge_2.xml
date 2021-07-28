@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="TROLLGE2.png">
+<TextureAtlas imagePath="trollge_2.png">
 	<!-- Created with Adobe Animate version 19.0.0.326 -->
 	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="tg2 D0000" x="0" y="0" width="548" height="829" frameX="-31" frameY="0" frameWidth="579" frameHeight="833"/>

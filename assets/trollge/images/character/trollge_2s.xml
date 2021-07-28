@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="trollge_2s.png">
+	<!-- Created with Adobe Animate version 19.0.0.326 -->
+	<!-- http://www.adobe.com/products/animate.html -->
+	<SubTexture name="tg22 D0000" x="0" y="0" width="629" height="829" frameX="0" frameY="0" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0001" x="629" y="0" width="641" height="815" frameX="-2" frameY="-14" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0002" x="629" y="0" width="641" height="815" frameX="-2" frameY="-14" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0003" x="1270" y="0" width="560" height="798" frameX="-64" frameY="-34" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0004" x="1830" y="0" width="564" height="810" frameX="-57" frameY="-22" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0005" x="1830" y="0" width="564" height="810" frameX="-57" frameY="-22" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0006" x="2394" y="0" width="576" height="802" frameX="-94" frameY="-30" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0007" x="2970" y="0" width="571" height="813" frameX="-50" frameY="-20" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0008" x="0" y="829" width="588" height="828" frameX="-59" frameY="-1" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0009" x="588" y="829" width="554" height="815" frameX="-73" frameY="-14" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0010" x="1142" y="829" width="560" height="798" frameX="-64" frameY="-34" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0011" x="1702" y="829" width="564" height="810" frameX="-57" frameY="-22" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0012" x="2266" y="829" width="559" height="802" frameX="-64" frameY="-30" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0013" x="2970" y="0" width="571" height="813" frameX="-50" frameY="-20" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0014" x="2825" y="829" width="548" height="829" frameX="-81" frameY="0" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0015" x="588" y="829" width="554" height="815" frameX="-73" frameY="-14" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 D0016" x="1142" y="829" width="560" height="798" frameX="-64" frameY="-34" frameWidth="670" frameHeight="833"/>
+	<SubTexture name="tg22 L0000" x="3373" y="829" width="637" height="720" frameX="-36" frameY="-13" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 L0001" x="0" y="1658" width="673" height="725" frameX="0" frameY="-8" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 L0002" x="0" y="1658" width="673" height="725" frameX="0" frameY="-8" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 L0003" x="673" y="1658" width="621" height="710" frameX="-52" frameY="-23" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 L0004" x="1294" y="1658" width="640" height="733" frameX="-34" frameY="0" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 L0005" x="1934" y="1658" width="617" height="708" frameX="-57" frameY="-25" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 L0006" x="2551" y="1658" width="629" height="726" frameX="-46" frameY="-7" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 L0007" x="3180" y="1658" width="638" height="720" frameX="-35" frameY="-13" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 L0008" x="0" y="2391" width="631" height="725" frameX="-42" frameY="-8" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 L0009" x="631" y="2391" width="621" height="710" frameX="-52" frameY="-23" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 L0010" x="1294" y="1658" width="640" height="733" frameX="-34" frameY="0" frameWidth="675" frameHeight="733"/>
+	<SubTexture name="tg22 R0000" x="1252" y="2391" width="674" height="712" frameX="-58" frameY="0" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0001" x="1926" y="2391" width="650" height="688" frameX="0" frameY="-24" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0002" x="1926" y="2391" width="650" height="688" frameX="0" frameY="-24" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0003" x="2576" y="2391" width="501" height="679" frameX="-58" frameY="-33" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0004" x="3077" y="2391" width="521" height="680" frameX="-58" frameY="-32" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0005" x="0" y="3116" width="502" height="686" frameX="-57" frameY="-26" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0006" x="502" y="3116" width="550" height="680" frameX="-25" frameY="-32" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0007" x="1052" y="3116" width="572" height="712" frameX="-58" frameY="0" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0008" x="1624" y="3116" width="560" height="670" frameX="-58" frameY="-42" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0009" x="2184" y="3116" width="566" height="679" frameX="-29" frameY="-33" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0010" x="3077" y="2391" width="521" height="680" frameX="-58" frameY="-32" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0011" x="0" y="3116" width="502" height="686" frameX="-57" frameY="-26" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 R0012" x="2750" y="3116" width="509" height="680" frameX="-58" frameY="-32" frameWidth="732" frameHeight="712"/>
+	<SubTexture name="tg22 U0000" x="3259" y="3116" width="454" height="809" frameX="0" frameY="-39" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0001" x="0" y="3925" width="453" height="843" frameX="-11" frameY="-4" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0002" x="453" y="3925" width="424" height="799" frameX="-32" frameY="-47" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0003" x="453" y="3925" width="424" height="799" frameX="-32" frameY="-47" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0004" x="877" y="3925" width="425" height="819" frameX="-6" frameY="-28" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0005" x="1302" y="3925" width="427" height="816" frameX="-32" frameY="-31" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0006" x="1729" y="3925" width="460" height="821" frameX="-6" frameY="-26" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0007" x="2189" y="3925" width="435" height="843" frameX="-21" frameY="-4" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0008" x="2624" y="3925" width="449" height="843" frameX="-15" frameY="-4" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0009" x="2624" y="3925" width="449" height="843" frameX="-15" frameY="-4" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0010" x="3073" y="3925" width="424" height="797" frameX="-32" frameY="-49" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0011" x="877" y="3925" width="425" height="819" frameX="-6" frameY="-28" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0012" x="1302" y="3925" width="427" height="816" frameX="-32" frameY="-31" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0013" x="3497" y="3925" width="474" height="847" frameX="-6" frameY="0" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0014" x="2189" y="3925" width="435" height="843" frameX="-21" frameY="-4" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0015" x="0" y="4772" width="451" height="843" frameX="-13" frameY="-4" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0016" x="1302" y="3925" width="427" height="816" frameX="-32" frameY="-31" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0017" x="451" y="4772" width="427" height="821" frameX="-6" frameY="-26" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22 U0018" x="451" y="4772" width="427" height="821" frameX="-6" frameY="-26" frameWidth="480" frameHeight="848"/>
+	<SubTexture name="tg22idle0000" x="878" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0001" x="878" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0002" x="1345" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0003" x="1812" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0004" x="2279" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0005" x="2279" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0006" x="2279" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0007" x="2279" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0008" x="2279" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0009" x="2746" y="4772" width="470" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0010" x="3216" y="4772" width="501" height="682" frameX="-63" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0011" x="3216" y="4772" width="501" height="682" frameX="-63" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0012" x="2279" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0013" x="2279" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0014" x="2279" y="4772" width="467" height="682" frameX="-76" frameY="0" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0015" x="0" y="5615" width="542" height="635" frameX="0" frameY="-46" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0016" x="542" y="5615" width="462" height="635" frameX="-80" frameY="-46" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0017" x="1004" y="5615" width="441" height="653" frameX="-73" frameY="-27" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0018" x="1445" y="5615" width="433" height="649" frameX="-81" frameY="-31" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0019" x="1878" y="5615" width="450" height="660" frameX="-79" frameY="-21" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0020" x="2328" y="5615" width="468" height="660" frameX="-58" frameY="-21" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0021" x="2796" y="5615" width="464" height="679" frameX="-77" frameY="-3" frameWidth="564" frameHeight="682"/>
+	<SubTexture name="tg22idle0022" x="3260" y="5615" width="451" height="673" frameX="-73" frameY="-9" frameWidth="564" frameHeight="682"/>
+</TextureAtlas>
