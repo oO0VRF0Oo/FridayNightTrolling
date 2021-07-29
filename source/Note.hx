@@ -33,7 +33,7 @@ class Note extends FlxSprite
 	public var originColor:Int = 0; // The sustain note's original note's color
 	public var noteSection:Int = 0;
 	
-	public var notetype:String = "normal";
+	public var ArrowType:String = "normal";
 
 	public var noteCharterObject:FlxSprite;
 
@@ -63,12 +63,15 @@ class Note extends FlxSprite
 
 	public var children:Array<Note> = [];
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inCharter:Bool = false)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inCharter:Bool = false, ?TypeGuide:Int)
 	{
 		super();
 
 		if (prevNote == null)
 			prevNote = this;
+			
+		if (TypeGuide == null)
+			TypeGuide = 0;
 
 		this.prevNote = prevNote;
 		isSustainNote = sustainNote;
@@ -107,7 +110,10 @@ class Note extends FlxSprite
 
 		if (inCharter)
 		{
-			frames = Paths.getSparrowAtlas('NOTE_assets');
+			if (TypeGuide == 0) frames = Paths.getSparrowAtlas('NOTE_assets');
+			else if (TypeGuide == 1) frames = Paths.getSparrowAtlas('NOTE_trolling');
+			else if (TypeGuide == 2) frames = Paths.getSparrowAtlas('NOTE_oily');
+			else if (TypeGuide == 3) frames = Paths.getSparrowAtlas('NOTE_magnetic');
 
 			for (i in 0...4)
 			{
@@ -119,9 +125,9 @@ class Note extends FlxSprite
 			setGraphicSize(Std.int(width * 0.7));
 			updateHitbox();
 			if(FlxG.save.data.antialiasing)
-				{
-					antialiasing = true;
-				}
+			{
+				antialiasing = true;
+			}	
 		}
 		else
 		{
@@ -146,8 +152,27 @@ class Note extends FlxSprite
 					setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 					updateHitbox();
 				default:
-					frames = Paths.getSparrowAtlas('NOTE_assets');
-
+					if (TypeGuide == 0)
+					{
+						frames = Paths.getSparrowAtlas('NOTE_assets');
+						ArrowType = 'normal';
+					}
+					else if (TypeGuide == 1)
+					{
+						frames = Paths.getSparrowAtlas('NOTE_trolling');
+						ArrowType = 'troll';
+					}
+					else if (TypeGuide == 2)
+					{
+						frames = Paths.getSparrowAtlas('NOTE_oily');
+						ArrowType = 'oil';
+					}
+					else if (TypeGuide == 3)
+					{
+						frames = Paths.getSparrowAtlas('NOTE_magnetic');
+						ArrowType = 'magnet';
+					}
+					
 					for (i in 0...4)
 					{
 						animation.addByPrefix(dataColor[i] + 'Scroll', dataColor[i] + ' alone'); // Normal notes
@@ -159,9 +184,9 @@ class Note extends FlxSprite
 					updateHitbox();
 					
 					if(FlxG.save.data.antialiasing)
-						{
-							antialiasing = true;
-						}
+					{
+						antialiasing = true;
+					}
 			}
 		}
 

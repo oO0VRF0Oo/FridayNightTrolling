@@ -2177,6 +2177,8 @@ class PlayState extends MusicBeatState
 				{
 					gottaHitNote = !section.mustHitSection;
 				}
+				
+				var notetype:Int = Std.int(songNotes[3]);
 
 				var oldNote:Note;
 				if (unspawnNotes.length > 0)
@@ -2184,7 +2186,7 @@ class PlayState extends MusicBeatState
 				else
 					oldNote = null;
 
-				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote);
+				var swagNote:Note = new Note(daStrumTime, daNoteData, oldNote, notetype);
 
 				if (!gottaHitNote && PlayStateChangeables.Optimize)
 					continue;
@@ -2207,7 +2209,7 @@ class PlayState extends MusicBeatState
 				{
 					oldNote = unspawnNotes[Std.int(unspawnNotes.length - 1)];
 
-					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true);
+					var sustainNote:Note = new Note(daStrumTime + (Conductor.stepCrochet * susNote) + Conductor.stepCrochet, daNoteData, oldNote, true, notetype);
 					sustainNote.scrollFactor.set();
 					unspawnNotes.push(sustainNote);
 
@@ -2870,7 +2872,8 @@ class PlayState extends MusicBeatState
 			#end
 		}
 		
-		if(FlxG.keys.justPressed.TWO) { //Go 10 seconds into the future, credit: Shadow Mario#9396
+		if (FlxG.keys.justPressed.TWO)  //Go 10 seconds into the future, credit: Shadow Mario#9396
+		{
 			if (!usedTimeTravel && Conductor.songPosition + 10000 < FlxG.sound.music.length) 
 			{
 				usedTimeTravel = true;
@@ -2879,11 +2882,10 @@ class PlayState extends MusicBeatState
 				Conductor.songPosition += 10000;
 				notes.forEachAlive(function(daNote:Note)
 				{
-					if(daNote.strumTime - 500 < Conductor.songPosition) {
+					if (daNote.strumTime - 500 < Conductor.songPosition) 
+					{
 						daNote.active = false;
 						daNote.visible = false;
-
-					
 						daNote.kill();
 						notes.remove(daNote, true);
 						daNote.destroy();
@@ -3359,7 +3361,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-				if (!daNote.mustPress && daNote.wasGoodHit)
+				if (!daNote.mustPress && daNote.wasGoodHit && (daNote.ArrowType == 'normal' || daNote.ArrowType == 'magnet'))
 				{
 					SectionCounter += 1;
 					if (SectionCounter >= ArrowCounts[SectionIdentifier])
@@ -3474,11 +3476,11 @@ class PlayState extends MusicBeatState
 				// WIP interpolation shit? Need to fix the pause issue
 				// daNote.y = (strumLine.y - (songTime - daNote.strumTime) * (0.45 * PlayState.SONG.speed));
 
-				if ((daNote.mustPress && daNote.tooLate && !PlayStateChangeables.useDownscroll || daNote.mustPress && daNote.tooLate
-					&& PlayStateChangeables.useDownscroll)
-					&& daNote.mustPress)
+				if ((daNote.mustPress && daNote.tooLate && !PlayStateChangeables.useDownscroll || daNote.mustPress && daNote.tooLate && PlayStateChangeables.useDownscroll) && (daNote.mustPress))
 				{
-					if (daNote.isSustainNote && daNote.wasGoodHit)
+					if (daNote.ArrowType == 'normal' || daNote.ArrowType == 'magnet')
+					{
+						if (daNote.isSustainNote && daNote.wasGoodHit)
 						{
 							health += 0.10;
 							daNote.kill();
@@ -3510,10 +3512,7 @@ class PlayState extends MusicBeatState
 									}
 									else
 									{
-										if (!daNote.wasGoodHit
-											&& daNote.isSustainNote
-											&& daNote.sustainActive
-											&& daNote.spotInLine != daNote.parent.children.length)
+										if (!daNote.wasGoodHit && daNote.isSustainNote && daNote.sustainActive && daNote.spotInLine != daNote.parent.children.length)
 										{
 											health -= 0.20; // give a health punishment for failing a LN
 											trace("hold fell over at " + daNote.spotInLine);
@@ -3570,11 +3569,12 @@ class PlayState extends MusicBeatState
 								}
 							}
 						}
-
-						daNote.visible = false;
-						daNote.kill();
-						notes.remove(daNote, true);
 					}
+
+					daNote.visible = false;
+					daNote.kill();
+					notes.remove(daNote, true);
+				}
 			});
 		}
 
@@ -3804,40 +3804,52 @@ class PlayState extends MusicBeatState
 			totalNotesHit += wife;
 
 		var daRating = daNote.rating;
-
-		switch (daRating)
+		
+		if (daNote.ArrowType == 'normal' || daNote.ArrowType == 'magnet')
 		{
-			case 'shit':
-				score = -300;
-				combo = 0;
-				misses++;
-				health -= 0.06;
-				ss = false;
-				shits++;
-				if (FlxG.save.data.accuracyMod == 0)
-					totalNotesHit -= 1;
-			case 'bad':
-				daRating = 'bad';
-				score = 0;
-				health -= 0.03;
-				ss = false;
-				bads++;
-				if (FlxG.save.data.accuracyMod == 0)
-					totalNotesHit += 0.50;
-			case 'good':
-				daRating = 'good';
-				score = 200;
-				ss = false;
-				goods++;
-				if (FlxG.save.data.accuracyMod == 0)
-					totalNotesHit += 0.75;
-			case 'sick':
-				if (health < 2)
-					health += 0.04;
-				if (FlxG.save.data.accuracyMod == 0)
-					totalNotesHit += 1;
-				sicks++;
+			switch (daRating)
+			{
+				case 'shit':
+					score = -300;
+					combo = 0;
+					misses++;
+					health -= 0.06;
+					ss = false;
+					shits++;
+					if (FlxG.save.data.accuracyMod == 0)
+						totalNotesHit -= 1;
+				case 'bad':
+					daRating = 'bad';
+					score = 0;
+					health -= 0.03;
+					ss = false;
+					bads++;
+					if (FlxG.save.data.accuracyMod == 0)
+						totalNotesHit += 0.50;
+				case 'good':
+					daRating = 'good';
+					score = 200;
+					ss = false;
+					goods++;
+					if (FlxG.save.data.accuracyMod == 0)
+						totalNotesHit += 0.75;
+				case 'sick':
+					if (health < 2)
+						health += 0.04;
+					if (FlxG.save.data.accuracyMod == 0)
+						totalNotesHit += 1;
+					sicks++;
+			}
 		}
+		else
+		{
+			if (FlxG.save.data.accuracyMod == 0)
+				totalNotesHit += 1;
+			combo = 0;
+			misses++;
+			updateAccuracy();
+		}
+		
 
 
 		// trace('Wife accuracy loss: ' + wife + ' | Rating: ' + daRating + ' | Score: ' + score + ' | Weight: ' + (1 - wife));
@@ -4407,98 +4419,147 @@ class PlayState extends MusicBeatState
 
 	function noteMiss(direction:Int = 1, daNote:Note):Void
 	{
-		if (!boyfriend.stunned)
+		if (daNote.ArrowType == 'normal')
 		{
-			//health -= 0.2;
-			if (combo > 5 && gf.animOffsets.exists('sad'))
+			if (!boyfriend.stunned)
 			{
-				gf.playAnim('sad');
-			}
-			combo = 0;
-			misses++;
+				combo = 0;
+				misses++;
 
-			if (daNote != null)
-			{
-				if (!loadRep)
+				if (daNote != null)
+				{
+					if (!loadRep)
+					{
+						saveNotes.push([
+							daNote.strumTime,
+							0,
+							direction,
+							166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166
+						]);
+						saveJudge.push("miss");
+					}
+				}
+				else if (!loadRep)
 				{
 					saveNotes.push([
-						daNote.strumTime,
+						Conductor.songPosition,
 						0,
 						direction,
 						166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166
 					]);
 					saveJudge.push("miss");
 				}
-			}
-			else if (!loadRep)
-			{
-				saveNotes.push([
-					Conductor.songPosition,
-					0,
-					direction,
-					166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166
-				]);
-				saveJudge.push("miss");
-			}
 
-			// var noteDiff:Float = Math.abs(daNote.strumTime - Conductor.songPosition);
-			// var wife:Float = EtternaFunctions.wife3(noteDiff, FlxG.save.data.etternaMode ? 1 : 1.7);
+				// var noteDiff:Float = Math.abs(daNote.strumTime - Conductor.songPosition);
+				// var wife:Float = EtternaFunctions.wife3(noteDiff, FlxG.save.data.etternaMode ? 1 : 1.7);
 
-			if (FlxG.save.data.accuracyMod == 1)
-				totalNotesHit -= 1;
+				if (FlxG.save.data.accuracyMod == 1)
+					totalNotesHit -= 1;
 
-			if (daNote != null)
-			{
-				if (!daNote.isSustainNote)
-					songScore -= 10;
-			}
-			else
-				songScore -= 10;
-			
-			if(FlxG.save.data.missSounds)
-			{
-				if (curStage == 'street-rain' || curStage == 'street-unused')
-					FlxG.sound.play(Paths.soundRandom('missnotedistort', 1, 3), FlxG.random.float(0.1, 0.2));
-				else if (curStage == 'void')
-					FlxG.sound.play(Paths.soundRandom('missed', 1, 3), FlxG.random.float(0.1, 0.2));
+				if (daNote != null)
+				{
+					if (!daNote.isSustainNote)
+						songScore -= 10;
+				}
 				else
-					FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-				// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
-				// FlxG.log.add('played imss note');
+					songScore -= 10;
+				
+				if(FlxG.save.data.missSounds)
+				{
+					if (curStage == 'street-rain' || curStage == 'street-unused')
+						FlxG.sound.play(Paths.soundRandom('missnotedistort', 1, 3), FlxG.random.float(0.1, 0.2));
+					else if (curStage == 'void')
+						FlxG.sound.play(Paths.soundRandom('missed', 1, 3), FlxG.random.float(0.1, 0.2));
+					else
+						FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+					// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
+					// FlxG.log.add('played imss note');
+				}
+
+				// Hole switch statement replaced with a single line :)
+				boyfriend.playAnim('sing' + dataSuffix[direction] + 'miss', true);
+
+				#if windows
+				if (luaModchart != null)
+					luaModchart.executeState('playerOneMiss', [direction, Conductor.songPosition]);
+				#end
+
+				updateAccuracy();
 			}
+		}
+		if (daNote.ArrowType == 'magnet')
+		{
+			if (!boyfriend.stunned)
+			{
+				combo = 0;
+				misses++;
 
-			// Hole switch statement replaced with a single line :)
-			boyfriend.playAnim('sing' + dataSuffix[direction] + 'miss', true);
+				if (daNote != null)
+				{
+					if (!loadRep)
+					{
+						saveNotes.push([
+							daNote.strumTime,
+							0,
+							direction,
+							166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166
+						]);
+						saveJudge.push("miss");
+					}
+				}
+				else if (!loadRep)
+				{
+					saveNotes.push([
+						Conductor.songPosition,
+						0,
+						direction,
+						166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166
+					]);
+					saveJudge.push("miss");
+				}
 
-			#if windows
-			if (luaModchart != null)
-				luaModchart.executeState('playerOneMiss', [direction, Conductor.songPosition]);
-			#end
+				// var noteDiff:Float = Math.abs(daNote.strumTime - Conductor.songPosition);
+				// var wife:Float = EtternaFunctions.wife3(noteDiff, FlxG.save.data.etternaMode ? 1 : 1.7);
 
-			updateAccuracy();
+				if (FlxG.save.data.accuracyMod == 1)
+					totalNotesHit -= 1;
+
+				if (daNote != null)
+				{
+					if (!daNote.isSustainNote)
+						songScore -= 10;
+				}
+				else
+					songScore -= 10;
+				
+				if(FlxG.save.data.missSounds)
+				{
+					if (curStage == 'street-rain' || curStage == 'street-unused')
+						FlxG.sound.play(Paths.soundRandom('missnotedistort', 1, 3), FlxG.random.float(0.1, 0.2));
+					else if (curStage == 'void')
+						FlxG.sound.play(Paths.soundRandom('missed', 1, 3), FlxG.random.float(0.1, 0.2));
+					else
+						FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
+					// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
+					// FlxG.log.add('played imss note');
+				}
+
+				// Hole switch statement replaced with a single line :)
+				boyfriend.playAnim('sing' + dataSuffix[direction] + 'miss', true);
+
+				#if windows
+				if (luaModchart != null)
+					luaModchart.executeState('playerOneMiss', [direction, Conductor.songPosition]);
+				#end
+
+				updateAccuracy();
+				
+				
+				trace('punishment_megnet');
+			}
 		}
 	}
 
-	/*function badNoteCheck()
-			{
-				// just double pasting this shit cuz fuk u
-				// REDO THIS SYSTEM!
-				var upP = controls.UP_P;
-				var rightP = controls.RIGHT_P;
-				var downP = controls.DOWN_P;
-				var leftP = controls.LEFT_P;
-
-				if (leftP)
-					noteMiss(0);
-				if (upP)
-					noteMiss(2);
-				if (rightP)
-					noteMiss(3);
-				if (downP)
-					noteMiss(1);
-				updateAccuracy();
-			}
-	 */
 	function updateAccuracy()
 	{
 		totalPlayed += 1;
@@ -4534,43 +4595,9 @@ class PlayState extends MusicBeatState
 
 		note.rating = Ratings.CalculateRating(noteDiff, Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
 
-		/* if (loadRep)
-			{
-				if (controlArray[note.noteData])
-					goodNoteHit(note, false);
-				else if (rep.replay.keyPresses.length > repPresses && !controlArray[note.noteData])
-				{
-					if (NearlyEquals(note.strumTime,rep.replay.keyPresses[repPresses].time, 4))
-					{
-						goodNoteHit(note, false);
-					}
-				}
-		}*/
-
 		if (controlArray[note.noteData])
 		{
 			goodNoteHit(note, (mashing > getKeyPresses(note)));
-
-			/*if (mashing > getKeyPresses(note) && mashViolations <= 2)
-				{
-					mashViolations++;
-
-					goodNoteHit(note, (mashing > getKeyPresses(note)));
-				}
-				else if (mashViolations > 2)
-				{
-					// this is bad but fuck you
-					playerStrums.members[0].animation.play('static');
-					playerStrums.members[1].animation.play('static');
-					playerStrums.members[2].animation.play('static');
-					playerStrums.members[3].animation.play('static');
-					health -= 0.4;
-					trace('mash ' + mashing);
-					if (mashing != 0)
-						mashing = 0;
-				}
-				else
-					goodNoteHit(note, false); */
 		}
 	}
 
@@ -4652,6 +4679,11 @@ class PlayState extends MusicBeatState
 			note.destroy();
 
 			updateAccuracy();
+			
+			if (note.ArrowType == 'oil')
+			{
+				trace('punishment_oil');
+			}
 		}
 	}
 

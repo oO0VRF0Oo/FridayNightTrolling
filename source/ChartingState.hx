@@ -64,6 +64,7 @@ class ChartingState extends MusicBeatState
 
 	public static var lengthInSteps:Float = 0;
 	public static var lengthInBeats:Float = 0;
+	public var ArrowTypeGuide:Int = 0;
 
 	public var beatsShown:Float = 1; // for the zoom factor
 	public var zoomFactor:Float = 1;
@@ -91,8 +92,7 @@ class ChartingState extends MusicBeatState
 	var defaultSnap:Bool = true;
 
 	var dummyArrow:FlxSprite;
-
-
+	
 	var curRenderedNotes:FlxTypedGroup<Note>;
 	var curRenderedSustains:FlxTypedGroup<FlxSprite>;
 
@@ -1850,6 +1850,16 @@ class ChartingState extends MusicBeatState
 				}
 			}
 		}
+		
+		//change arrowtype when o pressed
+		if (FlxG.keys.pressed.O)
+		{
+			ArrowTypeGuide += 1;
+			if (ArrowTypeGuide > 3) 
+			{
+				ArrowTypeGuide = 0;
+			}
+		}
 
 		if (FlxG.mouse.x > 0
 			&& FlxG.mouse.x < gridBG.width
@@ -2161,7 +2171,7 @@ class ChartingState extends MusicBeatState
 				var daStrumTime = i[0];
 				var daSus = i[2];
 
-				var note:Note = new Note(daStrumTime, daNoteInfo % 4,null,false,true);
+				var note:Note = new Note(daStrumTime, daNoteInfo % 4,null,false,true, i[3]);
 				note.rawNoteData = daNoteInfo;
 				note.sustainLength = daSus;
 				note.setGraphicSize(Math.floor(GRID_SIZE), Math.floor(GRID_SIZE));
@@ -2481,9 +2491,9 @@ class ChartingState extends MusicBeatState
 		var noteSus = 0;
 
 		if (n != null)
-			section.sectionNotes.push([n.strumTime, n.noteData, n.sustainLength]);
+			section.sectionNotes.push([n.strumTime, n.noteData, n.sustainLength, ArrowTypeGuide]);
 		else
-			section.sectionNotes.push([noteStrum, noteData, noteSus]);
+			section.sectionNotes.push([noteStrum, noteData, noteSus, ArrowTypeGuide]);
 
 		var thingy = section.sectionNotes[section.sectionNotes.length - 1];
 
@@ -2559,7 +2569,7 @@ class ChartingState extends MusicBeatState
 		
 		for (k in 0...PlayState.SONG.notes.length)
 		{
-			if (PlayState.SONG.notes[k].length != 0)
+			if (PlayState.SONG.notes[k].sectionNotes.length != 0)
 			{
 				for (i in 0...PlayState.SONG.notes[k].sectionNotes.length)
 				{
