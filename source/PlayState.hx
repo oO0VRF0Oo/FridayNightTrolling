@@ -1591,7 +1591,7 @@ class PlayState extends MusicBeatState
 
 	var startTimer:FlxTimer;
 	var perfectMode:Bool = false;
-
+	
 	var luaWiggles:Array<WiggleEffect> = [];
 
 	#if windows
@@ -1704,7 +1704,12 @@ class PlayState extends MusicBeatState
 
 			{
 				case 0:
-					FlxG.sound.play(Paths.sound('intro3' + altSuffix), 0.6);
+					if (curStage == 'street-rain'|| curStage == 'street-unused')
+						FlxG.sound.play(Paths.sound('3_sam'), 0.6);
+					else if (curStage == 'void')
+						FlxG.sound.play(Paths.sound('3_demon'), 0.6);
+					else
+						FlxG.sound.play(Paths.sound('intro3' + altSuffix), 0.6);
 				case 1:
 					var ready:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
 					ready.scrollFactor.set();
@@ -1722,7 +1727,14 @@ class PlayState extends MusicBeatState
 							ready.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('intro2' + altSuffix), 0.6);
+					
+					if (curStage == 'street-rain'|| curStage == 'street-unused')
+						FlxG.sound.play(Paths.sound('2_sam'), 1);
+					else if (curStage == 'void')
+						FlxG.sound.play(Paths.sound('2_demon'), 1);
+					else
+						FlxG.sound.play(Paths.sound('intro2' + altSuffix), 0.6);
+						
 				case 2:
 					var set:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
 					set.scrollFactor.set();
@@ -1739,7 +1751,14 @@ class PlayState extends MusicBeatState
 							set.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('intro1' + altSuffix), 0.6);
+					
+					if (curStage == 'street-rain'|| curStage == 'street-unused')
+						FlxG.sound.play(Paths.sound('1_sam'), 1);
+					else if (curStage == 'void')
+						FlxG.sound.play(Paths.sound('1_demon'), 1);
+					else
+						FlxG.sound.play(Paths.sound('intro1' + altSuffix), 0.6);
+						
 				case 3:
 					var go:FlxSprite = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
 					go.scrollFactor.set();
@@ -1758,7 +1777,14 @@ class PlayState extends MusicBeatState
 							go.destroy();
 						}
 					});
-					FlxG.sound.play(Paths.sound('introGo' + altSuffix), 0.6);
+					
+					if (curStage == 'street-rain'|| curStage == 'street-unused')
+						FlxG.sound.play(Paths.sound('go_sam'), 1);
+					else if (curStage == 'void')
+						FlxG.sound.play(Paths.sound('go_demon'), 1);
+					else
+						FlxG.sound.play(Paths.sound('introGo' + altSuffix), 0.6);
+					
 				case 4:
 			}
 
@@ -1770,6 +1796,7 @@ class PlayState extends MusicBeatState
 	var previousFrameTime:Int = 0;
 	var lastReportedPlayheadPosition:Int = 0;
 	var songTime:Float = 0;
+
 
 	private function getKey(charCode:Int):String
 	{
@@ -1937,6 +1964,7 @@ class PlayState extends MusicBeatState
 	}
 
 	var songStarted = false;
+	var ambiance:FlxSound;
 
 	function startSong():Void
 	{
@@ -1961,6 +1989,14 @@ class PlayState extends MusicBeatState
 			#else
 			FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 1, false);
 			#end
+			
+			if (curStage == 'street-rain' || curStage == 'street-unused')
+				ambiance = FlxG.sound.load(Paths.sound('rain'), 1);
+			else if (curStage == 'street-sunny' || curStage == 'street-abandon')
+				ambiance = FlxG.sound.play(Paths.sound('wind'), 1);
+			
+			if (ambiance != null)
+						ambiance.play();
 		}
 
 		FlxG.sound.music.onComplete = endSong;
@@ -2357,6 +2393,8 @@ class PlayState extends MusicBeatState
 				FlxG.sound.music.pause();
 				vocals.pause();
 			}
+			if (ambiance != null)
+				ambiance.pause();
 
 			#if windows
 			DiscordClient.changePresence("PAUSED on "
@@ -2386,6 +2424,10 @@ class PlayState extends MusicBeatState
 			if (FlxG.sound.music != null && !startingSong)
 			{
 				resyncVocals();
+			}
+			if (ambiance != null)
+			{
+				ambiance.play();
 			}
 
 			if (!startTimer.finished)
@@ -2456,6 +2498,8 @@ class PlayState extends MusicBeatState
 	var fogged:Bool = false;
 	var SectionCounter:Int = 0;
 	var SectionIdentifier:Int = 0;
+	var healthtrack:Float = 1;
+	var healthloss:Float;
 
 	public static var songRate = 1.5;
 
@@ -2522,9 +2566,6 @@ class PlayState extends MusicBeatState
 				rainFrontB.alpha = 1;
 				rainFrontB.animation.play('rain');
 			}
-
-			if (curStep == 1096) healthFactor = healthFactor * 0.8;
-			if (curStep == 1904) healthFactor = healthFactor * 1.25;
 		}
 		
 		#if !debug
@@ -3327,33 +3368,25 @@ class PlayState extends MusicBeatState
 						SectionCounter = 0;
 						trace(SectionIdentifier);
 					}
+					
+					healthtrack = health;
 	
-					if (health > 1)
+					if (daNote.isSustainNote) 
 					{
-						if (daNote.isSustainNote) 
+						switch(storyDifficulty)
 						{
-							switch(storyDifficulty)
-							{
-								case 2: health -= 0.015 * 1;
-								case 1: health -= 0.015 * 0.8;
-								case 0: health -= 0.015 * 0.6;
-							}			
-						}
-						else health -= 3 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier]));
-					}	
-					else
-					{
-						if (daNote.isSustainNote) 
-						{
-							switch(storyDifficulty)
-							{
-								case 2: health -= 0.025 * 1 * health;
-								case 1: health -= 0.025 * 0.8 * health;
-								case 0: health -= 0.025 * 0.6 * health;
-							}
-						} 
-						else health -= 2*(healthFactor * (health) / Math.log(ArrowCounts[SectionIdentifier]));
+							case 2: healthloss = 0.015 * 1 * (Math.floor(accuracy) / 100);
+							case 1: healthloss = 0.015 * 0.8 * (Math.floor(accuracy) / 100);
+							case 0: healthloss = 0.015 * 0.6 * (Math.floor(accuracy) / 100);
+						}			
 					}
+					else healthloss = 3 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier]));	
+					
+					if ((healthtrack - healthloss) <= 0)
+					{
+						health = 0.05;
+					}
+					else health -= healthloss;
 					
 					if (SONG.song != 'Tutorial')
 						camZooming = true;
@@ -4423,11 +4456,16 @@ class PlayState extends MusicBeatState
 				songScore -= 10;
 			
 			if(FlxG.save.data.missSounds)
-				{
+			{
+				if (curStage == 'street-rain' || curStage == 'street-unused')
+					FlxG.sound.play(Paths.soundRandom('missnotedistort', 1, 3), FlxG.random.float(0.1, 0.2));
+				else if (curStage == 'void')
+					FlxG.sound.play(Paths.soundRandom('missed', 1, 3), FlxG.random.float(0.1, 0.2));
+				else
 					FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-					// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
-					// FlxG.log.add('played imss note');
-				}
+				// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
+				// FlxG.log.add('played imss note');
+			}
 
 			// Hole switch statement replaced with a single line :)
 			boyfriend.playAnim('sing' + dataSuffix[direction] + 'miss', true);

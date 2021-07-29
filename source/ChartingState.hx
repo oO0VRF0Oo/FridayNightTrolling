@@ -2556,6 +2556,20 @@ class ChartingState extends MusicBeatState
 		}
 		PlayState.SONG = Song.loadFromJson(format, format);
 		LoadingState.loadAndSwitchState(new ChartingState());
+		
+		for (k in 0...PlayState.SONG.notes.length)
+		{
+			if (PlayState.SONG.notes[k].length != 0)
+			{
+				for (i in 0...PlayState.SONG.notes[k].sectionNotes.length)
+				{
+					if (PlayState.SONG.notes[k].sectionNotes[i].length == 3)
+					{
+						PlayState.SONG.notes[k].sectionNotes[i][3] = 0;
+					}
+				}
+			}
+		}
 	}
 
 	function loadAutosave():Void
