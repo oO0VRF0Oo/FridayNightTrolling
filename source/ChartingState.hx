@@ -1484,11 +1484,30 @@ class ChartingState extends MusicBeatState
 
 		regenerateLines();
 	}
-
 	
+	function recalculateSteps():Int
+	{
+		var lastChange:BPMChangeEvent = {
+			stepTime: 0,
+			songTime: 0,
+			bpm: 0
+		}
+		for (i in 0...Conductor.bpmChangeMap.length)
+		{
+			if (FlxG.sound.music.time > Conductor.bpmChangeMap[i].songTime)
+				lastChange = Conductor.bpmChangeMap[i];
+		}
+
+		curStep = lastChange.stepTime + Math.floor((FlxG.sound.music.time - lastChange.songTime) / Conductor.stepCrochet);
+		updateBeat();
+
+		return curStep;
+	}
 
 	override function update(elapsed:Float)
 	{
+		curStep = recalculateSteps();
+		
 		updateHeads();
 
 		var doInput = true;
@@ -1691,7 +1710,9 @@ class ChartingState extends MusicBeatState
 		+ "\nCurBPM: " 
 		+ currentBPM
 		+ "\nCurBeat: " 
-		+ HelperFunctions.truncateFloat(curDecimalBeat,3)
+		+ HelperFunctions.truncateFloat(curDecimalBeat, 3)
+		+ "\nCurStep: " 
+		+ curStep
 		+ "\nZoom: "
 		+ zoomFactor;
 
@@ -1852,7 +1873,7 @@ class ChartingState extends MusicBeatState
 		}
 		
 		//change arrowtype when o pressed
-		if (FlxG.keys.pressed.O)
+		if (FlxG.keys.justPressed.O)
 		{
 			ArrowTypeGuide += 1;
 			if (ArrowTypeGuide > 3) 

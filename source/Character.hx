@@ -448,6 +448,23 @@ class Character extends FlxSprite
 
 				playAnim('idle');
 				
+			case 'trollge01ori':
+				frames = Paths.getSparrowAtlas('character/trollge_1ori','trollge');
+				animation.addByPrefix('idle', 'tg1 idle', 24, false);
+				animation.addByPrefix('singUP', 'tg1 U', 24, false);
+				animation.addByPrefix('singDOWN', 'tg1 D', 24, false);
+				animation.addByPrefix('singLEFT', 'tg1 L', 24, false);
+				animation.addByPrefix('singRIGHT', 'tg1 R', 24, false);
+
+				addOffset('idle', 0, -110);
+				addOffset("singUP", -19, 47);
+				addOffset("singRIGHT", -67, -75);
+				addOffset("singLEFT", 152, -70);
+				addOffset("singDOWN", -4, -16);
+
+				playAnim('idle');
+				
+				
 			case 'trollge02':
 				frames = Paths.getSparrowAtlas('character/trollge_2','trollge');
 				animation.addByPrefix('idle', 'tg2 idle', 24, false);
@@ -465,12 +482,12 @@ class Character extends FlxSprite
 				playAnim('idle');
 			
 			case 'trollge02s':
-				frames = Paths.getSparrowAtlas('character/trollge_2','trollge');
-				animation.addByPrefix('idle', 'tg2 idle', 24, false);
-				animation.addByPrefix('singUP', 'tg2 U', 24, false);
-				animation.addByPrefix('singDOWN', 'tg2 D', 24, false);
-				animation.addByPrefix('singLEFT', 'tg2 L', 24, false);
-				animation.addByPrefix('singRIGHT', 'tg2 R', 24, false);
+				frames = Paths.getSparrowAtlas('character/trollge_2s','trollge');
+				animation.addByPrefix('idle', 'tg22 idle', 24, false);
+				animation.addByPrefix('singUP', 'tg22 U', 24, false);
+				animation.addByPrefix('singDOWN', 'tg22 D', 24, false);
+				animation.addByPrefix('singLEFT', 'tg22 L', 24, false);
+				animation.addByPrefix('singRIGHT', 'tg22 R', 24, false);
 
 				addOffset('idle', 0, -85);
 				addOffset("singUP", -19, 72);
@@ -495,6 +512,8 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -4, 9);
 
 				playAnim('idle');
+				
+			
 		}
 
 		dance();

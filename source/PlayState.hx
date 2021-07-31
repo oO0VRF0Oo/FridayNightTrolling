@@ -209,6 +209,7 @@ class PlayState extends MusicBeatState
 	var rainMiddleB:FlxSprite;
 	var rainBackA:FlxSprite;
 	var rainBackB:FlxSprite;
+	var heartbeat:FlxSprite;
 
 	var limo:FlxSprite;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
@@ -230,6 +231,8 @@ class PlayState extends MusicBeatState
 	var songScoreDef:Int = 0;
 	var scoreTxt:FlxText;
 	var replayTxt:FlxText;
+	
+	var initialize:Bool = false;
 
 	public static var campaignScore:Int = 0;
 
@@ -1198,7 +1201,13 @@ class PlayState extends MusicBeatState
 			case 'trollge01':
 				dad.x -= 124;
 				dad.y -= 20;
+			case 'trollge01ori':
+				dad.x -= 124;
+				dad.y -= 20;
 			case 'trollge02':
+				dad.x -= 124;
+				dad.y -= 30;
+			case 'trollge02s':
 				dad.x -= 124;
 				dad.y -= 30;
 			case 'trollge03':
@@ -1600,20 +1609,17 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
+		if (initialize)
+		{
+			initialize = false;
+		}
 		switch(curSong)
 		{
-			case 'Mischief': healthFactor = 0.02;
+			case 'Mischief': healthFactor = 0;
 			case 'Ominous': healthFactor = 0.03;
 			case 'Incident': healthFactor = 0.04;
-			case 'Lore': healthFactor = 0.03;
-			case 'Insanity': healthFactor = 0.045;
-		}
-		
-		switch(storyDifficulty)
-		{
-			case 2: healthFactor = healthFactor * 1;
-			case 1: healthFactor = healthFactor * 0.6;
-			case 0: healthFactor = healthFactor * 0.2;
+			case 'Lore': healthFactor = 0;
+			case 'Insanity': healthFactor = 0.04;
 		}
 		
 		inCutscene = false;
@@ -2497,7 +2503,6 @@ class PlayState extends MusicBeatState
 	var nps:Int = 0;
 	var maxNPS:Int = 0;
 	
-	var fogged:Bool = false;
 	var SectionCounter:Int = 0;
 	var SectionIdentifier:Int = 0;
 	var healthtrack:Float = 1;
@@ -2514,61 +2519,11 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		if (curStage == 'street-rain')
-		{
-			if (fogged == false)
-			{
-				var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
-				rainFrontA = new FlxSprite(1060, 540);
-				rainFrontA.frames = rainTex;
-				rainFrontA.animation.addByPrefix('rain', 'Rain', 24, true);
-				rainFrontA.alpha = 0;
-				rainFrontA.setGraphicSize(Std.int(rainFrontA.width * 2.5));
-				rainFrontA.blend = LIGHTEN;
-				rainFrontA.antialiasing = true;
-				add(rainFrontA);
-					
-				rainFrontB = new FlxSprite(1020, 540);
-				rainFrontB.frames = rainTex;
-				rainFrontB.animation.addByPrefix('rain', 'Rain', 24, true);
-				rainFrontB.alpha = 0;
-				rainFrontB.setGraphicSize(Std.int(rainFrontB.width * 2.5));
-				rainFrontB.blend = LIGHTEN;
-				rainFrontB.antialiasing = true;
-				add(rainFrontB);
-				
-				var fogTex = Paths.getSparrowAtlas('background/fog', 'trollge');
-				fog = new FlxSprite(0, -200);
-				fog.frames = fogTex;
-				fog.animation.addByPrefix('fog', 'Fog', 12, true);
-				fog.animation.play('fog', true, false, 2560);
-				fog.antialiasing = true;
-				fog.setGraphicSize(Std.int(fog.width * 2));
-				fog.flipX = true;
-				add(fog);
-				
-				fogged = true;
-			}
-			if ((curStep % 18) == 0)
-			{
-				rainBackA.alpha = 0.5;
-				rainBackA.animation.play('rain');
-				rainMiddleA.alpha = 0.75;
-				rainMiddleA.animation.play('rain');
-				rainFrontA.alpha = 1;
-				rainFrontA.animation.play('rain');
-
-			}
-			if (((curStep + 9) % 18) == 0)
-			{
-				rainBackB.alpha = 0.5;
-				rainBackB.animation.play('rain');
-				rainMiddleB.alpha = 0.75;
-				rainMiddleB.animation.play('rain');
-				rainFrontB.alpha = 1;
-				rainFrontB.animation.play('rain');
-			}
-		}
+		if (curStage == 'street-sunny') mischiefEvent();
+		else if (curStage == 'street-rain') ominousEvent();
+		else if (curStage == 'void') incidentEvent();
+		else if (curStage == 'street-abandon') loreEvent();
+		else if (curStage == 'street-unused') insanityEvent();
 		
 		#if !debug
 		perfectMode = false;
@@ -3375,15 +3330,31 @@ class PlayState extends MusicBeatState
 	
 					if (daNote.isSustainNote) 
 					{
+						if (healthFactor != 0 && healthFactor > 0.02)
+							switch(storyDifficulty)
+							{
+								case 2: healthloss = 0.02 * 1 * (Math.floor(accuracy) / 100);
+								case 1: healthloss = 0.02 * 0.8 * (Math.floor(accuracy) / 100);
+								case 0: healthloss = 0.02 * 0.6 * (Math.floor(accuracy) / 100);
+							}	
+						else if (healthFactor != 0)
+							switch(storyDifficulty)
+							{
+								case 2: healthloss = healthFactor * 1 * (Math.floor(accuracy) / 100);
+								case 1: healthloss = healthFactor * 0.8 * (Math.floor(accuracy) / 100);
+								case 0: healthloss = healthFactor * 0.6 * (Math.floor(accuracy) / 100);
+							}	
+					}
+					else
+					{
 						switch(storyDifficulty)
 						{
-							case 2: healthloss = 0.015 * 1 * (Math.floor(accuracy) / 100);
-							case 1: healthloss = 0.015 * 0.8 * (Math.floor(accuracy) / 100);
-							case 0: healthloss = 0.015 * 0.6 * (Math.floor(accuracy) / 100);
-						}			
+							case 2: healthloss = 3 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 100);
+							case 1: healthloss = 1.8 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 100);
+							case 0: healthloss = 0.6 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 100);
+						}
 					}
-					else healthloss = 3 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier]));	
-					
+
 					if ((healthtrack - healthloss) <= 0)
 					{
 						health = 0.05;
@@ -4419,75 +4390,7 @@ class PlayState extends MusicBeatState
 
 	function noteMiss(direction:Int = 1, daNote:Note):Void
 	{
-		if (daNote.ArrowType == 'normal')
-		{
-			if (!boyfriend.stunned)
-			{
-				combo = 0;
-				misses++;
-
-				if (daNote != null)
-				{
-					if (!loadRep)
-					{
-						saveNotes.push([
-							daNote.strumTime,
-							0,
-							direction,
-							166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166
-						]);
-						saveJudge.push("miss");
-					}
-				}
-				else if (!loadRep)
-				{
-					saveNotes.push([
-						Conductor.songPosition,
-						0,
-						direction,
-						166 * Math.floor((PlayState.rep.replay.sf / 60) * 1000) / 166
-					]);
-					saveJudge.push("miss");
-				}
-
-				// var noteDiff:Float = Math.abs(daNote.strumTime - Conductor.songPosition);
-				// var wife:Float = EtternaFunctions.wife3(noteDiff, FlxG.save.data.etternaMode ? 1 : 1.7);
-
-				if (FlxG.save.data.accuracyMod == 1)
-					totalNotesHit -= 1;
-
-				if (daNote != null)
-				{
-					if (!daNote.isSustainNote)
-						songScore -= 10;
-				}
-				else
-					songScore -= 10;
-				
-				if(FlxG.save.data.missSounds)
-				{
-					if (curStage == 'street-rain' || curStage == 'street-unused')
-						FlxG.sound.play(Paths.soundRandom('missnotedistort', 1, 3), FlxG.random.float(0.1, 0.2));
-					else if (curStage == 'void')
-						FlxG.sound.play(Paths.soundRandom('missed', 1, 3), FlxG.random.float(0.1, 0.2));
-					else
-						FlxG.sound.play(Paths.soundRandom('missnote', 1, 3), FlxG.random.float(0.1, 0.2));
-					// FlxG.sound.play(Paths.sound('missnote1'), 1, false);
-					// FlxG.log.add('played imss note');
-				}
-
-				// Hole switch statement replaced with a single line :)
-				boyfriend.playAnim('sing' + dataSuffix[direction] + 'miss', true);
-
-				#if windows
-				if (luaModchart != null)
-					luaModchart.executeState('playerOneMiss', [direction, Conductor.songPosition]);
-				#end
-
-				updateAccuracy();
-			}
-		}
-		if (daNote.ArrowType == 'magnet')
+		if (daNote.ArrowType == 'normal' || daNote.ArrowType == 'magnet')
 		{
 			if (!boyfriend.stunned)
 			{
@@ -4554,8 +4457,8 @@ class PlayState extends MusicBeatState
 
 				updateAccuracy();
 				
-				
-				trace('punishment_megnet');
+				if (daNote.ArrowType == 'magnet')
+					magneticBlast();
 			}
 		}
 	}
@@ -4682,9 +4585,275 @@ class PlayState extends MusicBeatState
 			
 			if (note.ArrowType == 'oil')
 			{
-				trace('punishment_oil');
+				oilOnScreen();
+			}
+			if (note.ArrowType == 'trolling')
+			{
+				trolling();
 			}
 		}
+	}
+	
+	function oilOnScreen()
+	{
+		//handle things when you hit the oily note
+		
+		//get the oil on screen
+		//oil splash sound effect
+	}
+	
+	function trolling()
+	{
+		//handle things when you hit the trolling note
+		
+		//laughing sound effect
+		//wood break sound effect
+	}
+	
+	function magneticBlast()
+	{
+		//handle things when you miss the magnetic note
+		
+		//electric shock sound
+		//screen blurred and darken
+		//sound muffled
+	}
+	
+	var climax:Bool = false;
+	
+	function mischiefEvent()
+	{
+		//healthfactor manipulation
+		if (curStep == 1) 
+		{
+			healthFactor = 0;
+			trace(curStep);
+		}
+		else
+		{
+			switch(curStep)
+			{
+				case 959: healthFactor = 0.02;
+				case 1216: healthFactor = 0;
+				case 1272: healthFactor = 0.04;
+				case 1280: healthFactor = 0;
+				case 1400: healthFactor = 0.04;
+				case 1406: healthFactor = 0;
+				case 1592: healthFactor = 0.05;
+				case 1600: healthFactor = 0;
+				case 1664: healthFactor = 0.05;
+			}
+		}
+
+		//climax event
+		if (curStep == 959)
+		{
+			if (!climax) climax = true;
+			FlxG.camera.zoom = 0.9;
+			camHUD.zoom = 0.9;
+			heartbeat.x = 960;
+		}
+		else if (curStep > 959 && curStep < 1216)
+		{
+			if (heartbeat.alpha < 1) heartbeat.alpha += 0.1;
+		}
+		else if (curStep == 1216)
+		{
+			if (climax) climax = false;
+			FlxG.camera.zoom = 0.7;
+		}
+		else if (curStep > 1216)
+		{
+			if (heartbeat.alpha > 0) heartbeat.alpha -= 0.01;
+		}
+		
+		//initialize asset above player
+		if (!initialize)
+		{
+			var heartTex = Paths.getSparrowAtlas('background/heartbeat', 'trollge');
+			heartbeat = new FlxSprite(150);
+			heartbeat.screenCenter();
+			heartbeat.frames = heartTex;
+			heartbeat.animation.addByPrefix('beat', 'Heart', 48, true);
+			heartbeat.alpha = 0;
+			heartbeat.setGraphicSize(Std.int(heartbeat.width * 2.5));
+			heartbeat.antialiasing = true;
+			heartbeat.scrollFactor.set();
+			add(heartbeat);
+	
+			initialize = true;
+		}
+	}
+	
+	function ominousEvent()
+	{
+		//healthfactor manipulation
+		if (curStep == 1) 
+		{
+			healthFactor = 0.01;
+			trace(curStep);
+		}
+		else
+		{
+			switch(curStep)
+			{
+				case 126: healthFactor = 0.015;
+				case 320: healthFactor = 0.02;
+				case 575: healthFactor = 0.025;
+				case 832: healthFactor = 0.03;
+				case 1118: healthFactor = 0.01;
+				case 1424: healthFactor = 0.03;
+				case 1800: healthFactor = 0.05;
+				case 1920: healthFactor = 0.03;
+				case 2058: healthFactor = 0.05;
+				case 2178: healthFactor = 0.04;
+			}
+		}
+		
+		//camera movement
+		
+		//climax event
+		
+		//initialize asset above player
+		if (!initialize)
+		{
+			var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
+			rainFrontA = new FlxSprite(1060, 540);
+			rainFrontA.frames = rainTex;
+			rainFrontA.animation.addByPrefix('rain', 'Rain', 24, true);
+			rainFrontA.alpha = 0;
+			rainFrontA.setGraphicSize(Std.int(rainFrontA.width * 2.5));
+			rainFrontA.blend = LIGHTEN;
+			rainFrontA.antialiasing = true;
+			add(rainFrontA);
+					
+			rainFrontB = new FlxSprite(1020, 540);
+			rainFrontB.frames = rainTex;
+			rainFrontB.animation.addByPrefix('rain', 'Rain', 24, true);
+			rainFrontB.alpha = 0;
+			rainFrontB.setGraphicSize(Std.int(rainFrontB.width * 2.5));
+			rainFrontB.blend = LIGHTEN;
+			rainFrontB.antialiasing = true;
+			add(rainFrontB);
+				
+			var fogTex = Paths.getSparrowAtlas('background/fog', 'trollge');
+			fog = new FlxSprite(0, -200);
+			fog.frames = fogTex;
+			fog.animation.addByPrefix('fog', 'Fog', 12, true);
+			fog.animation.play('fog', true, false, 2560);
+			fog.antialiasing = true;
+			fog.setGraphicSize(Std.int(fog.width * 2));
+			fog.flipX = true;
+			add(fog);
+				
+			initialize = true;
+		}
+		if ((curStep % 18) == 0)
+		{
+			rainBackA.alpha = 0.5;
+			rainBackA.animation.play('rain');
+			rainMiddleA.alpha = 0.75;
+			rainMiddleA.animation.play('rain');
+			rainFrontA.alpha = 1;
+			rainFrontA.animation.play('rain');
+
+		}
+		if (((curStep + 9) % 18) == 0)
+		{
+			rainBackB.alpha = 0.5;
+			rainBackB.animation.play('rain');
+			rainMiddleB.alpha = 0.75;
+			rainMiddleB.animation.play('rain');
+			rainFrontB.alpha = 1;
+			rainFrontB.animation.play('rain');
+		}
+	
+		//thundering
+	}
+	
+	function incidentEvent()
+	{
+		//healthfactor manipulation
+		if (curStep == 1) 
+		{
+			healthFactor = 0.03;
+			trace(curStep);
+		}
+		else
+		{
+			switch(curStep)
+			{
+				case 528: healthFactor = 0.035;
+				case 608: healthFactor = 0.03;
+				case 840: healthFactor = 0.035;
+				case 980: healthFactor = 0.045;
+				case 1621: healthFactor = 0.01;
+				case 1880: healthFactor = 0.02;
+				case 2160: healthFactor = 0.025;
+				case 2300: healthFactor = 0.01;
+				case 2560: healthFactor = 0.025;
+				case 3070: healthFactor = 0.035;
+			}
+		}
+		
+		
+		
+		//camera movement
+		
+		//climax event
+	}
+	
+	function loreEvent()
+	{
+		//healthfactor manipulation
+		if (curStep == 1) 
+		{
+			trace(curStep);
+			healthFactor = 0;
+		}
+		else
+		{
+			switch(curStep)
+			{
+				case 64: healthFactor = 0.01;
+				case 192: healthFactor = 0.025;
+				case 320: healthFactor = 0.03;
+				case 768: healthFactor = 0.02;
+				case 1151: healthFactor = 0.035;
+			}
+		}
+		
+		//camera movement
+		
+		//climax event
+	}
+	
+	function insanityEvent()
+	{
+		//healthfactor manipulation
+		if (curStep == 1) 
+		{
+			healthFactor = 0.025;
+			trace(curStep);
+		}
+		else
+		{
+			switch(curStep)
+			{
+				case 192: healthFactor = 0.025;
+				case 520: healthFactor = 0;
+				case 560: healthFactor = 0.025;
+				case 1071: healthFactor = 0.03;
+				case 1522: healthFactor = 0;
+				case 1584: healthFactor = 0.04;
+				case 1839: healthFactor = 0.025;
+				case 2095: healthFactor = 0;
+			}
+		}
+		
+		//camera movement
+		
+		//climax event
 	}
 
 	var fastCarCanDrive:Bool = true;
@@ -4889,6 +5058,13 @@ class PlayState extends MusicBeatState
 				FlxG.camera.zoom += 0.015;
 				camHUD.zoom += 0.03;
 			}
+			
+			if (curSong.toLowerCase() == 'mischief' && curStep >= 954 && curBeat < 1216 && camZooming && FlxG.camera.zoom < 1.35)
+			{
+				FlxG.camera.zoom += 0.015;
+				camHUD.zoom += 0.03;
+			}
+
 		}
 
 		iconP1.setGraphicSize(Std.int(iconP1.width + 30));
@@ -4978,6 +5154,14 @@ class PlayState extends MusicBeatState
 						trainStart();
 					}
 				}
+			
+			case "street-sunny":
+			{
+				if (climax)
+				{
+					heartbeat.animation.play('beat', false);
+				}
+			}
 		}
 
 		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
