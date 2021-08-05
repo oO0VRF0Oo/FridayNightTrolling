@@ -203,6 +203,7 @@ class PlayState extends MusicBeatState
 	
 	var fog:FlxSprite;
 	var cloud:FlxSprite;
+	var thunder:FlxSprite;
 	var rainFrontA:FlxSprite;
 	var rainFrontB:FlxSprite;
 	var rainMiddleA:FlxSprite;
@@ -210,6 +211,7 @@ class PlayState extends MusicBeatState
 	var rainBackA:FlxSprite;
 	var rainBackB:FlxSprite;
 	var heartbeat:FlxSprite;
+	var mischiefHue:FlxSprite;
 
 	var limo:FlxSprite;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
@@ -232,8 +234,6 @@ class PlayState extends MusicBeatState
 	var scoreTxt:FlxText;
 	var replayTxt:FlxText;
 	
-	var initialize:Bool = false;
-
 	public static var campaignScore:Int = 0;
 
 	var defaultCamZoom:Float = 1.05;
@@ -1609,14 +1609,71 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
-		if (initialize)
-		{
-			initialize = false;
-		}
 		switch(curSong)
 		{
-			case 'Mischief': healthFactor = 0;
-			case 'Ominous': healthFactor = 0.03;
+			case 'Mischief':
+			{
+				var mischiefHue:FlxSprite = new FlxSprite().loadGraphic(Paths.image('background/mischiefHue', 'trollge'));
+				mischiefHue.antialiasing = true;
+				mischiefHue.alpha = 0;
+				mischiefHue.setGraphicSize(Std.int(mischiefHue.width * 2.5));
+				add(mischiefHue);
+				
+				var heartTex = Paths.getSparrowAtlas('background/heartbeat', 'trollge');
+				heartbeat = new FlxSprite();
+				heartbeat.screenCenter();
+				heartbeat.frames = heartTex;
+				heartbeat.animation.addByPrefix('beat', 'Heart', 48, false);
+				heartbeat.alpha = 0;
+				heartbeat.setGraphicSize(Std.int(heartbeat.width * 2.5));
+				heartbeat.antialiasing = true;
+				heartbeat.scrollFactor.set();
+				add(heartbeat);
+				
+				healthFactor = 0;
+			}
+			case 'Ominous': 
+			{
+				var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
+				rainFrontA = new FlxSprite(1060, 540);
+				rainFrontA.frames = rainTex;
+				rainFrontA.animation.addByPrefix('rain', 'Rain', 24, false);
+				rainFrontA.alpha = 0;
+				rainFrontA.setGraphicSize(Std.int(rainFrontA.width * 2.5));
+				rainFrontA.blend = LIGHTEN;
+				rainFrontA.antialiasing = true;
+				add(rainFrontA);
+						
+				rainFrontB = new FlxSprite(1080, 540);
+				rainFrontB.frames = rainTex;
+				rainFrontB.animation.addByPrefix('rain', 'Rain', 24, false);
+				rainFrontB.alpha = 0;
+				rainFrontB.setGraphicSize(Std.int(rainFrontB.width * 2.5));
+				rainFrontB.blend = LIGHTEN;
+				rainFrontB.antialiasing = true;
+				add(rainFrontB);
+					
+				var fogTex = Paths.getSparrowAtlas('background/fog', 'trollge');
+				fog = new FlxSprite(0, -200);
+				fog.frames = fogTex;
+				fog.animation.addByPrefix('fog', 'Fog', 12, false);
+				fog.animation.play('fog', true, false, 2560);
+				fog.antialiasing = true;
+				fog.setGraphicSize(Std.int(fog.width * 2));
+				fog.flipX = true;
+				add(fog);
+				
+				var thunderTex = Paths.getSparrowAtlas('background/thunder', 'trollge');
+				thunder = new FlxSprite(1080, 540);
+				thunder.frames = thunderTex;
+				thunder.animation.addByPrefix('thunder', 'Thunder', 48, false);
+				thunder.antialiasing = true;
+				thunder.scrollFactor.set();
+				thunder.setGraphicSize(Std.int(thunder.width * 2.5));
+				add(thunder);
+				
+				healthFactor = 0.03;
+			}
 			case 'Incident': healthFactor = 0.04;
 			case 'Lore': healthFactor = 0;
 			case 'Insanity': healthFactor = 0.04;
@@ -4649,8 +4706,8 @@ class PlayState extends MusicBeatState
 		if (curStep == 959)
 		{
 			if (!climax) climax = true;
-			FlxG.camera.zoom = 0.9;
-			camHUD.zoom = 0.9;
+			FlxG.camera.zoom = 0.85;
+			camHUD.zoom = 0.85;
 			heartbeat.x = 960;
 		}
 		else if (curStep > 959 && curStep < 1216)
@@ -4666,24 +4723,9 @@ class PlayState extends MusicBeatState
 		{
 			if (heartbeat.alpha > 0) heartbeat.alpha -= 0.01;
 		}
-		
-		//initialize asset above player
-		if (!initialize)
-		{
-			var heartTex = Paths.getSparrowAtlas('background/heartbeat', 'trollge');
-			heartbeat = new FlxSprite(150);
-			heartbeat.screenCenter();
-			heartbeat.frames = heartTex;
-			heartbeat.animation.addByPrefix('beat', 'Heart', 48, true);
-			heartbeat.alpha = 0;
-			heartbeat.setGraphicSize(Std.int(heartbeat.width * 2.5));
-			heartbeat.antialiasing = true;
-			heartbeat.scrollFactor.set();
-			add(heartbeat);
-	
-			initialize = true;
-		}
 	}
+	
+	var thunderTrack:Int = 0;
 	
 	function ominousEvent()
 	{
@@ -4698,14 +4740,14 @@ class PlayState extends MusicBeatState
 			switch(curStep)
 			{
 				case 126: healthFactor = 0.015;
-				case 320: healthFactor = 0.02;
-				case 575: healthFactor = 0.025;
-				case 832: healthFactor = 0.03;
+				case 320: healthFactor = 0.0175;
+				case 575: healthFactor = 0.02;
+				case 832: healthFactor = 0.025;
 				case 1118: healthFactor = 0.01;
-				case 1424: healthFactor = 0.03;
-				case 1800: healthFactor = 0.05;
-				case 1920: healthFactor = 0.03;
-				case 2058: healthFactor = 0.05;
+				case 1424: healthFactor = 0.025;
+				case 1800: healthFactor = 0.03;
+				case 1920: healthFactor = 0.025;
+				case 2058: healthFactor = 0.03;
 				case 2178: healthFactor = 0.04;
 			}
 		}
@@ -4714,61 +4756,41 @@ class PlayState extends MusicBeatState
 		
 		//climax event
 		
-		//initialize asset above player
-		if (!initialize)
-		{
-			var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
-			rainFrontA = new FlxSprite(1060, 540);
-			rainFrontA.frames = rainTex;
-			rainFrontA.animation.addByPrefix('rain', 'Rain', 24, true);
-			rainFrontA.alpha = 0;
-			rainFrontA.setGraphicSize(Std.int(rainFrontA.width * 2.5));
-			rainFrontA.blend = LIGHTEN;
-			rainFrontA.antialiasing = true;
-			add(rainFrontA);
-					
-			rainFrontB = new FlxSprite(1020, 540);
-			rainFrontB.frames = rainTex;
-			rainFrontB.animation.addByPrefix('rain', 'Rain', 24, true);
-			rainFrontB.alpha = 0;
-			rainFrontB.setGraphicSize(Std.int(rainFrontB.width * 2.5));
-			rainFrontB.blend = LIGHTEN;
-			rainFrontB.antialiasing = true;
-			add(rainFrontB);
-				
-			var fogTex = Paths.getSparrowAtlas('background/fog', 'trollge');
-			fog = new FlxSprite(0, -200);
-			fog.frames = fogTex;
-			fog.animation.addByPrefix('fog', 'Fog', 12, true);
-			fog.animation.play('fog', true, false, 2560);
-			fog.antialiasing = true;
-			fog.setGraphicSize(Std.int(fog.width * 2));
-			fog.flipX = true;
-			add(fog);
-				
-			initialize = true;
-		}
+		//rainning
 		if ((curStep % 18) == 0)
 		{
 			rainBackA.alpha = 0.5;
-			rainBackA.animation.play('rain');
+			rainBackA.animation.play('rain', false);
 			rainMiddleA.alpha = 0.75;
-			rainMiddleA.animation.play('rain');
+			rainMiddleA.animation.play('rain', false);
 			rainFrontA.alpha = 1;
-			rainFrontA.animation.play('rain');
+			rainFrontA.animation.play('rain', false);
 
 		}
+		
 		if (((curStep + 9) % 18) == 0)
 		{
 			rainBackB.alpha = 0.5;
-			rainBackB.animation.play('rain');
+			rainBackB.animation.play('rain', false);
 			rainMiddleB.alpha = 0.75;
-			rainMiddleB.animation.play('rain');
+			rainMiddleB.animation.play('rain', false);
 			rainFrontB.alpha = 1;
-			rainFrontB.animation.play('rain');
+			rainFrontB.animation.play('rain', false);
 		}
 	
 		//thundering
+		if (thunderTrack == 0 || (curStep - thunderTrack) > 400)
+		{
+			if (Math.random() < (curStep % 600) / 600)
+			{
+				thunder.alpha = 1;
+				FlxG.sound.play(Paths.soundRandom('thunder_', 1, 2));
+				thunderTrack = curStep;
+				thunder.animation.play('thunder', false);
+			}
+		}
+		
+		if (thunder.animation.finished && thunder.alpha > 0) thunder.alpha -= 0.1;
 	}
 	
 	function incidentEvent()
@@ -4795,9 +4817,7 @@ class PlayState extends MusicBeatState
 				case 3070: healthFactor = 0.035;
 			}
 		}
-		
-		
-		
+
 		//camera movement
 		
 		//climax event
@@ -5059,7 +5079,7 @@ class PlayState extends MusicBeatState
 				camHUD.zoom += 0.03;
 			}
 			
-			if (curSong.toLowerCase() == 'mischief' && curStep >= 954 && curBeat < 1216 && camZooming && FlxG.camera.zoom < 1.35)
+			if (curSong.toLowerCase() == 'mischief' && curStep >= 954 && curBeat < 1216 && camZooming && FlxG.camera.zoom < 1.35 && climax)
 			{
 				FlxG.camera.zoom += 0.015;
 				camHUD.zoom += 0.03;

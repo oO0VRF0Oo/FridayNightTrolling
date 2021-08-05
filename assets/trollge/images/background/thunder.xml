@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TextureAtlas imagePath="thunder.png">
+	<SubTexture name="Thunder0000" x="0" y="0" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0001" x="960" y="0" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0002" x="1920" y="0" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0003" x="2880" y="0" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0004" x="3840" y="0" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0005" x="4800" y="0" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0006" x="0" y="540" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0007" x="960" y="540" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0008" x="1920" y="540" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0009" x="2880" y="540" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0010" x="3840" y="540" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0011" x="4800" y="540" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0012" x="0" y="1080" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0013" x="960" y="1080" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0014" x="1920" y="1080" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0015" x="2880" y="1080" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0016" x="3840" y="1080" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0017" x="4800" y="1080" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0018" x="0" y="1620" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0019" x="960" y="1620" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0020" x="1920" y="1620" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0021" x="2880" y="1620" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0022" x="3840" y="1620" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+	<SubTexture name="Thunder0023" x="4800" y="1620" width="960" height="540" frameX="0" frameY="0" frameWidth="2160" frameHeight="1080"/>
+</TextureAtlas>
+
+
