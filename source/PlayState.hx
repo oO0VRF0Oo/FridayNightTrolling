@@ -947,7 +947,7 @@ class PlayState extends MusicBeatState
 					rainBackA.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainBackA.alpha = 0;
 					rainBackA.setGraphicSize(Std.int(rainBackA.width * 2));
-					rainBackA.blend = LIGHTEN;
+					rainBackA.blendMode = BLEND_LIGHTEN;
 					rainBackA.antialiasing = true;
 					add(rainBackA);
 					
@@ -956,7 +956,7 @@ class PlayState extends MusicBeatState
 					rainBackB.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainBackB.alpha = 0;
 					rainBackB.setGraphicSize(Std.int(rainBackB.width * 2));
-					rainBackB.blend = LIGHTEN;
+					rainBackB.blendMode = BLEND_LIGHTEN;
 					rainBackB.antialiasing = true;
 					add(rainBackB);
 					
@@ -978,7 +978,7 @@ class PlayState extends MusicBeatState
 					rainMiddleA.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainMiddleA.alpha = 0;
 					rainMiddleA.setGraphicSize(Std.int(rainMiddleA.width * 2.5));
-					rainMiddleA.blend = LIGHTEN;
+					rainMiddleA.blendMode = BLEND_LIGHTEN;
 					rainMiddleA.antialiasing = true;
 					rainMiddleA.flipX = true;
 					add(rainMiddleA);
@@ -988,7 +988,7 @@ class PlayState extends MusicBeatState
 					rainMiddleB.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainMiddleB.alpha = 0;
 					rainMiddleB.setGraphicSize(Std.int(rainMiddleB.width * 2.5));
-					rainMiddleB.blend = LIGHTEN;
+					rainMiddleB.blendMode = BLEND_LIGHTEN;
 					rainMiddleB.antialiasing = true;
 					rainMiddleB.flipX = true;
 					add(rainMiddleB);
@@ -1009,7 +1009,7 @@ class PlayState extends MusicBeatState
 					rainBackA.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainBackA.alpha = 0;
 					rainBackA.setGraphicSize(Std.int(rainBackA.width * 2));
-					rainBackA.blend = LIGHTEN;
+					rainBackA.blendMode = BLEND_LIGHTEN;
 					rainBackA.antialiasing = true;
 					add(rainBackA);
 					
@@ -1018,7 +1018,7 @@ class PlayState extends MusicBeatState
 					rainBackB.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainBackB.alpha = 0;
 					rainBackB.setGraphicSize(Std.int(rainBackB.width * 2));
-					rainBackB.blend = LIGHTEN;
+					rainBackB.blendMode = BLEND_LIGHTEN;
 					rainBackB.antialiasing = true;
 					add(rainBackB);
 					
@@ -1040,7 +1040,7 @@ class PlayState extends MusicBeatState
 					rainMiddleA.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainMiddleA.alpha = 0;
 					rainMiddleA.setGraphicSize(Std.int(rainMiddleA.width * 2.5));
-					rainMiddleA.blend = LIGHTEN;
+					rainMiddleA.blendMode = BLEND_LIGHTEN;
 					rainMiddleA.antialiasing = true;
 					rainMiddleA.flipX = true;
 					add(rainMiddleA);
@@ -1050,7 +1050,7 @@ class PlayState extends MusicBeatState
 					rainMiddleB.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainMiddleB.alpha = 0;
 					rainMiddleB.setGraphicSize(Std.int(rainMiddleB.width * 2.5));
-					rainMiddleB.blend = LIGHTEN;
+					rainMiddleB.blendMode = BLEND_LIGHTEN;
 					rainMiddleB.antialiasing = true;
 					rainMiddleB.flipX = true;
 					add(rainMiddleB);
@@ -1634,15 +1634,13 @@ class PlayState extends MusicBeatState
 			}
 			case 'Ominous': 
 			{
-				LoadOil();
-				
 				var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
 				rainFrontA = new FlxSprite(1060, 540);
 				rainFrontA.frames = rainTex;
 				rainFrontA.animation.addByPrefix('rain', 'Rain', 24, false);
 				rainFrontA.alpha = 0;
 				rainFrontA.setGraphicSize(Std.int(rainFrontA.width * 2.5));
-				rainFrontA.blend = LIGHTEN;
+				rainFrontA.blendMode = BLEND_LIGHTEN;
 				rainFrontA.antialiasing = true;
 				add(rainFrontA);
 						
@@ -1651,7 +1649,7 @@ class PlayState extends MusicBeatState
 				rainFrontB.animation.addByPrefix('rain', 'Rain', 24, false);
 				rainFrontB.alpha = 0;
 				rainFrontB.setGraphicSize(Std.int(rainFrontB.width * 2.5));
-				rainFrontB.blend = LIGHTEN;
+				rainFrontB.blendMode = BLEND_LIGHTEN;
 				rainFrontB.antialiasing = true;
 				add(rainFrontB);
 					
@@ -1675,6 +1673,8 @@ class PlayState extends MusicBeatState
 				add(thunder);
 				
 				healthFactor = 0.03;
+				
+				LoadOil();
 			}
 			case 'Incident': healthFactor = 0.04;
 			case 'Lore': healthFactor = 0;
@@ -4755,6 +4755,15 @@ class PlayState extends MusicBeatState
 		oilF.scrollFactor.set();
 		oilG.scrollFactor.set();
 		oilH.scrollFactor.set();
+		
+		oilA.blendMode = BLEND_DIFFERENCE;
+		oilB.blendMode = BLEND_DIFFERENCE;
+		oilC.blendMode = BLEND_DIFFERENCE;
+		oilD.blendMode = BLEND_DIFFERENCE;
+		oilE.blendMode = BLEND_DIFFERENCE;
+		oilF.blendMode = BLEND_DIFFERENCE;
+		oilG.blendMode = BLEND_DIFFERENCE;
+		oilH.blendMode = BLEND_DIFFERENCE;
 		
 		add(oilA);
 		add(oilB);
