@@ -1634,6 +1634,8 @@ class PlayState extends MusicBeatState
 			}
 			case 'Ominous': 
 			{
+				LoadOil();
+				
 				var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
 				rainFrontA = new FlxSprite(1060, 540);
 				rainFrontA.frames = rainTex;
@@ -1666,7 +1668,7 @@ class PlayState extends MusicBeatState
 				var thunderTex = Paths.getSparrowAtlas('background/thunder', 'trollge');
 				thunder = new FlxSprite(1080, 540);
 				thunder.frames = thunderTex;
-				thunder.animation.addByPrefix('thunder', 'Thunder', 48, false);
+				thunder.animation.addByPrefix('thunder', 'Thunder', 96, false);
 				thunder.antialiasing = true;
 				thunder.scrollFactor.set();
 				thunder.setGraphicSize(Std.int(thunder.width * 2.5));
@@ -4651,12 +4653,158 @@ class PlayState extends MusicBeatState
 		}
 	}
 	
+	var oilA:FlxSprite;
+	var oilB:FlxSprite;
+	var oilC:FlxSprite;
+	var oilD:FlxSprite;
+	var oilE:FlxSprite;
+	var oilF:FlxSprite;
+	var oilG:FlxSprite;
+	var oilH:FlxSprite;
+	var oilList:Array<FlxSprite> = [];
+	
+	//spegatti codes lol
+	function LoadOil()
+	{
+		var oilATex = Paths.getSparrowAtlas('background/oil/oilA', 'trollge');
+		var oilBTex = Paths.getSparrowAtlas('background/oil/oilB', 'trollge');
+		var oilCTex = Paths.getSparrowAtlas('background/oil/oilC', 'trollge');
+		var oilDTex = Paths.getSparrowAtlas('background/oil/oilD', 'trollge');
+		var oilETex = Paths.getSparrowAtlas('background/oil/oilE', 'trollge');
+		var oilFTex = Paths.getSparrowAtlas('background/oil/oilF', 'trollge');
+		var oilGTex = Paths.getSparrowAtlas('background/oil/oilG', 'trollge');
+		var oilHTex = Paths.getSparrowAtlas('background/oil/oilH', 'trollge');
+		
+		oilA = new FlxSprite();
+		oilB = new FlxSprite();
+		oilC = new FlxSprite();
+		oilD = new FlxSprite();
+		oilE = new FlxSprite();
+		oilF = new FlxSprite();
+		oilG = new FlxSprite();
+		oilH = new FlxSprite();
+		
+		oilA.frames = oilATex;
+		oilB.frames = oilBTex;
+		oilC.frames = oilCTex;
+		oilD.frames = oilDTex;
+		oilE.frames = oilETex;
+		oilF.frames = oilFTex;
+		oilG.frames = oilGTex;
+		oilH.frames = oilHTex;
+		
+		oilA.animation.addByPrefix('splash', 'Oil', 24, false);
+		oilB.animation.addByPrefix('splash', 'Oil', 24, false);
+		oilC.animation.addByPrefix('splash', 'Oil', 24, false);
+		oilD.animation.addByPrefix('splash', 'Oil', 24, false);
+		oilE.animation.addByPrefix('splash', 'Oil', 24, false);
+		oilF.animation.addByPrefix('splash', 'Oil', 24, false);
+		oilG.animation.addByPrefix('splash', 'Oil', 24, false);
+		oilH.animation.addByPrefix('splash', 'Oil', 24, false);
+		
+		oilA.alpha = 0;
+		oilB.alpha = 0;
+		oilC.alpha = 0;
+		oilD.alpha = 0;
+		oilE.alpha = 0;
+		oilF.alpha = 0;
+		oilG.alpha = 0;
+		oilH.alpha = 0;
+		
+		oilA.setGraphicSize(Std.int(oilA.width * 2.25));
+		oilB.setGraphicSize(Std.int(oilA.width * 2.25));
+		oilC.setGraphicSize(Std.int(oilA.width * 2.25));
+		oilD.setGraphicSize(Std.int(oilA.width * 2.25));
+		oilE.setGraphicSize(Std.int(oilA.width * 2.25));
+		oilF.setGraphicSize(Std.int(oilA.width * 2.25));
+		oilG.setGraphicSize(Std.int(oilA.width * 2.25));
+		oilH.setGraphicSize(Std.int(oilA.width * 2.25));
+		
+		oilA.screenCenter();
+		oilB.screenCenter();
+		oilC.screenCenter();
+		oilD.screenCenter();
+		oilE.screenCenter();
+		oilF.screenCenter();
+		oilG.screenCenter();
+		oilH.screenCenter();
+		
+		oilA.flipX = true;
+		oilB.flipX = true;
+		oilC.flipX = true;
+		oilD.flipX = true;
+		oilE.flipX = true;
+		oilF.flipX = true;
+		oilG.flipX = true;
+		oilH.flipX = true;
+
+		oilA.antialiasing = true;
+		oilB.antialiasing = true;
+		oilC.antialiasing = true;
+		oilD.antialiasing = true;
+		oilE.antialiasing = true;
+		oilF.antialiasing = true;
+		oilG.antialiasing = true;
+		oilH.antialiasing = true;
+		
+		oilA.scrollFactor.set();
+		oilB.scrollFactor.set();
+		oilC.scrollFactor.set();
+		oilD.scrollFactor.set();
+		oilE.scrollFactor.set();
+		oilF.scrollFactor.set();
+		oilG.scrollFactor.set();
+		oilH.scrollFactor.set();
+		
+		add(oilA);
+		add(oilB);
+		add(oilC);
+		add(oilD);
+		add(oilE);
+		add(oilF);
+		add(oilG);
+		add(oilH);
+		
+		oilList = [oilA, oilB, oilC, oilD, oilE, oilF, oilG, oilH];
+	}
+	
+	var oilRandom:Int = 0;
+	var oilIndex:Int = 0;
+	var oilplaying:Array<FlxSprite> = [];
+	
+	//handle things when you hit oily note
 	function oilOnScreen()
 	{
-		//handle things when you hit the oily note
-		
 		//get the oil on screen
+		if (oilList.length != 0)
+		{
+			trace("on");
+			oilRandom = Std.int(Math.floor(Math.random() * (oilList.length - 1)));
+			oilList[oilRandom].x = 960;
+			oilList[oilRandom].alpha = 1;
+			oilList[oilRandom].animation.play('splash', false);
+			oilplaying.push(oilList[oilRandom]);
+			oilList.remove(oilList[oilRandom]);
+		}
+		else
+		{
+			trace("on");
+			oilRandom = 0;
+			oilIndex = 0;
+			for (n in 0...oilplaying.length)
+			{
+				if (oilplaying[n].animation.frameIndex >= oilRandom)
+				{
+					oilIndex = n;
+					oilRandom= oilplaying[n].animation.frameIndex;
+				}
+			}
+			oilplaying[oilIndex].animation.finish();
+			oilplaying[oilIndex].animation.play('splash', false);
+		}
+		
 		//oil splash sound effect
+		FlxG.sound.play(Paths.soundRandom('splat_', 1, 5));
 	}
 	
 	function trolling()
@@ -4791,6 +4939,17 @@ class PlayState extends MusicBeatState
 		}
 		
 		if (thunder.animation.finished && thunder.alpha > 0) thunder.alpha -= 0.1;
+		
+		//recycle oil
+		for (n in 0...oilplaying.length)
+		{
+			if (oilplaying[n].animation.finished)
+			{
+				oilplaying[n].alpha = 0;
+				oilList.push(oilplaying[n]);
+				oilplaying.remove(oilplaying[n]);
+			}
+		}
 	}
 	
 	function incidentEvent()
