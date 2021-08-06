@@ -947,7 +947,7 @@ class PlayState extends MusicBeatState
 					rainBackA.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainBackA.alpha = 0;
 					rainBackA.setGraphicSize(Std.int(rainBackA.width * 2));
-					rainBackA.blendMode = BLEND_LIGHTEN;
+					rainBackA.blend = LIGHTEN;
 					rainBackA.antialiasing = true;
 					add(rainBackA);
 					
@@ -956,7 +956,7 @@ class PlayState extends MusicBeatState
 					rainBackB.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainBackB.alpha = 0;
 					rainBackB.setGraphicSize(Std.int(rainBackB.width * 2));
-					rainBackB.blendMode = BLEND_LIGHTEN;
+					rainBackB.blend = LIGHTEN;
 					rainBackB.antialiasing = true;
 					add(rainBackB);
 					
@@ -978,7 +978,7 @@ class PlayState extends MusicBeatState
 					rainMiddleA.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainMiddleA.alpha = 0;
 					rainMiddleA.setGraphicSize(Std.int(rainMiddleA.width * 2.5));
-					rainMiddleA.blendMode = BLEND_LIGHTEN;
+					rainMiddleA.blend = LIGHTEN;
 					rainMiddleA.antialiasing = true;
 					rainMiddleA.flipX = true;
 					add(rainMiddleA);
@@ -988,7 +988,7 @@ class PlayState extends MusicBeatState
 					rainMiddleB.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainMiddleB.alpha = 0;
 					rainMiddleB.setGraphicSize(Std.int(rainMiddleB.width * 2.5));
-					rainMiddleB.blendMode = BLEND_LIGHTEN;
+					rainMiddleB.blend = LIGHTEN;
 					rainMiddleB.antialiasing = true;
 					rainMiddleB.flipX = true;
 					add(rainMiddleB);
@@ -1009,7 +1009,7 @@ class PlayState extends MusicBeatState
 					rainBackA.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainBackA.alpha = 0;
 					rainBackA.setGraphicSize(Std.int(rainBackA.width * 2));
-					rainBackA.blendMode = BLEND_LIGHTEN;
+					rainBackA.blend = LIGHTEN;
 					rainBackA.antialiasing = true;
 					add(rainBackA);
 					
@@ -1018,7 +1018,7 @@ class PlayState extends MusicBeatState
 					rainBackB.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainBackB.alpha = 0;
 					rainBackB.setGraphicSize(Std.int(rainBackB.width * 2));
-					rainBackB.blendMode = BLEND_LIGHTEN;
+					rainBackB.blend = LIGHTEN;
 					rainBackB.antialiasing = true;
 					add(rainBackB);
 					
@@ -1040,7 +1040,7 @@ class PlayState extends MusicBeatState
 					rainMiddleA.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainMiddleA.alpha = 0;
 					rainMiddleA.setGraphicSize(Std.int(rainMiddleA.width * 2.5));
-					rainMiddleA.blendMode = BLEND_LIGHTEN;
+					rainMiddleA.blend = LIGHTEN;
 					rainMiddleA.antialiasing = true;
 					rainMiddleA.flipX = true;
 					add(rainMiddleA);
@@ -1050,7 +1050,7 @@ class PlayState extends MusicBeatState
 					rainMiddleB.animation.addByPrefix('rain', 'Rain', 24, true);
 					rainMiddleB.alpha = 0;
 					rainMiddleB.setGraphicSize(Std.int(rainMiddleB.width * 2.5));
-					rainMiddleB.blendMode = BLEND_LIGHTEN;
+					rainMiddleB.blend = LIGHTEN;
 					rainMiddleB.antialiasing = true;
 					rainMiddleB.flipX = true;
 					add(rainMiddleB);
@@ -1640,7 +1640,7 @@ class PlayState extends MusicBeatState
 				rainFrontA.animation.addByPrefix('rain', 'Rain', 24, false);
 				rainFrontA.alpha = 0;
 				rainFrontA.setGraphicSize(Std.int(rainFrontA.width * 2.5));
-				rainFrontA.blendMode = BLEND_LIGHTEN;
+				rainFrontA.blend = LIGHTEN;
 				rainFrontA.antialiasing = true;
 				add(rainFrontA);
 						
@@ -1649,7 +1649,7 @@ class PlayState extends MusicBeatState
 				rainFrontB.animation.addByPrefix('rain', 'Rain', 24, false);
 				rainFrontB.alpha = 0;
 				rainFrontB.setGraphicSize(Std.int(rainFrontB.width * 2.5));
-				rainFrontB.blendMode = BLEND_LIGHTEN;
+				rainFrontB.blend = LIGHTEN;
 				rainFrontB.antialiasing = true;
 				add(rainFrontB);
 					
@@ -4756,14 +4756,14 @@ class PlayState extends MusicBeatState
 		oilG.scrollFactor.set();
 		oilH.scrollFactor.set();
 		
-		oilA.blendMode = BLEND_DIFFERENCE;
-		oilB.blendMode = BLEND_DIFFERENCE;
-		oilC.blendMode = BLEND_DIFFERENCE;
-		oilD.blendMode = BLEND_DIFFERENCE;
-		oilE.blendMode = BLEND_DIFFERENCE;
-		oilF.blendMode = BLEND_DIFFERENCE;
-		oilG.blendMode = BLEND_DIFFERENCE;
-		oilH.blendMode = BLEND_DIFFERENCE;
+		oilA.blend = DIFFERENCE;
+		oilB.blend = DIFFERENCE;
+		oilC.blend = DIFFERENCE;
+		oilD.blend = DIFFERENCE;
+		oilE.blend = DIFFERENCE;
+		oilF.blend = DIFFERENCE;
+		oilG.blend = DIFFERENCE;
+		oilH.blend = DIFFERENCE;
 		
 		add(oilA);
 		add(oilB);
