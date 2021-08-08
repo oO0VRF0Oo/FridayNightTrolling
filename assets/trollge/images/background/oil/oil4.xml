@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="oil4.png">	
+	<SubTexture name="Oil0000" x="0" y="0" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0001" x="857" y="0" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0002" x="1714" y="0" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0003" x="2571" y="0" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0004" x="0" y="484" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0005" x="857" y="484" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0006" x="1714" y="484" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0007" x="2571" y="484" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0008" x="0" y="968" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0009" x="857" y="968" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0010" x="1714" y="968" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0011" x="2571" y="968" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0012" x="0" y="1452" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0013" x="857" y="1452" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0014" x="1714" y="1452" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+	<SubTexture name="Oil0015" x="2571" y="1452" width="857" height="484" frameX="0" frameY="0" frameWidth="857" frameHeight="484" />
+</TextureAtlas>
