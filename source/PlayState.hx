@@ -4418,8 +4418,18 @@ class PlayState extends MusicBeatState
 
 			updateAccuracy();
 				
-			if (daNote.ArrowType == 'magnet')
-				magneticBlast();
+			
+			switch(note.ArrowType)
+			{
+				case 'oil' || 'troll':
+				{
+					note.kill();
+					notes.remove(note, true);
+					note.destroy();
+				}
+				case 'magnet':
+					magneticBlast();
+			}
 		}
 	}
 
