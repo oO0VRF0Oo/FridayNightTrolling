@@ -209,8 +209,7 @@ class PlayState extends MusicBeatState
 	var rainBackA:FlxSprite;
 	var rainBackB:FlxSprite;
 	var heartbeat:FlxSprite;
-	var mischiefHue:FlxSprite;
-	var mischiefHueFadeIn:FlxTween;
+	var hue:FlxSprite;
 
 	var limo:FlxSprite;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
@@ -940,7 +939,6 @@ class PlayState extends MusicBeatState
 					add(streetBack);
 					
 					var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
-				
 					rainBackA = new FlxSprite(1060, 270);
 					rainBackA.frames = rainTex;
 					rainBackA.animation.addByPrefix('rain', 'Rain', 24, true);
@@ -1378,7 +1376,8 @@ class PlayState extends MusicBeatState
 		scoreTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 		
-		LoadOil();
+		if (curStage == 'street-rain' || curStage == 'street-unused' || curStage == 'void') LoadOil();
+
 		if (FlxG.save.data.songPosition)
 		{
 			songPosBG.cameras = [camHUD];
@@ -1553,22 +1552,21 @@ class PlayState extends MusicBeatState
 		{
 			case 'Mischief':
 			{
-				var mischiefHue:FlxSprite = new FlxSprite().loadGraphic(Paths.image('background/mischiefHue', 'trollge'));
-				mischiefHue.antialiasing = true;
-				mischiefHue.alpha = 0;
-				mischiefHue.scrollFactor.set();
-				mischiefHue.cameras = [camHUD];
-				var mischiefHueFadeIn = FlxTween.tween(mischiefHue, { alpha:1 }, 164, { type:FlxTweenType.PERSIST });
-				mischiefHue.setGraphicSize(Std.int(mischiefHue.width * 2.5));
-				add(mischiefHue);
+				hue = new FlxSprite(0, 0).loadGraphic(Paths.image('background/mischiefHue', 'trollge'));
+				hue.screenCenter();
+				hue.antialiasing = true;
+				hue.scrollFactor.set();
+				hue.alpha = 0;
+				hue.setGraphicSize(Std.int(hue.width * 1920));
+				add(hue);
 				
 				var heartTex = Paths.getSparrowAtlas('background/heartbeat', 'trollge');
 				heartbeat = new FlxSprite();
 				heartbeat.screenCenter();
 				heartbeat.frames = heartTex;
 				heartbeat.animation.addByPrefix('beat', 'Heart', 48, false);
+				heartbeat.setGraphicSize(Std.int(heartbeat.width * 2));
 				heartbeat.alpha = 0;
-				heartbeat.setGraphicSize(Std.int(heartbeat.width * 2.5));
 				heartbeat.antialiasing = true;
 				heartbeat.scrollFactor.set();
 				heartbeat.cameras = [camHUD];
@@ -3346,9 +3344,9 @@ class PlayState extends MusicBeatState
 						{
 							switch(storyDifficulty)
 							{
-								case 2: healthloss = 3 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 100);
-								case 1: healthloss = 1.8 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 100);
-								case 0: healthloss = 0.6 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 100);
+								case 2: healthloss = 3 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 200 + 1/2);
+								case 1: healthloss = 1.8 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 200 + 1/2);
+								case 0: healthloss = 0.6 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 200 + 1/2);
 							}
 						}
 					}
@@ -4612,7 +4610,6 @@ class PlayState extends MusicBeatState
 		for (i in 0...20)
 		{
 			var oil:FlxSprite = new FlxSprite();
-			
 			if (i < 8)
 			{
 				var oilTex = Paths.getSparrowAtlas('background/oil/oil' + Std.string(i + 1), 'trollge');
@@ -4622,8 +4619,7 @@ class PlayState extends MusicBeatState
 			{
 				var oilTex = Paths.getSparrowAtlas('background/oil/oil' + Std.string(Math.floor(Math.random() * 7.99) + 1), 'trollge');
 				oil.frames = oilTex;
-			}
-				
+			}	
 			oil.animation.addByPrefix('splash', 'Oil', 24, false);
 			oil.alpha = 1;
 			oil.setGraphicSize(Std.int(oil.width * 1.5));
@@ -4633,11 +4629,10 @@ class PlayState extends MusicBeatState
 			oil.cameras = [camHUD];
 			add(oil);
 			oilList.push(oil);
+			
 			var tween = FlxTween.tween(oil, { y:840+(Math.random()*120-60), alpha:0 }, 6, { ease:FlxEase.sineOut, type:FlxTweenType.PERSIST });
 			oilTween.push(tween);
 		}
-		trace(oilList);
-		trace(oilTween);
 	}
 	
 	//handle things when you hit oily note
@@ -4682,21 +4677,19 @@ class PlayState extends MusicBeatState
 	{
 		switch(curStep)
 		{
-			case 1:
-			{
-				mischiefHueFadeIn.start();
-				healthFactor = 0;
-			}
+			case 0: healthFactor = 0;
 			case 959:
 			{
+				FlxTween.tween(heartbeat, { alpha:1 }, 2);
+				FlxTween.tween(hue, { alpha:0.15 }, 60);
 				healthFactor = 0.02;
 				if (!climax) climax = true;
 				FlxG.camera.zoom = 0.85;
 				camHUD.zoom = 0.85;
-				heartbeat.x = 960;
 			}
 			case 1216:
 			{
+				FlxTween.tween(heartbeat, { alpha:0 }, 2);
 				healthFactor = 0;
 				if (climax) climax = false;
 				FlxG.camera.zoom = 0.7;
@@ -4709,30 +4702,14 @@ class PlayState extends MusicBeatState
 			case 1600: healthFactor = 0;
 			case 1664: healthFactor = 0.05;
 		}
-
-		if (curStep > 959 && curStep < 1216 && heartbeat.alpha < 1) heartbeat.alpha += 0.1;
-		else if (curStep > 1216 && heartbeat.alpha > 0) heartbeat.alpha -= 0.01;
 	}
 	
 	var thunderTrack:Int = 0;
 	
-	function ominousChangeCharacter()
+	function changeCharacter(character:String)
 	{
-		switch(dad.curCharacter)
-		{
-			case 'trollge02':
-			{
-				remove(dad);
-				dad = new Character(100, 100, 'trollge02s');
-			}
-			case 'trollge02s':
-			{
-				remove(dad);
-				dad = new Character(100, 100, 'trollge02');
-			}
-		}
-		dad.x -= 124;
-		dad.y -= 30;
+		remove(dad);
+		dad = new Character(-24, 70, character);
 		add(dad);
 	}
 	
@@ -4751,17 +4728,19 @@ class PlayState extends MusicBeatState
 			case 27: rainBackB.animation.play('rain', true);
 			case 126: healthFactor = 0.015;
 			case 320: healthFactor = 0.0175;
-			case 502: ominousChangeCharacter();
-			case 512: ominousChangeCharacter();
+			case 502: changeCharacter('trollge02s');
+			case 524: changeCharacter('trollge02');
 			case 575: healthFactor = 0.02;
-			case 654: ominousChangeCharacter();
-			case 672: ominousChangeCharacter();
-			case 716: ominousChangeCharacter();
-			case 736: ominousChangeCharacter();
-			case 764: ominousChangeCharacter();
-			case 800: ominousChangeCharacter();
+			case 588: changeCharacter('trollge02s');
+			case 608: changeCharacter('trollge02');
+			case 654: changeCharacter('trollge02s');
+			case 672: changeCharacter('trollge02');
+			case 716: changeCharacter('trollge02s');
+			case 736: changeCharacter('trollge02');
+			case 764: changeCharacter('trollge02s');
+			case 800: changeCharacter('trollge02');
 			case 832: healthFactor = 0.025;
-			case 1092: ominousChangeCharacter();
+			case 954: changeCharacter('trollge02s');
 			case 1118: healthFactor = 0.01;
 			case 1424: healthFactor = 0.025;
 			case 1800: healthFactor = 0.03;

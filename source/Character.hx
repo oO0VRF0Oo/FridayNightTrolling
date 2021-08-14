@@ -483,17 +483,17 @@ class Character extends FlxSprite
 			
 			case 'trollge02s':
 				frames = Paths.getSparrowAtlas('character/trollge_2s','trollge');
-				animation.addByPrefix('idle', 'tg22 idle', 24, false);
+				animation.addByPrefix('idle', 'tg22idle', 24, false);
 				animation.addByPrefix('singUP', 'tg22 U', 24, false);
 				animation.addByPrefix('singDOWN', 'tg22 D', 24, false);
 				animation.addByPrefix('singLEFT', 'tg22 L', 24, false);
 				animation.addByPrefix('singRIGHT', 'tg22 R', 24, false);
 
-				addOffset('idle', 0, -85);
-				addOffset("singUP", -19, 72);
+				addOffset('idle', 50, -85);
+				addOffset("singUP", 21, 72);
 				addOffset("singRIGHT", -67, -50);
-				addOffset("singLEFT", 152, -45);
-				addOffset("singDOWN", -4, 9);
+				addOffset("singLEFT", 202, -45);
+				addOffset("singDOWN", 46, 9);
 
 				playAnim('idle');
 			
