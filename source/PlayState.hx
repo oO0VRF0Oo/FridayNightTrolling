@@ -4428,7 +4428,7 @@ class PlayState extends MusicBeatState
 					note.destroy();
 				}
 				case 'magnet':
-					magneticattract();
+					magneticEffect();
 			}
 		}
 	}
@@ -4640,7 +4640,7 @@ class PlayState extends MusicBeatState
 		//wood break sound effect
 	}
 	
-	function magneticBlast()
+	function magneticEffect()
 	{
 		//handle things when you miss the magnetic note
 		
