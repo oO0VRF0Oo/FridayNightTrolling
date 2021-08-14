@@ -206,8 +206,11 @@ class PlayState extends MusicBeatState
 	var thunder:FlxSprite;
 	var rainFrontA:FlxSprite;
 	var rainFrontB:FlxSprite;
+	var rainBackA:FlxSprite;
+	var rainBackB:FlxSprite;
 	var heartbeat:FlxSprite;
 	var mischiefHue:FlxSprite;
+	var mischiefHueFadeIn:FlxTween;
 
 	var limo:FlxSprite;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
@@ -935,6 +938,24 @@ class PlayState extends MusicBeatState
 					streetBack.antialiasing = true;
 					streetBack.active = false;
 					add(streetBack);
+					
+					var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
+				
+					rainBackA = new FlxSprite(1060, 270);
+					rainBackA.frames = rainTex;
+					rainBackA.animation.addByPrefix('rain', 'Rain', 24, true);
+					rainBackA.setGraphicSize(Std.int(rainBackA.width * 2));
+					rainBackA.blend = LIGHTEN;
+					rainBackA.antialiasing = true;
+					add(rainBackA);
+							
+					rainBackB = new FlxSprite(1080, 270);
+					rainBackB.frames = rainTex;
+					rainBackB.animation.addByPrefix('rain', 'Rain', 24, true);
+					rainBackB.setGraphicSize(Std.int(rainBackB.width * 2));
+					rainBackB.blend = LIGHTEN;
+					rainBackB.antialiasing = true;
+					add(rainBackB);
 
 					var cloudTex = Paths.getSparrowAtlas('background/cloud', 'trollge');
 					cloud = new FlxSprite(-575, -500);
@@ -1535,6 +1556,9 @@ class PlayState extends MusicBeatState
 				var mischiefHue:FlxSprite = new FlxSprite().loadGraphic(Paths.image('background/mischiefHue', 'trollge'));
 				mischiefHue.antialiasing = true;
 				mischiefHue.alpha = 0;
+				mischiefHue.scrollFactor.set();
+				mischiefHue.cameras = [camHUD];
+				var mischiefHueFadeIn = FlxTween.tween(mischiefHue, { alpha:1 }, 164, { type:FlxTweenType.PERSIST });
 				mischiefHue.setGraphicSize(Std.int(mischiefHue.width * 2.5));
 				add(mischiefHue);
 				
@@ -1547,6 +1571,7 @@ class PlayState extends MusicBeatState
 				heartbeat.setGraphicSize(Std.int(heartbeat.width * 2.5));
 				heartbeat.antialiasing = true;
 				heartbeat.scrollFactor.set();
+				heartbeat.cameras = [camHUD];
 				add(heartbeat);
 				
 				healthFactor = 0;
@@ -4650,10 +4675,13 @@ class PlayState extends MusicBeatState
 	
 	function mischiefEvent()
 	{
-			
 		switch(curStep)
 		{
-			case 1: healthFactor = 0;
+			case 1:
+			{
+				mischiefHueFadeIn.start();
+				healthFactor = 0;
+			}
 			case 959:
 			{
 				healthFactor = 0.02;
@@ -4688,12 +4716,14 @@ class PlayState extends MusicBeatState
 		//healthfactor manipulation
 		switch(curStep)
 		{
-			case 1: 
+			case 0: 
 			{
 				healthFactor = 0.01;
-				rainFrontA.animation.play('rain');	
+				rainFrontA.animation.play('rain', true);	
 			}
-			case 19: rainFrontB.animation.play('rain', true);
+			case 9:	rainBackA.animation.play('rain', true);
+			case 18: rainFrontB.animation.play('rain', true);
+			case 27: rainBackB.animation.play('rain', true);
 			case 126: healthFactor = 0.015;
 			case 320: healthFactor = 0.0175;
 			case 575: healthFactor = 0.02;
