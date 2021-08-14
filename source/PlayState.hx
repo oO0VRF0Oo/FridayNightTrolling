@@ -4445,12 +4445,18 @@ class PlayState extends MusicBeatState
 				
 			switch(daNote.ArrowType)
 			{
-				case 'oil' || 'troll':
+				case 'oil':
 				{
 					note.kill();
 					notes.remove(note, true);
 					note.destroy();
 				}
+				case 'troll':
+				{
+					note.kill();
+					notes.remove(note, true);
+					note.destroy();
+				}	
 				case 'magnet':
 					magneticEffect();
 			}
