@@ -4447,15 +4447,15 @@ class PlayState extends MusicBeatState
 			{
 				case 'oil':
 				{
-					note.kill();
-					notes.remove(note, true);
-					note.destroy();
+					daNote.kill();
+					notes.remove(daNote, true);
+					daNote.destroy();
 				}
 				case 'troll':
 				{
-					note.kill();
-					notes.remove(note, true);
-					note.destroy();
+					daNote.kill();
+					notes.remove(daNote, true);
+					daNote.destroy();
 				}	
 				case 'magnet':
 					magneticEffect();
