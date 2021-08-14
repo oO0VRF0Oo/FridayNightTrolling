@@ -4444,7 +4444,7 @@ class PlayState extends MusicBeatState
 			updateAccuracy();
 				
 			
-			switch(note.ArrowType)
+			switch(deNote.ArrowType)
 			{
 				case 'oil' || 'troll':
 				{
