@@ -4428,7 +4428,7 @@ class PlayState extends MusicBeatState
 					note.destroy();
 				}
 				case 'magnet':
-					magneticBlast();
+					magneticattract();
 			}
 		}
 	}
@@ -4644,9 +4644,6 @@ class PlayState extends MusicBeatState
 	{
 		//handle things when you miss the magnetic note
 		
-		//electric shock sound
-		//screen blurred and darken
-		//sound muffled
 	}
 	
 	var climax:Bool = false;
