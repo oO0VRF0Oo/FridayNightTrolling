@@ -4716,6 +4716,26 @@ class PlayState extends MusicBeatState
 	
 	var thunderTrack:Int = 0;
 	
+	function ominousChangeCharacter()
+	{
+		switch(dad.curCharacter)
+		{
+			case 'trollge02':
+			{
+				remove(dad);
+				dad = new Character(100, 100, 'trollge02s');
+			}
+			case 'trollge02s':
+			{
+				remove(dad);
+				dad = new Character(100, 100, 'trollge02');
+			}
+		}
+		dad.x -= 124;
+		dad.y -= 30;
+		add(dad);
+	}
+	
 	function ominousEvent()
 	{
 		//healthfactor manipulation
@@ -4731,8 +4751,17 @@ class PlayState extends MusicBeatState
 			case 27: rainBackB.animation.play('rain', true);
 			case 126: healthFactor = 0.015;
 			case 320: healthFactor = 0.0175;
+			case 502: ominousChangeCharacter();
+			case 512: ominousChangeCharacter();
 			case 575: healthFactor = 0.02;
+			case 654: ominousChangeCharacter();
+			case 672: ominousChangeCharacter();
+			case 716: ominousChangeCharacter();
+			case 736: ominousChangeCharacter();
+			case 764: ominousChangeCharacter();
+			case 800: ominousChangeCharacter();
 			case 832: healthFactor = 0.025;
+			case 1092: ominousChangeCharacter();
 			case 1118: healthFactor = 0.01;
 			case 1424: healthFactor = 0.025;
 			case 1800: healthFactor = 0.03;
