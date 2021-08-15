@@ -54,6 +54,26 @@ class Character extends FlxSprite
 
 				playAnim('danceRight');
 				
+			case 'gf-2':
+				// GIRLFRIEND CODE
+				tex = Paths.getSparrowAtlas('GF_assets','shared',true);
+				frames = tex;
+				animation.addByPrefix('cheer', 'GF Cheer', 24, false);
+				animation.addByPrefix('singLEFT', 'GF left note', 24, false);
+				animation.addByPrefix('singRIGHT', 'GF Right Note', 24, false);
+				animation.addByPrefix('singUP', 'GF Up Note', 24, false);
+				animation.addByPrefix('singDOWN', 'GF Down Note', 24, false);
+				animation.addByIndices('sad', 'gf sad', [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], "", 24, false);
+				animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+				animation.addByIndices('hairBlow', "GF Dancing Beat Hair blowing", [0, 1, 2, 3], "", 24);
+				animation.addByIndices('hairFall', "GF Dancing Beat Hair Landing", [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11], "", 24, false);
+				animation.addByPrefix('scared', 'GF FEAR', 24);
+
+				loadOffsetFile(curCharacter);
+
+				playAnim('danceRight');	
+				
 			case 'gf-1':
 				tex = Paths.getSparrowAtlas('character/GF_1','trollge');
 				frames = tex;
@@ -222,6 +242,35 @@ class Character extends FlxSprite
 				flipX = true;
 
 			case 'bf':
+				var tex = Paths.getSparrowAtlas('BOYFRIEND','shared',true);
+				frames = tex;
+
+				trace(tex.frames.length);
+
+				animation.addByPrefix('idle', 'BF idle dance', 24, false);
+				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
+				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
+				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
+				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
+				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
+				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
+				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
+				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
+				animation.addByPrefix('hey', 'BF HEY', 24, false);
+
+				animation.addByPrefix('firstDeath', "BF dies", 24, false);
+				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, false);
+				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
+
+				animation.addByPrefix('scared', 'BF idle shaking', 24);
+
+				loadOffsetFile(curCharacter);
+
+				playAnim('idle');
+
+				flipX = true;
+				
+			case 'bf-2':
 				var tex = Paths.getSparrowAtlas('BOYFRIEND','shared',true);
 				frames = tex;
 
@@ -434,6 +483,23 @@ class Character extends FlxSprite
 				
 			case 'trollge01':
 				frames = Paths.getSparrowAtlas('character/trollge_1','trollge');
+				animation.addByPrefix('idle', 'tg1 idle', 24, false);
+				animation.addByPrefix('singUP', 'tg1 U', 24, false);
+				animation.addByPrefix('singDOWN', 'tg1 D', 24, false);
+				animation.addByPrefix('singLEFT', 'tg1 L', 24, false);
+				animation.addByPrefix('singRIGHT', 'tg1 R', 24, false);
+
+				addOffset('idle', 0, -110);
+				addOffset("singUP", -19, 47);
+				addOffset("singRIGHT", -67, -75);
+				addOffset("singLEFT", 152, -70);
+				addOffset("singDOWN", -4, -16);
+
+				playAnim('idle');
+				
+				
+			case 'trollge01dark':
+				frames = Paths.getSparrowAtlas('character/trollge_1dark','trollge');
 				animation.addByPrefix('idle', 'tg1 idle', 24, false);
 				animation.addByPrefix('singUP', 'tg1 U', 24, false);
 				animation.addByPrefix('singDOWN', 'tg1 D', 24, false);

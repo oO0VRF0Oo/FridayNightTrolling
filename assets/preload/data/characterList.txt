@@ -1,5 +1,6 @@
 bf
 bf-1
+bf-2
 dad
 gf
 spooky
@@ -17,6 +18,8 @@ senpai
 senpai-angry
 spirit
 trollge01
+trollge01ori
 trollge02
 trollge02s
 trollge03
+trollge01dark

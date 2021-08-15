@@ -897,12 +897,12 @@ class PlayState extends MusicBeatState
 				{
 					defaultCamZoom = 0.7;
 					curStage = 'street-sunny';
-					var streetBack:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/streetBack-A', 'trollge'));
+					/*var streetBack:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/streetBack-C', 'trollge'));
 					streetBack.antialiasing = true;
 					streetBack.active = false;
-					add(streetBack);
+					add(streetBack);*/
 		
-					var street:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/street-A', 'trollge'));
+					var street:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/street-C', 'trollge'));
 					street.antialiasing = true;
 					street.active = false;
 					add(street);
@@ -933,7 +933,7 @@ class PlayState extends MusicBeatState
 				{
 					defaultCamZoom = 0.7;
 					curStage = 'street-rain';
-					var streetBack:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/streetBack-B', 'trollge'));
+					var streetBack:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/streetBack-D', 'trollge'));
 					streetBack.antialiasing = true;
 					streetBack.active = false;
 					add(streetBack);
@@ -963,11 +963,10 @@ class PlayState extends MusicBeatState
 					cloud.antialiasing = true;
 					add(cloud);
 		
-					var street:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/street-B', 'trollge'));
+					var street:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/street-D', 'trollge'));
 					street.antialiasing = true;
 					street.active = false;
 					add(street);
-					
 				}
 				case 'street-unused':
 				{
@@ -1045,6 +1044,7 @@ class PlayState extends MusicBeatState
 		}
 		// defaults if no gf was found in chart
 		var gfCheck:String = 'gf';
+		var curGf:String = '';
 
 		if (SONG.gfVersion == null)
 		{
@@ -1063,7 +1063,6 @@ class PlayState extends MusicBeatState
 			gfCheck = SONG.gfVersion;
 		}
 
-		var curGf:String = '';
 		switch (gfCheck)
 		{
 			case 'gf-car':

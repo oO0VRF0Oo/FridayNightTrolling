@@ -26,6 +26,7 @@ class HealthIcon extends FlxSprite
 		loadGraphic(Paths.image('iconGrid'), true, 150, 150);
 		animation.add('bf', [0, 1, 24], 0, false, isPlayer);
 		animation.add('bf-1', [0, 1, 24], 0, false, isPlayer);
+		animation.add('bf-2', [0, 1, 24], 0, false, isPlayer);
 		animation.add('bf-car', [0, 1, 24], 0, false, isPlayer);
 		animation.add('bf-christmas', [0, 1, 24], 0, false, isPlayer);
 		animation.add('bf-pixel', [21, 21, 21], 0, false, isPlayer);
@@ -42,6 +43,7 @@ class HealthIcon extends FlxSprite
 		animation.add('bf-old', [14, 15, 14], 0, false, isPlayer);
 		animation.add('gf', [16, 16, 16], 0, false, isPlayer);
 		animation.add('gf-1', [16, 16, 16], 0, false, isPlayer);
+		animation.add('gf-2', [16, 16, 16], 0, false, isPlayer);
 		animation.add('gf-christmas', [16, 16, 16], 0, false, isPlayer);
 		animation.add('gf-pixel', [16, 16, 16], 0, false, isPlayer);
 		animation.add('parents-christmas', [17, 18, 18], 0, false, isPlayer);
