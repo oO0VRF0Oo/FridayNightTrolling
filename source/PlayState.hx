@@ -210,6 +210,9 @@ class PlayState extends MusicBeatState
 	var rainBackB:FlxSprite;
 	var heartbeat:FlxSprite;
 	var hue:FlxSprite;
+	var streetBackO:FlxSprite;
+	var streetO:FlxSprite;
+	var jumpIn:FlxSprite;
 
 	var limo:FlxSprite;
 	var grpLimoDancers:FlxTypedGroup<BackgroundDancer>;
@@ -897,12 +900,14 @@ class PlayState extends MusicBeatState
 				{
 					defaultCamZoom = 0.7;
 					curStage = 'street-sunny';
-					/*var streetBack:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/streetBack-C', 'trollge'));
+					
+					var streetBack:FlxSprite = new FlxSprite( -575, -285).loadGraphic(Paths.image('background/streetBack-A', 'trollge'));
+					streetBack.scrollFactor.set(0.5, 0.5);
 					streetBack.antialiasing = true;
 					streetBack.active = false;
-					add(streetBack);*/
+					add(streetBack);
 		
-					var street:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/street-C', 'trollge'));
+					var street:FlxSprite = new FlxSprite(-575, -285).loadGraphic(Paths.image('background/street-A', 'trollge'));
 					street.antialiasing = true;
 					street.active = false;
 					add(street);
@@ -911,20 +916,21 @@ class PlayState extends MusicBeatState
 				{
 					defaultCamZoom = 0.7;
 					curStage = 'street-abandon';
-					var streetBack:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/streetBack-A', 'trollge'));
+					var streetBack:FlxSprite = new FlxSprite( -575, -285).loadGraphic(Paths.image('background/streetBack-A', 'trollge'));
+					streetBack.scrollFactor.set(0.5, 0.5);
 					streetBack.antialiasing = true;
 					streetBack.active = false;
 					add(streetBack);
 					
 					var cloudTex = Paths.getSparrowAtlas('background/cloud', 'trollge');
-					cloud = new FlxSprite(-575, -500);
+					cloud = new FlxSprite(-575, -650);
 					cloud.frames = cloudTex;
 					cloud.animation.addByPrefix('cloud', 'Fog', 24, true);
 					cloud.animation.play('cloud');
 					cloud.antialiasing = true;
 					add(cloud);
 		
-					var street:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/street-A', 'trollge'));
+					var street:FlxSprite = new FlxSprite(-575, -285).loadGraphic(Paths.image('background/street-A', 'trollge'));
 					street.antialiasing = true;
 					street.active = false;
 					add(street);
@@ -933,10 +939,17 @@ class PlayState extends MusicBeatState
 				{
 					defaultCamZoom = 0.7;
 					curStage = 'street-rain';
-					var streetBack:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/streetBack-D', 'trollge'));
+					var streetBack:FlxSprite = new FlxSprite( -575, -285).loadGraphic(Paths.image('background/streetBack-B2', 'trollge'));
+					streetBack.scrollFactor.set(0.5, 0.5);
 					streetBack.antialiasing = true;
 					streetBack.active = false;
 					add(streetBack);
+					
+					streetBackO = new FlxSprite( -575, -285).loadGraphic(Paths.image('background/streetBack-B', 'trollge'));
+					streetBackO.scrollFactor.set(0.5, 0.5);
+					streetBackO.antialiasing = true;
+					streetBackO.active = false;
+					add(streetBackO);
 					
 					var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
 					rainBackA = new FlxSprite(1060, 270);
@@ -956,36 +969,41 @@ class PlayState extends MusicBeatState
 					add(rainBackB);
 
 					var cloudTex = Paths.getSparrowAtlas('background/cloud', 'trollge');
-					cloud = new FlxSprite(-575, -500);
+					cloud = new FlxSprite(-575, -650);
 					cloud.frames = cloudTex;
 					cloud.animation.addByPrefix('cloud', 'Fog', 24, true);
 					cloud.animation.play('cloud');
 					cloud.antialiasing = true;
 					add(cloud);
 		
-					var street:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/street-D', 'trollge'));
+					var street:FlxSprite = new FlxSprite(-575, -285).loadGraphic(Paths.image('background/street-B2', 'trollge'));
 					street.antialiasing = true;
 					street.active = false;
 					add(street);
+					
+					streetO = new FlxSprite(-575, -285).loadGraphic(Paths.image('background/street-B', 'trollge'));
+					streetO.antialiasing = true;
+					add(streetO);
 				}
 				case 'street-unused':
 				{
 					defaultCamZoom = 0.7;
 					curStage = 'street-unused';
-					var streetBack:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/streetBack-B', 'trollge'));
+					var streetBack:FlxSprite = new FlxSprite( -575, -285).loadGraphic(Paths.image('background/streetBack-B', 'trollge'));
+					streetBack.scrollFactor.set(0.5, 0.5);
 					streetBack.antialiasing = true;
 					streetBack.active = false;
 					add(streetBack);
 					
 					var cloudTex = Paths.getSparrowAtlas('background/cloud', 'trollge');
-					cloud = new FlxSprite(-575, -500);
+					cloud = new FlxSprite(-575, -280);
 					cloud.frames = cloudTex;
 					cloud.animation.addByPrefix('cloud', 'Fog', 24, true);
 					cloud.animation.play('cloud');
 					cloud.antialiasing = true;
 					add(cloud);
 		
-					var street:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/street-B', 'trollge'));
+					var street:FlxSprite = new FlxSprite(-575, -285).loadGraphic(Paths.image('background/street-B', 'trollge'));
 					street.antialiasing = true;
 					street.active = false;
 					add(street);
@@ -994,52 +1012,42 @@ class PlayState extends MusicBeatState
 				{
 					defaultCamZoom = 0.7;
 					curStage = 'void';
-					var streetBack:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/streetBack-B', 'trollge'));
+					var streetBack:FlxSprite = new FlxSprite(-575, -285).loadGraphic(Paths.image('background/streetBack-B', 'trollge'));
 					streetBack.antialiasing = true;
 					streetBack.active = false;
 					add(streetBack);
 		
-					var street:FlxSprite = new FlxSprite(-575, -135).loadGraphic(Paths.image('background/street-B', 'trollge'));
+					var street:FlxSprite = new FlxSprite(-575, -285).loadGraphic(Paths.image('background/street-B', 'trollge'));
 					street.antialiasing = true;
 					street.active = false;
 					add(street);
 				}
 				default:
 				{
-						defaultCamZoom = 0.9;
-						curStage = 'stage';
-						var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
-						if(FlxG.save.data.antialiasing)
-							{
-								bg.antialiasing = true;
-							}
-						bg.scrollFactor.set(0.9, 0.9);
-						bg.active = false;
-						add(bg);
+					defaultCamZoom = 0.9;
+					curStage = 'stage';
+					var bg:FlxSprite = new FlxSprite(-600, -200).loadGraphic(Paths.image('stageback'));
+					if(FlxG.save.data.antialiasing) bg.antialiasing = true;
+					bg.scrollFactor.set(0.9, 0.9);
+					bg.active = false;
+					add(bg);
 
-						var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
-						stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
-						stageFront.updateHitbox();
-						if(FlxG.save.data.antialiasing)
-							{
-								stageFront.antialiasing = true;
-							}
-						stageFront.scrollFactor.set(0.9, 0.9);
-						stageFront.active = false;
-						add(stageFront);
+					var stageFront:FlxSprite = new FlxSprite(-650, 600).loadGraphic(Paths.image('stagefront'));
+					stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
+					stageFront.updateHitbox();
+					if(FlxG.save.data.antialiasing) stageFront.antialiasing = true;
+					stageFront.scrollFactor.set(0.9, 0.9);
+					stageFront.active = false;
+					add(stageFront);
 
-						var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
-						stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
-						stageCurtains.updateHitbox();
-						if(FlxG.save.data.antialiasing)
-							{
-								stageCurtains.antialiasing = true;
-							}
-						stageCurtains.scrollFactor.set(1.3, 1.3);
-						stageCurtains.active = false;
-
-						add(stageCurtains);
-					}
+					var stageCurtains:FlxSprite = new FlxSprite(-500, -300).loadGraphic(Paths.image('stagecurtains'));
+					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
+					stageCurtains.updateHitbox();
+					if(FlxG.save.data.antialiasing) stageCurtains.antialiasing = true;
+					stageCurtains.scrollFactor.set(1.3, 1.3);
+					stageCurtains.active = false;
+					add(stageCurtains);
+				}
 			}
 		}
 		// defaults if no gf was found in chart
@@ -1376,24 +1384,34 @@ class PlayState extends MusicBeatState
 		doof.cameras = [camHUD];
 		
 		if (curStage == 'street-rain' || curStage == 'street-unused' || curStage == 'void') LoadOil();
-
+		
 		if (FlxG.save.data.songPosition)
 		{
 			songPosBG.cameras = [camHUD];
 			songPosBar.cameras = [camHUD];
 		}
 		kadeEngineWatermark.cameras = [camHUD];
-		if (loadRep)
-			replayTxt.cameras = [camHUD];
-
-		// if (SONG.song == 'South')
-		// FlxG.camera.alpha = 0.7;
-		// UI_camera.zoom = 1;
-
-		// cameras = [FlxG.cameras.list[1]];
+		if (loadRep) replayTxt.cameras = [camHUD];
+			
 		startingSong = true;
 
 		trace('starting');
+		
+		if (curStage == 'street-rain')
+		{
+			var jumpTex = Paths.getSparrowAtlas('background/jumpscare', 'trollge');
+			jumpIn = new FlxSprite();
+			jumpIn.frames = jumpTex;
+			jumpIn.animation.addByPrefix('jump', 'Jump', 36, false);
+			jumpIn.screenCenter();
+			jumpIn.scrollFactor.set();
+			jumpIn.setGraphicSize(Std.int(jumpIn.width * 2));
+			jumpIn.alpha = 0;
+			jumpIn.antialiasing = true;
+			jumpIn.cameras = [camHUD];
+			add(jumpIn);
+		}
+
 
 		if (isStoryMode)
 		{
@@ -1551,9 +1569,8 @@ class PlayState extends MusicBeatState
 		{
 			case 'Mischief':
 			{
-				hue = new FlxSprite(0, 0).loadGraphic(Paths.image('background/mischiefHue', 'trollge'));
+				hue = new FlxSprite().loadGraphic(Paths.image('background/mischiefHue', 'trollge'));
 				hue.screenCenter();
-				hue.antialiasing = true;
 				hue.scrollFactor.set();
 				hue.alpha = 0;
 				hue.setGraphicSize(Std.int(hue.width * 1920));
@@ -1570,8 +1587,6 @@ class PlayState extends MusicBeatState
 				heartbeat.scrollFactor.set();
 				heartbeat.cameras = [camHUD];
 				add(heartbeat);
-				
-				healthFactor = 0;
 			}
 			case 'Ominous': 
 			{
@@ -1584,7 +1599,7 @@ class PlayState extends MusicBeatState
 				rainFrontA.blend = LIGHTEN;
 				rainFrontA.antialiasing = true;
 				add(rainFrontA);
-						
+
 				rainFrontB = new FlxSprite(1080, 540);
 				rainFrontB.frames = rainTex;
 				rainFrontB.animation.addByPrefix('rain', 'Rain', 24, true);
@@ -1606,17 +1621,35 @@ class PlayState extends MusicBeatState
 				var thunderTex = Paths.getSparrowAtlas('background/thunder', 'trollge');
 				thunder = new FlxSprite(1080, 540);
 				thunder.frames = thunderTex;
-				thunder.animation.addByPrefix('thunder', 'Thunder', 96, false);
+				thunder.animation.addByPrefix('thunder', 'Thunder', 48, false);
 				thunder.antialiasing = true;
 				thunder.scrollFactor.set();
 				thunder.setGraphicSize(Std.int(thunder.width * 2.5));
 				add(thunder);
 				
-				healthFactor = 0.03;
+				hue = new FlxSprite().loadGraphic(Paths.image('background/ominousHue', 'trollge'));
+				hue.screenCenter();
+				hue.scrollFactor.set();
+				hue.alpha = 0;
+				hue.setGraphicSize(Std.int(hue.width * 1920));
+				add(hue);
+				
+				var heartTex = Paths.getSparrowAtlas('background/heartbeat', 'trollge');
+				heartbeat = new FlxSprite();
+				heartbeat.screenCenter();
+				heartbeat.frames = heartTex;
+				heartbeat.animation.addByPrefix('beat', 'Heart', 24, false);
+				heartbeat.setGraphicSize(Std.int(heartbeat.width * 2));
+				heartbeat.alpha = 0;
+				heartbeat.antialiasing = true;
+				heartbeat.scrollFactor.set();
+				heartbeat.cameras = [camHUD];
+				add(heartbeat);
 			}
-			case 'Incident': healthFactor = 0.04;
-			case 'Lore': healthFactor = 0;
-			case 'Insanity': healthFactor = 0.04;
+			case 'Incident': 
+			{
+				
+			}
 		}
 		
 		inCutscene = false;
@@ -3315,7 +3348,6 @@ class PlayState extends MusicBeatState
 					{
 						SectionIdentifier += 1;
 						SectionCounter = 0;
-						trace(SectionIdentifier);
 					}
 					
 					healthtrack = health;
@@ -4676,13 +4708,17 @@ class PlayState extends MusicBeatState
 	{
 		switch(curStep)
 		{
-			case 0: healthFactor = 0;
+			case 0:
+			{
+				healthFactor = 0;
+				if (climax) climax = false;
+			}
 			case 959:
 			{
 				FlxTween.tween(heartbeat, { alpha:1 }, 2);
 				FlxTween.tween(hue, { alpha:0.15 }, 60);
 				healthFactor = 0.02;
-				if (!climax) climax = true;
+				climax = true;
 				FlxG.camera.zoom = 0.85;
 				camHUD.zoom = 0.85;
 			}
@@ -4690,7 +4726,7 @@ class PlayState extends MusicBeatState
 			{
 				FlxTween.tween(heartbeat, { alpha:0 }, 2);
 				healthFactor = 0;
-				if (climax) climax = false;
+				climax = false;
 				FlxG.camera.zoom = 0.7;
 			}
 			case 1272: healthFactor = 0.04;
@@ -4719,8 +4755,9 @@ class PlayState extends MusicBeatState
 		{
 			case 0: 
 			{
+				if (climax) climax = false;
 				healthFactor = 0.01;
-				rainFrontA.animation.play('rain', true);	
+				rainFrontA.animation.play('rain', true);
 			}
 			case 9:	rainBackA.animation.play('rain', true);
 			case 18: rainFrontB.animation.play('rain', true);
@@ -4739,8 +4776,26 @@ class PlayState extends MusicBeatState
 			case 764: changeCharacter('trollge02s');
 			case 800: changeCharacter('trollge02');
 			case 832: healthFactor = 0.025;
-			case 954: changeCharacter('trollge02s');
-			case 1118: healthFactor = 0.01;
+			case 954: 
+			{
+				changeCharacter('trollge02s');
+				FlxTween.tween(hue, { alpha:0.15 }, 30);
+				FlxTween.tween(heartbeat, { alpha:1 }, 2);
+			}
+			case 1092:
+			{
+				jumpIn.alpha = 1;
+				jumpIn.animation.play('jump',false);
+			}
+			case 1101:
+			{
+				remove(streetO);
+				remove(streetBackO);
+				remove(thunder);
+				jumpIn.alpha = 0;
+				healthFactor = 0.01;
+				climax = true;
+			}
 			case 1424: healthFactor = 0.025;
 			case 1800: healthFactor = 0.03;
 			case 1920: healthFactor = 0.025;
@@ -4753,7 +4808,7 @@ class PlayState extends MusicBeatState
 		//climax event
 		
 		//thundering
-		if (thunderTrack == 0 || (curStep - thunderTrack) > 400)
+		if (((thunderTrack == 0) || ((curStep - thunderTrack) > 400)) && (curStep <= 1000))
 		{
 			if (Math.random() < (curStep % 600) / 600)
 			{
@@ -4763,8 +4818,7 @@ class PlayState extends MusicBeatState
 				thunder.animation.play('thunder', false);
 			}
 		}
-		
-		if (thunder.animation.finished && thunder.alpha > 0) thunder.alpha -= 0.1;
+		if (thunder.animation.finished) FlxTween.tween(thunder, { alpha:0 }, 1.5);
 	}
 
 	function incidentEvent()
@@ -4792,7 +4846,6 @@ class PlayState extends MusicBeatState
 	
 	function loreEvent()
 	{
-		//healthfactor manipulation
 		switch(curStep)
 		{
 			case 1: healthFactor = 0;
@@ -4802,15 +4855,10 @@ class PlayState extends MusicBeatState
 			case 768: healthFactor = 0.02;
 			case 1151: healthFactor = 0.035;
 		}
-		
-		//camera movement
-		
-		//climax event
 	}
 	
 	function insanityEvent()
 	{
-		//healthfactor manipulation
 		switch(curStep)
 		{
 			case 1: healthFactor = 0.025;
@@ -4823,10 +4871,6 @@ class PlayState extends MusicBeatState
 			case 1839: healthFactor = 0.025;
 			case 2095: healthFactor = 0;
 		}
-		
-		//camera movement
-		
-		//climax event
 	}
 
 	var fastCarCanDrive:Bool = true;
@@ -5128,13 +5172,8 @@ class PlayState extends MusicBeatState
 					}
 				}
 			
-			case "street-sunny":
-			{
-				if (climax)
-				{
-					heartbeat.animation.play('beat', false);
-				}
-			}
+			case "street-sunny": if (climax) heartbeat.animation.play('beat', false);
+			case "street-rain": if (climax) heartbeat.animation.play('beat', false);
 		}
 
 		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)

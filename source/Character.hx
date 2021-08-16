@@ -73,17 +73,6 @@ class Character extends FlxSprite
 				loadOffsetFile(curCharacter);
 
 				playAnim('danceRight');	
-				
-			case 'gf-1':
-				tex = Paths.getSparrowAtlas('character/GF_1','trollge');
-				frames = tex;
-				animation.addByIndices('danceLeft', 'GF Dancing Beat', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-				animation.addByIndices('danceRight', 'GF Dancing Beat', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-				
-				addOffset('danceLeft', 0, -9);
-				addOffset('danceRight', 0, -9);
-				
-				playAnim('danceRight');
 
 			case 'gf-christmas':
 				tex = Paths.getSparrowAtlas('gfChristmas','shared',true);
@@ -298,44 +287,6 @@ class Character extends FlxSprite
 				playAnim('idle');
 
 				flipX = true;
-				
-			case 'bf-1':
-				var tex = Paths.getSparrowAtlas('character/BF_1','trollge');
-				frames = tex;
-
-				trace(tex.frames.length);
-
-				animation.addByPrefix('idle', 'BF idle dance', 24, false);
-				animation.addByPrefix('singUP', 'BF NOTE UP0', 24, false);
-				animation.addByPrefix('singLEFT', 'BF NOTE LEFT0', 24, false);
-				animation.addByPrefix('singRIGHT', 'BF NOTE RIGHT0', 24, false);
-				animation.addByPrefix('singDOWN', 'BF NOTE DOWN0', 24, false);
-				animation.addByPrefix('singUPmiss', 'BF NOTE UP MISS', 24, false);
-				animation.addByPrefix('singLEFTmiss', 'BF NOTE LEFT MISS', 24, false);
-				animation.addByPrefix('singRIGHTmiss', 'BF NOTE RIGHT MISS', 24, false);
-				animation.addByPrefix('singDOWNmiss', 'BF NOTE DOWN MISS', 24, false);
-
-				animation.addByPrefix('firstDeath', "BF dies", 24, false);
-				animation.addByPrefix('deathLoop', "BF Dead Loop", 24, true);
-				animation.addByPrefix('deathConfirm', "BF Dead confirm", 24, false);
-
-				addOffset('idle', -5);
-				addOffset("singUP", -29, 27);
-				addOffset("singRIGHT", -38, -7);
-				addOffset("singLEFT", 12, -6);
-				addOffset("singDOWN", -10, -50);
-				addOffset("singUPmiss", -29, 27);
-				addOffset("singRIGHTmiss", -30, 21);
-				addOffset("singLEFTmiss", 12, 24);
-				addOffset("singDOWNmiss", -11, -19);
-				addOffset('firstDeath', 37, 11);
-				addOffset('deathLoop', 37, 5);
-				addOffset('deathConfirm', 37, 69);
-
-				playAnim('idle');
-
-				flipX = true;
-
 
 			case 'bf-christmas':
 				var tex = Paths.getSparrowAtlas('bfChristmas','shared',true);
@@ -513,24 +464,7 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -4, -16);
 
 				playAnim('idle');
-				
-			case 'trollge01ori':
-				frames = Paths.getSparrowAtlas('character/trollge_1ori','trollge');
-				animation.addByPrefix('idle', 'tg1 idle', 24, false);
-				animation.addByPrefix('singUP', 'tg1 U', 24, false);
-				animation.addByPrefix('singDOWN', 'tg1 D', 24, false);
-				animation.addByPrefix('singLEFT', 'tg1 L', 24, false);
-				animation.addByPrefix('singRIGHT', 'tg1 R', 24, false);
 
-				addOffset('idle', 0, -110);
-				addOffset("singUP", -19, 47);
-				addOffset("singRIGHT", -67, -75);
-				addOffset("singLEFT", 152, -70);
-				addOffset("singDOWN", -4, -16);
-
-				playAnim('idle');
-				
-				
 			case 'trollge02':
 				frames = Paths.getSparrowAtlas('character/trollge_2','trollge');
 				animation.addByPrefix('idle', 'tg2 idle', 24, false);
