@@ -110,19 +110,39 @@ class Note extends FlxSprite
 
 		if (inCharter)
 		{
-			switch(TypeGuide)
-			{
-				case 0: frames = Paths.getSparrowAtlas('NOTE_assets');
-				case 1: frames = Paths.getSparrowAtlas('NOTE_trolling');
-				case 2: frames = Paths.getSparrowAtlas('OIL_NOTE_assets');
-				case 3: frames = Paths.getSparrowAtlas('NOTE_magnetic');
-			}
+			frames = Paths.getSparrowAtlas('NOTE_assets');
 
 			for (i in 0...4)
 			{
 				animation.addByPrefix(dataColor[i] + 'Scroll', dataColor[i] + ' alone'); // Normal notes
 				animation.addByPrefix(dataColor[i] + 'hold', dataColor[i] + ' hold'); // Hold
 				animation.addByPrefix(dataColor[i] + 'holdend', dataColor[i] + ' tail'); // Tails
+			}
+	
+			frames = Paths.getSparrowAtlas('chart_Notes');
+
+			switch(TypeGuide)
+			{
+				case 1: 
+					animation.addByPrefix('greenScroll', 'WG');
+					animation.addByPrefix('redScroll', 'WR');
+					animation.addByPrefix('blueScroll', 'WB');
+					animation.addByPrefix('purpleScroll', 'WP');
+				case 2: 
+					animation.addByPrefix('greenScroll', 'OG');
+					animation.addByPrefix('redScroll', 'OR');
+					animation.addByPrefix('blueScroll', 'OB');
+					animation.addByPrefix('purpleScroll', 'OP');
+				case 3: 
+					animation.addByPrefix('greenScroll', 'MG');
+					animation.addByPrefix('redScroll', 'MR');
+					animation.addByPrefix('blueScroll', 'MB');
+					animation.addByPrefix('purpleScroll', 'MP');
+				case 4:
+					animation.addByPrefix('greenScroll', 'PG');
+					animation.addByPrefix('redScroll', 'PR');
+					animation.addByPrefix('blueScroll', 'PB');
+					animation.addByPrefix('purpleScroll', 'PP');
 			}
 
 			setGraphicSize(Std.int(width * 0.7));
@@ -155,6 +175,7 @@ class Note extends FlxSprite
 					setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 					updateHitbox();
 				default:
+					ArrowType = 'normal';
 					frames = Paths.getSparrowAtlas('NOTE_assets');
 					
 					for (i in 0...4)
@@ -166,21 +187,26 @@ class Note extends FlxSprite
 					
 					switch(TypeGuide)
 					{
-						case 0:
-							ArrowType = 'normal';
 						case 1: 
 							frames = Paths.getSparrowAtlas('NOTE_trolling');
 							ArrowType = 'troll';
 						case 2: 
 							frames = Paths.getSparrowAtlas('NOTE_oily');
 							ArrowType = 'oil';
-							animation.addByPrefix('greenScroll', 'up');
-							animation.addByPrefix('redScroll', 'right');
-							animation.addByPrefix('blueScroll', 'down');
-							animation.addByPrefix('purpleScroll', 'left');
 						case 3:
 							frames = Paths.getSparrowAtlas('NOTE_magnetic');
 							ArrowType = 'magnet';
+						case 4:
+							frames = Paths.getSparrowAtlas('NOTE_paper');
+							ArrowType = 'paper';
+					}
+					
+					if (TypeGuide != 0)
+					{
+						animation.addByPrefix('greenScroll', 'Green');
+						animation.addByPrefix('redScroll', 'Red');
+						animation.addByPrefix('blueScroll', 'Blue');
+						animation.addByPrefix('purpleScroll', 'Purple');
 					}
 
 					setGraphicSize(Std.int(width * 0.7));

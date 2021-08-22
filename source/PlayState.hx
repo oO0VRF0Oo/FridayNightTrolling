@@ -1990,7 +1990,7 @@ class PlayState extends MusicBeatState
 			ana.hitJudge = Ratings.CalculateRating(noteDiff, Math.floor((PlayStateChangeables.safeFrames / 60) * 1000));
 			ana.nearestNote = [coolNote.strumTime, coolNote.noteData, coolNote.sustainLength];
 		}
-		else if (!FlxG.save.data.ghost && songStarted)
+		else if ((!FlxG.save.data.ghost && songStarted) || (daNote.ArrowType == 'normal' || daNote.ArrowType == 'magnet'))
 		{
 			noteMiss(data, null);
 			ana.hit = false;
@@ -3358,19 +3358,23 @@ class PlayState extends MusicBeatState
 						if (daNote.isSustainNote) 
 						{
 							if (healthFactor != 0 && healthFactor > 0.02)
+							{
 								switch(storyDifficulty)
 								{
 									case 2: healthloss = 0.02 * 1 * (Math.floor(accuracy) / 100);
 									case 1: healthloss = 0.02 * 0.8 * (Math.floor(accuracy) / 100);
 									case 0: healthloss = 0.02 * 0.6 * (Math.floor(accuracy) / 100);
-								}	
+								}
+							}
 							else if (healthFactor != 0)
+							{
 								switch(storyDifficulty)
 								{
 									case 2: healthloss = healthFactor * 1 * (Math.floor(accuracy) / 100);
 									case 1: healthloss = healthFactor * 0.8 * (Math.floor(accuracy) / 100);
 									case 0: healthloss = healthFactor * 0.6 * (Math.floor(accuracy) / 100);
-								}	
+								}
+							}
 						}
 						else
 						{
@@ -4205,7 +4209,7 @@ class PlayState extends MusicBeatState
 					{
 						for (shit in 0...pressArray.length)
 						{ // if a direction is hit that shouldn't be
-							if (pressArray[shit] && !directionList.contains(shit))
+							if ((pressArray[shit] && !directionList.contains(shit)) || (daNote.ArrowType == 'normal' || daNote.ArrowType == 'magnet'))
 								noteMiss(shit, null);
 						}
 					}
@@ -4233,7 +4237,7 @@ class PlayState extends MusicBeatState
 				}
 				else if (!FlxG.save.data.ghost)
 				{
-					for (shit in 0...pressArray.length)
+					for ((shit in 0...pressArray.length) || (daNote.ArrowType == 'normal' || daNote.ArrowType == 'magnet'))
 						if (pressArray[shit])
 							noteMiss(shit, null);
 				}

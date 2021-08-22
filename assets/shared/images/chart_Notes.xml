@@ -1,0 +1,19 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="chart_Notes.png">
+	<SubTexture name="PB0000" x="0" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="PG0000" x="160" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="PP0000" x="320" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="PR0000" x="480" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="WB0000" x="0" y="160" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="WG0000" x="160" y="160" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="WP0000" x="320" y="160" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="WR0000" x="480" y="160" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="OB0000" x="0" y="320" width="154" height="154" frameX="0" frameY="0" frameWidth="154" frameHeight="154" />
+	<SubTexture name="OG0000" x="154" y="320" width="154" height="154" frameX="0" frameY="0" frameWidth="154" frameHeight="154" />
+	<SubTexture name="OP0000" x="308" y="320" width="154" height="154" frameX="0" frameY="0" frameWidth="154" frameHeight="154" />
+	<SubTexture name="OR0000" x="462" y="320" width="154" height="154" frameX="0" frameY="0" frameWidth="154" frameHeight="154" />
+	<SubTexture name="MB0000" x="0" y="474" width="154" height="154" frameX="0" frameY="0" frameWidth="154" frameHeight="154" />
+	<SubTexture name="MG0000" x="154" y="474" width="154" height="154" frameX="0" frameY="0" frameWidth="154" frameHeight="154" />
+	<SubTexture name="MP0000" x="308" y="474" width="154" height="154" frameX="0" frameY="0" frameWidth="154" frameHeight="154" />
+	<SubTexture name="MR0000" x="462" y="474" width="154" height="154" frameX="0" frameY="0" frameWidth="154" frameHeight="154" />
+</TextureAtlas>

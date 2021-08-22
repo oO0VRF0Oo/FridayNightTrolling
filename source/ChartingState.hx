@@ -1876,7 +1876,7 @@ class ChartingState extends MusicBeatState
 		if (FlxG.keys.justPressed.O)
 		{
 			ArrowTypeGuide += 1;
-			if (ArrowTypeGuide > 3) 
+			if (ArrowTypeGuide > 4) 
 			{
 				ArrowTypeGuide = 0;
 			}
