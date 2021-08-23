@@ -4572,12 +4572,12 @@ class PlayState extends MusicBeatState
 			case 'oil':
 			{
 				noteMiss(note.noteData, note);
-				oilOnScreen();
+				oilOnScreen(note.noteData);
 			}
 			case 'troll':
 			{
 				noteMiss(note.noteData, note);
-				trolling();
+				trolling(note.noteDat);
 			}
 			default:
 			{
@@ -4672,7 +4672,7 @@ class PlayState extends MusicBeatState
 	}
 	
 	//handle things when you hit oily note
-	function oilOnScreen()
+	function oilOnScreen(Data:Int)
 	{
 		//get the oil on screen
 		if (oilList.length != 0)
@@ -4693,12 +4693,33 @@ class PlayState extends MusicBeatState
 		FlxG.sound.play(Paths.soundRandom('splat_', 1, 5));
 	}
 	
-	function trolling()
+	function trolling(Data:Int)
 	{
 		//handle things when you hit the trolling note
-		
+		//the wood break
+		playerStrums.forEach(function(spr:FlxSprite)
+		{
+			if (pressArray[spr.ID] && spr.ID == Data)
+			{
+				var noteBreak:FlxSprite = new FlxSprite(spr.x - spr.width + 15, spr.y - spr.height);
+				noteBreak.frames = Paths.getSparrowAtlas('troll_note_vanish');
+				switch(Data)
+				{
+					case 1: noteBreak.animation.addByPrefix('breaking', 'Purple', 24, false);
+					case 2: noteBreak.animation.addByPrefix('breaking', 'Blue', 24, false);
+					case 3: noteBreak.animation.addByPrefix('breaking', 'Green', 24, false);
+					case 4: noteBreak.animation.addByPrefix('breaking', 'Red', 24, false);
+				}
+				noteBreak.animation.play('breaking');
+				noteBreak.cameras = [camHUD];
+				add(noteBreak);
+				smoke.animation.finishCallback = function(name:String) { remove(noteBreak); }
+			}
+		});
 		//laughing sound effect
+		
 		//wood break sound effect
+		FlxG.sound.play(Paths.soundRandom('TrollNoteBreaking_', 1, 3));
 	}
 	
 	function magneticEffect()
