@@ -118,8 +118,8 @@ class Note extends FlxSprite
 				animation.addByPrefix(dataColor[i] + 'hold', dataColor[i] + ' hold'); // Hold
 				animation.addByPrefix(dataColor[i] + 'holdend', dataColor[i] + ' tail'); // Tails
 			}
-	
-			frames = Paths.getSparrowAtlas('chart_Notes');
+			
+			if (TypeGuide != 0) frames = Paths.getSparrowAtlas('chart_Notes');
 
 			switch(TypeGuide)
 			{
@@ -161,6 +161,7 @@ class Note extends FlxSprite
 			switch (noteTypeCheck)
 			{
 				case 'pixel':
+				{
 					loadGraphic(Paths.image('weeb/pixelUI/arrows-pixels', 'week6'), true, 17, 17);
 					if (isSustainNote)
 						loadGraphic(Paths.image('weeb/pixelUI/arrowEnds', 'week6'), true, 7, 6);
@@ -174,7 +175,9 @@ class Note extends FlxSprite
 
 					setGraphicSize(Std.int(width * PlayState.daPixelZoom));
 					updateHitbox();
+				}
 				default:
+				{
 					ArrowType = 'normal';
 					frames = Paths.getSparrowAtlas('NOTE_assets');
 					
@@ -216,6 +219,7 @@ class Note extends FlxSprite
 					{
 						antialiasing = true;
 					}
+				}
 			}
 		}
 

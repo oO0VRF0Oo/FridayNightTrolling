@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <TextureAtlas imagePath="NOTE_trolling.png">
 	<SubTexture name="Blue0000" x="0" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
-	<SubTexture name="Purple0001" x="160" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
-	<SubTexture name="Red0002" x="320" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
-	<SubTexture name="Green0003" x="480" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="Purple0000" x="160" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="Red0000" x="320" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
+	<SubTexture name="Green0000" x="480" y="0" width="160" height="160" frameX="0" frameY="0" frameWidth="160" frameHeight="160" />
 </TextureAtlas>
