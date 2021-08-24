@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="magnetic_note_activate_red.png">
+	<SubTexture name="Red0000" x="0" y="0" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0001" x="404" y="0" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0002" x="808" y="0" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0003" x="1212" y="0" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0004" x="0" y="404" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0005" x="404" y="404" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0006" x="808" y="404" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0007" x="1212" y="404" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0008" x="0" y="808" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0009" x="404" y="808" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0010" x="808" y="808" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0011" x="1212" y="808" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0012" x="0" y="1212" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0013" x="404" y="1212" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0014" x="808" y="1212" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0015" x="1212" y="1212" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0016" x="0" y="1616" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0017" x="404" y="1616" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0018" x="808" y="1616" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0019" x="1212" y="1616" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0020" x="0" y="2020" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0021" x="404" y="2020" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0022" x="808" y="2020" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0023" x="1212" y="2020" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0024" x="0" y="2424" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0025" x="404" y="2424" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0026" x="808" y="2424" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0027" x="1212" y="2424" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0028" x="0" y="2828" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0029" x="404" y="2828" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0030" x="808" y="2828" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0031" x="1212" y="2828" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0032" x="0" y="3232" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0033" x="404" y="3232" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0034" x="808" y="3232" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0035" x="1212" y="3232" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0036" x="0" y="3636" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0037" x="404" y="3636" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0038" x="808" y="3636" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0039" x="1212" y="3636" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0040" x="0" y="4040" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0041" x="404" y="4040" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0042" x="808" y="4040" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+	<SubTexture name="Red0043" x="1212" y="4040" width="404" height="404" frameX="0" frameY="0" frameWidth="404" frameHeight="404" />
+</TextureAtlas>
