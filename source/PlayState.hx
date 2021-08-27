@@ -214,6 +214,26 @@ class PlayState extends MusicBeatState
 	var streetO:FlxSprite;
 	var jumpIn:FlxSprite;
 	
+	var factoryBackA:FlxSprite;
+	var factoryA:FlxSprite;
+	var barA:FlxSprite;
+	var chainA:FlxSprite;
+	
+	var factoryBackB:FlxSprite;
+	var factoryB:FlxSprite;
+	var barB:FlxSprite;
+	var chainB:FlxSprite;
+	
+	var factoryTransitionBack:FlxSprite;
+	var factoryTransition:FlxSprite;
+	var barTransition:FlxSprite;
+	var chainTransition:FlxSprite;
+	
+	var factoryBackC:FlxSprite;
+	var factoryC:FlxSprite;
+	var barC:FlxSprite;
+	var chainC:FlxSprite;
+	
 	var moveAmount:Array<Int> = [0, 0, 0, 0];
 	var moveAmountMemory:Array<Int> = [0, 0, 0, 0];
 	var moveTimer:Array<Float> = [0, 0, 0, 0];
@@ -880,18 +900,78 @@ class PlayState extends MusicBeatState
 				}
 				case 'void':
 				{
-					defaultCamZoom = 0.7;
+					defaultCamZoom = 0.6;
 					curStage = 'void';
-					var streetBack:FlxSprite = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/streetBack-B', 'trollge'));
-					streetBack.setGraphicSize(Std.int(streetBack.width * 1.1));
-					streetBack.antialiasing = true;
-					streetBack.active = false;
-					add(streetBack);
+					
+					factoryBackC = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryBackC', 'trollge'));
+					factoryBackC.setGraphicSize(Std.int(factoryBackC.width * 2));
+					factoryBackC.antialiasing = true;
+					factoryBackC.active = false;
+					factoryBackC.visible = false;
+					add(factoryBackC);
 		
-					var street:FlxSprite = new FlxSprite(-575, -285).loadGraphic(Paths.image('background/street-B', 'trollge'));
-					street.antialiasing = true;
-					street.active = false;
-					add(street);
+					factoryC = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryC', 'trollge'));
+					factoryC.setGraphicSize(Std.int(factoryC.width * 2));
+					factoryC.antialiasing = true;
+					factoryC.active = false;
+					factoryC.visible = false;
+					add(factoryC);
+					
+					var FTBTex = Paths.getSparrowAtlas('background/factoryTranBack', 'trollge');
+					factoryTransitionBack = new FlxSprite( -575, -235);
+					factoryTransitionBack.frames = FTBTex;
+					factoryTransitionBack.animation.addByPrefix('transition', 'Transition', 24, false);
+					factoryTransitionBack.setGraphicSize(Std.int(factoryTransitionBack.width * 2));
+					factoryTransitionBack.antialiasing = true;
+					factoryTransitionBack.active = false;
+					factoryTransitionBack.visible = false;
+					factoryTransitionBack.animation.finishCallback = function(name:String) {
+						factoryTransitionBack.active = false; 
+						factoryBackC.visible = true;
+						remove(factoryTransitionBack);
+					}
+					add(factoryTransitionBack);
+					
+					var FTTex = Paths.getSparrowAtlas('background/factoryTran', 'trollge');
+					factoryTransition = new FlxSprite( -575, -235);
+					factoryTransition.frames = FTTex;
+					factoryTransition.animation.addByPrefix('transition', 'Transition', 24, false);
+					factoryTransition.setGraphicSize(Std.int(factoryTransition.width * 2));
+					factoryTransition.antialiasing = true;
+					factoryTransition.active = false;
+					factoryTransition.visible = false;
+					factoryTransition.animation.finishCallback = function(name:String) {
+						factoryTransition.active = false; 
+						factoryC.visible = true;
+						remove(factoryTransition);
+					}
+					add(factoryTransition);
+					
+					factoryBackB = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryBackB', 'trollge'));
+					factoryBackB.setGraphicSize(Std.int(factoryBackB.width * 2));
+					factoryBackB.antialiasing = true;
+					factoryBackB.active = false;
+					factoryBackB.visible = false;
+					add(factoryBackB);
+		
+					factoryB = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryB', 'trollge'));
+					factoryB.setGraphicSize(Std.int(factoryB.width * 2));
+					factoryB.antialiasing = true;
+					factoryB.active = false;
+					factoryB.visible = false;
+					add(factoryB);
+					
+					factoryBackA = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryBackA', 'trollge'));
+					factoryBackA.setGraphicSize(Std.int(factoryBackA.width * 2));
+					factoryBackA.antialiasing = true;
+					factoryBackA.active = false;
+					add(factoryBackA);
+		
+					factoryA = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryA', 'trollge'));
+					factoryA.setGraphicSize(Std.int(factoryA.width * 2));
+					factoryA.antialiasing = true;
+					factoryA.active = false;
+					add(factoryA);
 				}
 				default:
 				{
@@ -1237,8 +1317,11 @@ class PlayState extends MusicBeatState
 		scoreTxt.cameras = [camHUD];
 		doof.cameras = [camHUD];
 		
-		if (curStage == 'street-rain' || curStage == 'street-unused' || curStage == 'void') LoadOil();
-		
+		if (curStage == 'street-rain' || curStage == 'street-unused' || curStage == 'void')
+		{
+			LoadOil();
+		}
+
 		if (FlxG.save.data.songPosition)
 		{
 			songPosBG.cameras = [camHUD];
@@ -1251,8 +1334,62 @@ class PlayState extends MusicBeatState
 
 		trace('starting');
 		
+		if (curStage == 'street-sunny')
+		{
+			hue = new FlxSprite().loadGraphic(Paths.image('background/mischiefHue', 'trollge'));
+			hue.screenCenter();
+			hue.scrollFactor.set();
+			hue.alpha = 0;
+			hue.setGraphicSize(Std.int(hue.width * 1920));
+			add(hue);
+		}
+		
 		if (curStage == 'street-rain')
 		{
+			var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
+			
+			rainFrontA = new FlxSprite(1060, 540);
+			rainFrontA.frames = rainTex;
+			rainFrontA.animation.addByPrefix('rain', 'Rain', 24, true);
+			rainFrontA.setGraphicSize(Std.int(rainFrontA.width * 2.5));
+			rainFrontA.blend = LIGHTEN;
+			rainFrontA.antialiasing = true;
+			add(rainFrontA);
+
+			rainFrontB = new FlxSprite(1080, 540);
+			rainFrontB.frames = rainTex;
+			rainFrontB.animation.addByPrefix('rain', 'Rain', 24, true);
+			rainFrontB.setGraphicSize(Std.int(rainFrontB.width * 2.5));
+			rainFrontB.blend = LIGHTEN;
+			rainFrontB.antialiasing = true;
+			add(rainFrontB);
+				
+			var fogTex = Paths.getSparrowAtlas('background/fog', 'trollge');
+			fog = new FlxSprite(0, -200);
+			fog.frames = fogTex;
+			fog.animation.addByPrefix('fog', 'Fog', 12, false);
+			fog.animation.play('fog', true, false, 2560);
+			fog.antialiasing = true;
+			fog.setGraphicSize(Std.int(fog.width * 2));
+			fog.flipX = true;
+			add(fog);
+			
+			var thunderTex = Paths.getSparrowAtlas('background/thunder', 'trollge');
+			thunder = new FlxSprite(1080, 540);
+			thunder.frames = thunderTex;
+			thunder.animation.addByPrefix('thunder', 'Thunder', 48, false);
+			thunder.antialiasing = true;
+			thunder.scrollFactor.set();
+			thunder.setGraphicSize(Std.int(thunder.width * 2.5));
+			add(thunder);
+			
+			hue = new FlxSprite().loadGraphic(Paths.image('background/ominousHue', 'trollge'));
+			hue.screenCenter();
+			hue.scrollFactor.set();
+			hue.alpha = 0;
+			hue.setGraphicSize(Std.int(hue.width * 1920));
+			add(hue);
+			
 			var jumpTex = Paths.getSparrowAtlas('background/jumpscare', 'trollge');
 			jumpIn = new FlxSprite();
 			jumpIn.frames = jumpTex;
@@ -1265,13 +1402,90 @@ class PlayState extends MusicBeatState
 			jumpIn.cameras = [camHUD];
 			add(jumpIn);
 		}
-
+		
+		if (curStage == 'void')
+		{
+			barC = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/barC', 'trollge'));
+			barC.setGraphicSize(Std.int(barC.width * 2));
+			barC.antialiasing = true;
+			barC.active = false;
+			barC.visible = false;
+			add(barC);
+			
+			var BarTex = Paths.getSparrowAtlas('background/barTran', 'trollge');
+			barTransition = new FlxSprite( -575, -235);
+			barTransition.frames = BarTex;
+			barTransition.animation.addByPrefix('transition', 'Transition', 24, false);
+			barTransition.setGraphicSize(Std.int(barTransition.width * 2));
+			barTransition.antialiasing = true;
+			barTransition.active = false;
+			barTransition.visible = false;
+			barTransition.animation.finishCallback = function(name:String) {
+				barTransition.active = false;
+				barC.visible = true;
+				remove(barTransition);
+			}
+			add(barTransition);
+			
+			var ChainTex = Paths.getSparrowAtlas('background/chainTran', 'trollge');
+			chainTransition = new FlxSprite( -575, -235);
+			chainTransition.frames = ChainTex;
+			chainTransition.animation.addByPrefix('transition', 'Transition', 24, false);
+			chainTransition.setGraphicSize(Std.int(chainTransition.width * 2));
+			chainTransition.antialiasing = true;
+			chainTransition.active = false;
+			chainTransition.visible = false;
+			chainTransition.animation.finishCallback = function(name:String) { chainTransition.active = false; }
+			add(chainTransition);
+			
+			barB = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/barB', 'trollge'));
+			barB.setGraphicSize(Std.int(barB.width * 2));
+			barB.antialiasing = true;
+			barB.active = false;
+			barB.visible = false;
+			add(barB);
+			
+			chainB = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/chainB', 'trollge'));
+			chainB.setGraphicSize(Std.int(chainB.width * 2));
+			chainB.antialiasing = true;
+			chainB.active = false;
+			chainB.visible = false;
+			add(chainB);
+				
+			barA = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/barA', 'trollge'));
+			barA.setGraphicSize(Std.int(barA.width * 2));
+			barA.antialiasing = true;
+			barA.active = false;
+			add(barA);
+			
+			chainA = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/chainA', 'trollge'));
+			chainA.setGraphicSize(Std.int(chainA.width * 2));
+			chainA.antialiasing = true;
+			chainA.active = false;
+			add(chainA);
+		}
+		
+		if (curStage == 'street-rain' || curStage == 'street-sunny' || curStage == 'void')
+		{
+			var heartTex = Paths.getSparrowAtlas('background/heartbeat', 'trollge');
+			heartbeat = new FlxSprite();
+			heartbeat.screenCenter();
+			heartbeat.frames = heartTex;
+			heartbeat.animation.addByPrefix('beat', 'Heart', 48, false);
+			heartbeat.setGraphicSize(Std.int(heartbeat.width * 2));
+			heartbeat.alpha = 0;
+			heartbeat.antialiasing = true;
+			heartbeat.scrollFactor.set();
+			heartbeat.cameras = [camHUD];
+			add(heartbeat);
+		}
 
 		if (isStoryMode)
 		{
 			switch (StringTools.replace(curSong, " ", "-").toLowerCase())
 			{
 				case "winter-horrorland":
+				{
 					var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
 					add(blackScreen);
 					blackScreen.scrollFactor.set();
@@ -1299,13 +1513,20 @@ class PlayState extends MusicBeatState
 							});
 						});
 					});
+				}
 				case 'senpai':
+				{
 					schoolIntro(doof);
+				}
 				case 'roses':
+				{
 					FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
+				}	
 				case 'thorns':
+				{
 					schoolIntro(doof);
+				}
 				default:
 					startCountdown();
 			}
@@ -1419,93 +1640,6 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
-		switch(curSong)
-		{
-			case 'Mischief':
-			{
-				hue = new FlxSprite().loadGraphic(Paths.image('background/mischiefHue', 'trollge'));
-				hue.screenCenter();
-				hue.scrollFactor.set();
-				hue.alpha = 0;
-				hue.setGraphicSize(Std.int(hue.width * 1920));
-				add(hue);
-				
-				var heartTex = Paths.getSparrowAtlas('background/heartbeat', 'trollge');
-				heartbeat = new FlxSprite();
-				heartbeat.screenCenter();
-				heartbeat.frames = heartTex;
-				heartbeat.animation.addByPrefix('beat', 'Heart', 48, false);
-				heartbeat.setGraphicSize(Std.int(heartbeat.width * 2));
-				heartbeat.alpha = 0;
-				heartbeat.antialiasing = true;
-				heartbeat.scrollFactor.set();
-				heartbeat.cameras = [camHUD];
-				add(heartbeat);
-			}
-			case 'Ominous': 
-			{
-				var rainTex = Paths.getSparrowAtlas('background/rain', 'trollge');
-				
-				rainFrontA = new FlxSprite(1060, 540);
-				rainFrontA.frames = rainTex;
-				rainFrontA.animation.addByPrefix('rain', 'Rain', 24, true);
-				rainFrontA.setGraphicSize(Std.int(rainFrontA.width * 2.5));
-				rainFrontA.blend = LIGHTEN;
-				rainFrontA.antialiasing = true;
-				add(rainFrontA);
-
-				rainFrontB = new FlxSprite(1080, 540);
-				rainFrontB.frames = rainTex;
-				rainFrontB.animation.addByPrefix('rain', 'Rain', 24, true);
-				rainFrontB.setGraphicSize(Std.int(rainFrontB.width * 2.5));
-				rainFrontB.blend = LIGHTEN;
-				rainFrontB.antialiasing = true;
-				add(rainFrontB);
-					
-				var fogTex = Paths.getSparrowAtlas('background/fog', 'trollge');
-				fog = new FlxSprite(0, -200);
-				fog.frames = fogTex;
-				fog.animation.addByPrefix('fog', 'Fog', 12, false);
-				fog.animation.play('fog', true, false, 2560);
-				fog.antialiasing = true;
-				fog.setGraphicSize(Std.int(fog.width * 2));
-				fog.flipX = true;
-				add(fog);
-				
-				var thunderTex = Paths.getSparrowAtlas('background/thunder', 'trollge');
-				thunder = new FlxSprite(1080, 540);
-				thunder.frames = thunderTex;
-				thunder.animation.addByPrefix('thunder', 'Thunder', 48, false);
-				thunder.antialiasing = true;
-				thunder.scrollFactor.set();
-				thunder.setGraphicSize(Std.int(thunder.width * 2.5));
-				add(thunder);
-				
-				hue = new FlxSprite().loadGraphic(Paths.image('background/ominousHue', 'trollge'));
-				hue.screenCenter();
-				hue.scrollFactor.set();
-				hue.alpha = 0;
-				hue.setGraphicSize(Std.int(hue.width * 1920));
-				add(hue);
-				
-				var heartTex = Paths.getSparrowAtlas('background/heartbeat', 'trollge');
-				heartbeat = new FlxSprite();
-				heartbeat.screenCenter();
-				heartbeat.frames = heartTex;
-				heartbeat.animation.addByPrefix('beat', 'Heart', 24, false);
-				heartbeat.setGraphicSize(Std.int(heartbeat.width * 2));
-				heartbeat.alpha = 0;
-				heartbeat.antialiasing = true;
-				heartbeat.scrollFactor.set();
-				heartbeat.cameras = [camHUD];
-				add(heartbeat);
-			}
-			case 'Incident': 
-			{
-				
-			}
-		}
-		
 		inCutscene = false;
 
 		appearStaticArrows();
@@ -4821,7 +4955,7 @@ class PlayState extends MusicBeatState
 				remove(streetO);
 				remove(streetBackO);
 				remove(thunder);
-				jumpIn.alpha = 0;
+				remove(jumpIn);
 				healthFactor = 0.01;
 				climax = true;
 			}
@@ -4857,9 +4991,44 @@ class PlayState extends MusicBeatState
 		{
 			case 1: healthFactor = 0.03;
 			case 528: healthFactor = 0.035;
-			case 608: healthFactor = 0.03;
+			case 608:
+			{
+				remove(factoryBackA);
+				remove(factoryA);
+				remove(barA);
+				remove(chainA);
+				
+				factoryBackB.visible = true;
+				factoryB.visible = true;
+				barB.visible = true;
+				chainB.visible = true;
+				
+				healthFactor = 0.03;
+			}
 			case 840: healthFactor = 0.035;
 			case 980: healthFactor = 0.045;
+			case 992:
+			{
+				remove(factoryBackB);
+				remove(factoryB);
+				remove(barB);
+				remove(chainB);
+				
+				factoryTransition.visible  = true;
+				factoryTransitionBack.visible  = true;
+				barTransition.visible = true;
+				chainTransition.visible  = true;
+				
+				factoryTransition.active  = true;
+				factoryTransitionBack.active  = true;
+				barTransition.active = true;
+				chainTransition.active  = true;
+				
+				factoryTransition.animation.play('transition', false);
+				factoryTransitionBack.animation.play('transition', false);
+				barTransition.animation.play('transition', false);
+				chainTransition.animation.play('transition', false);
+			}
 			case 1621: healthFactor = 0.01;
 			case 1880: healthFactor = 0.02;
 			case 2160: healthFactor = 0.025;
