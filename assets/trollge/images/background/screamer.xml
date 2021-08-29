@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='utf-8'?>
+<TextureAtlas imagePath="screamer.png">
+	<SubTexture name="scream0000" x="0" y="0" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0001" x="964" y="0" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0002" x="1928" y="0" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0003" x="2892" y="0" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0004" x="0" y="544" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0005" x="964" y="544" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0006" x="1928" y="544" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0007" x="2892" y="544" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0008" x="0" y="1088" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0009" x="964" y="1088" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0010" x="1928" y="1088" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+	<SubTexture name="scream0011" x="2892" y="1088" width="964" height="544" frameX="0" frameY="0" frameWidth="964" frameHeight="544" />
+</TextureAtlas>

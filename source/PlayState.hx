@@ -234,6 +234,9 @@ class PlayState extends MusicBeatState
 	var barC:FlxSprite;
 	var chainC:FlxSprite;
 	
+	var staticScreen:FlxSprite;
+	var fadeIn:FlxSprite;
+	
 	var moveAmount:Array<Int> = [0, 0, 0, 0];
 	var moveAmountMemory:Array<Int> = [0, 0, 0, 0];
 	var moveTimer:Array<Float> = [0, 0, 0, 0];
@@ -389,14 +392,8 @@ class PlayState extends MusicBeatState
 		}
 
 		// String that contains the mode defined here so it isn't necessary to call changePresence for each mode
-		if (isStoryMode)
-		{
-			detailsText = "Story Mode: Week " + storyWeek;
-		}
-		else
-		{
-			detailsText = "Freeplay";
-		}
+		if (isStoryMode) detailsText = "Story Mode: Week " + storyWeek;
+		else detailsText = "Freeplay";
 
 		// String for when the game is paused
 		detailsPausedText = "Paused - " + detailsText;
@@ -904,39 +901,54 @@ class PlayState extends MusicBeatState
 					curStage = 'void';
 					
 					factoryBackC = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryBackC', 'trollge'));
-					factoryBackC.setGraphicSize(Std.int(factoryBackC.width * 2));
+					factoryBackC.setGraphicSize(Std.int(factoryBackC.width * 1.75));
 					factoryBackC.antialiasing = true;
 					factoryBackC.active = false;
 					factoryBackC.visible = false;
 					add(factoryBackC);
+					
+					var staticTex = Paths.getSparrowAtlas('background/Satics', 'trollge');
+					staticScreen = new FlxSprite( -575, -235);
+					staticScreen.frames = staticTex;
+					staticScreen.animation.addByPrefix('static', 'Static', 24, true);
+					staticScreen.setGraphicSize(Std.int(staticScreen.width * 3));
+					staticScreen.screenCenter();
+					staticScreen.alpha = 0;
+					staticScreen.active = false;
+					staticScreen.visible = false;
+					add(staticScreen);
 		
 					factoryC = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryC', 'trollge'));
-					factoryC.setGraphicSize(Std.int(factoryC.width * 2));
+					factoryC.setGraphicSize(Std.int(factoryC.width * 1.75));
 					factoryC.antialiasing = true;
 					factoryC.active = false;
 					factoryC.visible = false;
 					add(factoryC);
 					
-					var FTBTex = Paths.getSparrowAtlas('background/factoryTranBack', 'trollge');
-					factoryTransitionBack = new FlxSprite( -575, -235);
+					var FTBTex = Paths.getSparrowAtlas('background/factoryBackTran', 'trollge');
+					factoryTransitionBack = new FlxSprite( -375, -35);
 					factoryTransitionBack.frames = FTBTex;
 					factoryTransitionBack.animation.addByPrefix('transition', 'Transition', 24, false);
-					factoryTransitionBack.setGraphicSize(Std.int(factoryTransitionBack.width * 2));
+					factoryTransitionBack.setGraphicSize(Std.int(factoryTransitionBack.width * 3.5));
 					factoryTransitionBack.antialiasing = true;
 					factoryTransitionBack.active = false;
 					factoryTransitionBack.visible = false;
 					factoryTransitionBack.animation.finishCallback = function(name:String) {
 						factoryTransitionBack.active = false; 
 						factoryBackC.visible = true;
+						staticScreen.active = true;
+						staticScreen.visible = true;
+						staticScreen.animation.play('static', true);
+						FlxTween.tween(staticScreen, { alpha:0.2 }, 1.5);
 						remove(factoryTransitionBack);
 					}
 					add(factoryTransitionBack);
 					
 					var FTTex = Paths.getSparrowAtlas('background/factoryTran', 'trollge');
-					factoryTransition = new FlxSprite( -575, -235);
+					factoryTransition = new FlxSprite( -375, -35);
 					factoryTransition.frames = FTTex;
 					factoryTransition.animation.addByPrefix('transition', 'Transition', 24, false);
-					factoryTransition.setGraphicSize(Std.int(factoryTransition.width * 2));
+					factoryTransition.setGraphicSize(Std.int(factoryTransition.width * 3.5));
 					factoryTransition.antialiasing = true;
 					factoryTransition.active = false;
 					factoryTransition.visible = false;
@@ -948,27 +960,36 @@ class PlayState extends MusicBeatState
 					add(factoryTransition);
 					
 					factoryBackB = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryBackB', 'trollge'));
-					factoryBackB.setGraphicSize(Std.int(factoryBackB.width * 2));
+					factoryBackB.setGraphicSize(Std.int(factoryBackB.width * 1.75));
 					factoryBackB.antialiasing = true;
 					factoryBackB.active = false;
 					factoryBackB.visible = false;
 					add(factoryBackB);
+					
+					var cloudTex = Paths.getSparrowAtlas('background/fogRED', 'trollge');
+					cloud = new FlxSprite(-575, -650);
+					cloud.frames = cloudTex;
+					cloud.animation.addByPrefix('cloud', 'Fog', 24, true);
+					cloud.animation.play('cloud');
+					cloud.visible = false;
+					cloud.antialiasing = true;
+					add(cloud);
 		
 					factoryB = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryB', 'trollge'));
-					factoryB.setGraphicSize(Std.int(factoryB.width * 2));
+					factoryB.setGraphicSize(Std.int(factoryB.width * 1.75));
 					factoryB.antialiasing = true;
 					factoryB.active = false;
 					factoryB.visible = false;
 					add(factoryB);
 					
 					factoryBackA = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryBackA', 'trollge'));
-					factoryBackA.setGraphicSize(Std.int(factoryBackA.width * 2));
+					factoryBackA.setGraphicSize(Std.int(factoryBackA.width * 1.75));
 					factoryBackA.antialiasing = true;
 					factoryBackA.active = false;
 					add(factoryBackA);
 		
 					factoryA = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/factoryA', 'trollge'));
-					factoryA.setGraphicSize(Std.int(factoryA.width * 2));
+					factoryA.setGraphicSize(Std.int(factoryA.width * 1.75));
 					factoryA.antialiasing = true;
 					factoryA.active = false;
 					add(factoryA);
@@ -1134,11 +1155,10 @@ class PlayState extends MusicBeatState
 
 		if (!PlayStateChangeables.Optimize)
 		{
-			add(gf);
+			if (curStage != 'void') add(gf);
 
 			// Shitty layering but whatev it works LOL
-			if (curStage == 'limo')
-				add(limo);
+			if (curStage == 'limo') add(limo);
 
 			add(dad);
 			add(boyfriend);
@@ -1280,25 +1300,19 @@ class PlayState extends MusicBeatState
 
 		add(scoreTxt);
 
-		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "REPLAY",
-			20);
+		replayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "REPLAY", 20);
 		replayTxt.setFormat(Paths.font("vcr.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		replayTxt.borderSize = 4;
 		replayTxt.borderQuality = 2;
 		replayTxt.scrollFactor.set();
-		if (loadRep)
-		{
-			add(replayTxt);
-		}
+		if (loadRep) add(replayTxt);
 		// Literally copy-paste of the above, fu
-		botPlayState = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0,
-			"BOTPLAY", 20);
+		botPlayState = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (PlayStateChangeables.useDownscroll ? 100 : -100), 0, "BOTPLAY", 20);
 		botPlayState.setFormat(Paths.font("vcr.ttf"), 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botPlayState.scrollFactor.set();
 		botPlayState.borderSize = 4;
 		botPlayState.borderQuality = 2;
-		if (PlayStateChangeables.botPlay && !loadRep)
-			add(botPlayState);
+		if (PlayStateChangeables.botPlay && !loadRep) add(botPlayState);
 
 		iconP1 = new HealthIcon(SONG.player1, true);
 		iconP1.y = healthBar.y - (iconP1.height / 2);
@@ -1406,20 +1420,33 @@ class PlayState extends MusicBeatState
 		if (curStage == 'void')
 		{
 			barC = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/barC', 'trollge'));
-			barC.setGraphicSize(Std.int(barC.width * 2));
+			barC.setGraphicSize(Std.int(barC.width * 1.75));
 			barC.antialiasing = true;
 			barC.active = false;
 			barC.visible = false;
+			barC.scrollFactor.set( 0.7, 0.7);
 			add(barC);
+			
+			var ChainCTex = Paths.getSparrowAtlas('background/chainC', 'trollge');
+			chainC = new FlxSprite( -575, -235);
+			chainC.frames = ChainCTex;
+			chainC.animation.addByPrefix('static', 'Static', 24, true);
+			chainC.setGraphicSize(Std.int(chainC.width * 1.75));
+			chainC.antialiasing = true;
+			chainC.active = false;
+			chainC.visible = false;
+			chainC.scrollFactor.set( 0.75, 0.75);
+			add(chainC);
 			
 			var BarTex = Paths.getSparrowAtlas('background/barTran', 'trollge');
 			barTransition = new FlxSprite( -575, -235);
 			barTransition.frames = BarTex;
 			barTransition.animation.addByPrefix('transition', 'Transition', 24, false);
-			barTransition.setGraphicSize(Std.int(barTransition.width * 2));
+			barTransition.setGraphicSize(Std.int(barTransition.width * 1.75));
 			barTransition.antialiasing = true;
 			barTransition.active = false;
 			barTransition.visible = false;
+			barTransition.scrollFactor.set( 0.7, 0.7);
 			barTransition.animation.finishCallback = function(name:String) {
 				barTransition.active = false;
 				barC.visible = true;
@@ -1431,38 +1458,100 @@ class PlayState extends MusicBeatState
 			chainTransition = new FlxSprite( -575, -235);
 			chainTransition.frames = ChainTex;
 			chainTransition.animation.addByPrefix('transition', 'Transition', 24, false);
-			chainTransition.setGraphicSize(Std.int(chainTransition.width * 2));
+			chainTransition.setGraphicSize(Std.int(chainTransition.width * 1.75));
 			chainTransition.antialiasing = true;
 			chainTransition.active = false;
 			chainTransition.visible = false;
-			chainTransition.animation.finishCallback = function(name:String) { chainTransition.active = false; }
+			chainTransition.scrollFactor.set( 0.75, 0.75);
+			chainTransition.animation.finishCallback = function(name:String) {
+				chainTransition.active = false; 
+				chainC.active = true;
+				chainC.visible = true;
+				chainC.animation.play('static', true);
+				remove(chainTransition);
+			}
 			add(chainTransition);
 			
 			barB = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/barB', 'trollge'));
-			barB.setGraphicSize(Std.int(barB.width * 2));
+			barB.setGraphicSize(Std.int(barB.width * 1.75));
 			barB.antialiasing = true;
 			barB.active = false;
 			barB.visible = false;
+			barB.scrollFactor.set( 0.7, 0.7);
 			add(barB);
 			
 			chainB = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/chainB', 'trollge'));
-			chainB.setGraphicSize(Std.int(chainB.width * 2));
+			chainB.setGraphicSize(Std.int(chainB.width * 1.75));
 			chainB.antialiasing = true;
 			chainB.active = false;
 			chainB.visible = false;
+			chainB.scrollFactor.set( 0.75, 0.75);
 			add(chainB);
 				
 			barA = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/barA', 'trollge'));
-			barA.setGraphicSize(Std.int(barA.width * 2));
+			barA.setGraphicSize(Std.int(barA.width * 1.75));
 			barA.antialiasing = true;
 			barA.active = false;
+			barA.scrollFactor.set( 0.7, 0.7);
 			add(barA);
 			
 			chainA = new FlxSprite( -575, -235).loadGraphic(Paths.image('background/chainA', 'trollge'));
-			chainA.setGraphicSize(Std.int(chainA.width * 2));
+			chainA.setGraphicSize(Std.int(chainA.width * 1.75));
 			chainA.antialiasing = true;
 			chainA.active = false;
+			chainA.scrollFactor.set( 0.75, 0.75);
 			add(chainA);
+			
+			var fogTex = Paths.getSparrowAtlas('background/fogRED', 'trollge');
+			fog = new FlxSprite(0, -200);
+			fog.frames = fogTex;
+			fog.animation.addByPrefix('fog', 'Fog', 12, false);
+			fog.animation.play('fog', true, false, 2560);
+			fog.antialiasing = true;
+			fog.visible = false;
+			fog.setGraphicSize(Std.int(fog.width * 2));
+			fog.flipX = true;
+			add(fog);
+			
+			hue = new FlxSprite().loadGraphic(Paths.image('background/incidentHue', 'trollge'));
+			hue.screenCenter();
+			hue.scrollFactor.set();
+			hue.alpha = 0;
+			hue.setGraphicSize(Std.int(hue.width * 2560));
+			add(hue);
+			
+			var jumpTex = Paths.getSparrowAtlas('background/screamer', 'trollge');
+			jumpIn = new FlxSprite();
+			jumpIn.frames = jumpTex;
+			jumpIn.animation.addByPrefix('jump', 'scream', 36, false);
+			jumpIn.screenCenter();
+			jumpIn.scrollFactor.set();
+			jumpIn.setGraphicSize(Std.int(jumpIn.width * 2));
+			jumpIn.alpha = 0;
+			jumpIn.antialiasing = true;
+			jumpIn.cameras = [camHUD];
+			jumpIn.animation.finishCallback = function(name:String) {
+				remove(factoryBackA);
+				remove(factoryA);
+				remove(barA);
+				remove(chainA);
+				hue.alpha = 0.15;
+				factoryBackB.visible = true;
+				factoryB.visible = true;
+				barB.visible = true;
+				chainB.visible = true;
+				cloud.visible = true;
+				fog.visible = true;
+				FlxTween.tween(jumpIn, { alpha:0 }, 0.5, { ease:FlxEase.sineOut, onComplete: function(twn:FlxTween){ remove(jumpIn); }});
+			}
+			add(jumpIn);
+			
+			
+			fadeIn = new FlxSprite().loadGraphic(Paths.image('background/fadeIn', 'trollge'));
+			fadeIn.screenCenter();
+			fadeIn.scrollFactor.set();
+			fadeIn.setGraphicSize(Std.int(hue.width * 2560));
+			add(fadeIn);
 		}
 		
 		if (curStage == 'street-rain' || curStage == 'street-sunny' || curStage == 'void')
@@ -1536,8 +1625,7 @@ class PlayState extends MusicBeatState
 			startCountdown();
 		}
 
-		if (!loadRep)
-			rep = new Replay("na");
+		if (!loadRep) rep = new Replay("na");
 
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, handleInput);
 		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, releaseInput);
@@ -2694,27 +2782,6 @@ class PlayState extends MusicBeatState
 				iconP1.animation.play('bf-old');
 		}
 
-		switch (curStage)
-		{
-			case 'street-sunny': mischiefEvent();
-			case 'street-rain': ominousEvent();
-			case 'void': incidentEvent();
-			case 'street-abandon': loreEvent();
-			case 'street-unused': insanityEvent();
-			case 'philly':
-				if (trainMoving && !PlayStateChangeables.Optimize)
-				{
-					trainFrameTiming += elapsed;
-
-					if (trainFrameTiming >= 1 / 24)
-					{
-						updateTrainPos();
-						trainFrameTiming = 0;
-					}
-				}
-				// phillyCityLights.members[curLight].alpha -= (Conductor.crochet / 1000) * FlxG.elapsed;
-		}
-
 		super.update(elapsed);
 
 		scoreTxt.text = Ratings.CalculateRanking(songScore, songScoreDef, nps, maxNPS, accuracy);
@@ -2767,9 +2834,6 @@ class PlayState extends MusicBeatState
 			#end
 		}
 
-		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
-		// FlxG.watch.addQuick('VOLRight', vocals.amplitudeRight);
-
 		iconP1.setGraphicSize(Std.int(FlxMath.lerp(150, iconP1.width, 0.50)));
 		iconP2.setGraphicSize(Std.int(FlxMath.lerp(150, iconP2.width, 0.50)));
 
@@ -2781,8 +2845,8 @@ class PlayState extends MusicBeatState
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
 		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
 
-		if (health > 2)
-			health = 2;
+		if (health > 2) health = 2;
+		
 		if (healthBar.percent < 20)
 		{
 			iconP1.animation.curAnim.curFrame = 1;
@@ -2798,9 +2862,6 @@ class PlayState extends MusicBeatState
 			iconP1.animation.curAnim.curFrame = 0;
 			iconP2.animation.curAnim.curFrame = 0;
 		}
-
-		/* if (FlxG.keys.justPressed.NINE)
-			FlxG.switchState(new Charting()); */
 
 		#if debug
 		if (FlxG.keys.justPressed.SIX)
@@ -2893,10 +2954,6 @@ class PlayState extends MusicBeatState
 		{
 			// Conductor.songPosition = FlxG.sound.music.time;
 			Conductor.songPosition += FlxG.elapsed * 1000;
-			/*@:privateAccess
-				{
-					FlxG.sound.music._channel.
-			}*/
 			songPositionBar = Conductor.songPosition;
 
 			if (!paused)
@@ -2909,8 +2966,6 @@ class PlayState extends MusicBeatState
 				{
 					songTime = (songTime + Conductor.songPosition) / 2;
 					Conductor.lastSongPos = Conductor.songPosition;
-					// Conductor.songPosition += FlxG.elapsed * 1000;
-					// trace('MISSED FRAME');
 				}
 			}
 
@@ -3106,36 +3161,6 @@ class PlayState extends MusicBeatState
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
 
-		if (curSong == 'Fresh')
-		{
-			switch (curBeat)
-			{
-				case 16:
-					camZooming = true;
-					gfSpeed = 2;
-				case 48:
-					gfSpeed = 1;
-				case 80:
-					gfSpeed = 2;
-				case 112:
-					gfSpeed = 1;
-				case 163:
-					// FlxG.sound.music.stop();
-					// FlxG.switchState(new TitleState());
-			}
-		}
-
-		if (curSong == 'Bopeebo')
-		{
-			switch (curBeat)
-			{
-				case 128, 129, 130:
-					vocals.volume = 0;
-					// FlxG.sound.music.stop();
-					// FlxG.switchState(new PlayState());
-			}
-		}
-
 		if (health <= 0 && !cannotDie)
 		{
 			if (!usedTimeTravel) 
@@ -3172,6 +3197,7 @@ class PlayState extends MusicBeatState
 			else
 				health = 1;
 		}
+		
 		if (!inCutscene && FlxG.save.data.resetButton)
 		{
 			if (FlxG.keys.justPressed.R)
@@ -3378,6 +3404,7 @@ class PlayState extends MusicBeatState
 				if (!daNote.mustPress && daNote.wasGoodHit)
 				{
 					SectionCounter += 1;
+					
 					if (SectionCounter >= ArrowCounts[SectionIdentifier])
 					{
 						SectionIdentifier += 1;
@@ -3413,33 +3440,34 @@ class PlayState extends MusicBeatState
 						{
 							switch(storyDifficulty)
 							{
-								case 2: healthloss = 3 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 200 + 1/2);
-								case 1: healthloss = 1.8 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 200 + 1/2);
-								case 0: healthloss = 0.6 * (healthFactor / Math.log(ArrowCounts[SectionIdentifier])) * (Math.floor(accuracy) / 200 + 1/2);
+								case 2: healthloss = 3 * ((healthFactor / Math.log(ArrowCounts[SectionIdentifier]))) * ((Math.floor(accuracy) / 200 + 1/2));
+								case 1: healthloss = 2.6 * ((healthFactor / Math.log(ArrowCounts[SectionIdentifier]))) * ((Math.floor(accuracy) / 200 + 1/2));
+								case 0: healthloss = 2.4 * ((healthFactor / Math.log(ArrowCounts[SectionIdentifier]))) * ((Math.floor(accuracy) / 200 + 1/2));
 							}
 						}
 
-						if ((healthtrack - healthloss) <= 0)
-						{
-							health = 0.05;
-						}
+						if ((healthtrack - healthloss) <= 0) health = 0.005;
 						else health -= healthloss;
 					}
 
-					if (SONG.song != 'Tutorial')
-						camZooming = true;
+					if (SONG.song != 'Tutorial') camZooming = true;
 
 					var altAnim:String = "";
 
-					if (SONG.notes[Math.floor(curStep / 16)] != null)
-					{
-						if (SONG.notes[Math.floor(curStep / 16)].altAnim)
-							altAnim = '-alt';
-					}
+					if (SONG.notes[Math.floor(curStep / 16)] != null　&& SONG.notes[Math.floor(curStep / 16)].altAnim) altAnim = '-alt';
 					
 					// Accessing the animation name directly to play it
 					var singData:Int = Std.int(Math.abs(daNote.noteData));
 					dad.playAnim('sing' + dataSuffix[singData] + altAnim, true);
+					
+					if (climax)
+					{
+						switch (curStage)
+						{
+							case 'street-sunny': FlxG.camera.shake(0.01, 0.2);
+							case 'void': FlxG.camera.shake(0.025, 0.2);
+						}
+					}
 
 					if (FlxG.save.data.cpuStrums)
 					{
@@ -3464,14 +3492,12 @@ class PlayState extends MusicBeatState
 					}
 
 					#if windows
-					if (luaModchart != null)
-						luaModchart.executeState('playerTwoSing', [Math.abs(daNote.noteData), Conductor.songPosition]);
+					if (luaModchart != null)　luaModchart.executeState('playerTwoSing', [Math.abs(daNote.noteData), Conductor.songPosition]);
 					#end
 
 					dad.holdTimer = 0;
 
-					if (SONG.needsVoices)
-						vocals.volume = 1;
+					if (SONG.needsVoices) vocals.volume = 1;
 
 					daNote.active = false;
 
@@ -4797,6 +4823,15 @@ class PlayState extends MusicBeatState
 		}
 	}
 	
+	//straight from bob mod
+	function shakescreen()
+	{
+		new FlxTimer().start(0.01, function(tmr:FlxTimer)
+		{
+			Lib.application.window.move(Lib.application.window.x + FlxG.random.int( -10, 10),Lib.application.window.y + FlxG.random.int( -8, 8));
+		}, 50);
+	}
+	
 	var oilList:Array<FlxSprite> = [];
 	var oilTween:Array<FlxTween> = [];
 	var oilRandom:Int = 0;
@@ -4989,30 +5024,35 @@ class PlayState extends MusicBeatState
 		//healthfactor manipulation
 		switch(curStep)
 		{
-			case 1: healthFactor = 0.03;
-			case 528: healthFactor = 0.035;
-			case 608:
+			case 1:
 			{
-				remove(factoryBackA);
-				remove(factoryA);
-				remove(barA);
-				remove(chainA);
-				
-				factoryBackB.visible = true;
-				factoryB.visible = true;
-				barB.visible = true;
-				chainB.visible = true;
-				
+				healthFactor = 0.03;
+				FlxTween.tween(fadeIn, { alpha:0 }, 1, { ease:FlxEase.elasticOut });
+				FlxG.camera.zoom = 3;
+				FlxTween.tween(FlxG.camera, { zoom:0.6 }, 1, { ease:FlxEase.elasticOut });
+			}
+			case 528: healthFactor = 0.03;
+			case 599: FlxG.sound.play(Paths.sound('scream'));
+			case 600:
+			{
+				jumpIn.alpha = 1;
+				jumpIn.animation.play('jump', false);
+			
 				healthFactor = 0.03;
 			}
-			case 840: healthFactor = 0.035;
-			case 980: healthFactor = 0.045;
+			case 840: healthFactor = 0.03;
+			case 980: healthFactor = 0.04;
 			case 992:
 			{
 				remove(factoryBackB);
 				remove(factoryB);
 				remove(barB);
 				remove(chainB);
+				
+				FlxTween.tween(hue, { alpha:0 }, 1.5, , { ease:FlxEase.elasticOut, onComplete: function(twn:FlxTween){ remove(hue); } });
+				FlxTween.tween(cloud, { alpha:0 }, 1.5, { ease:FlxEase.sineOut, onComplete: function(twn:FlxTween){ remove(cloud); }});
+				FlxTween.tween(fog, { alpha:0 }, 1.5, { ease:FlxEase.sineOut, onComplete: function(twn:FlxTween){ remove(fog); }});
+				FlxTween.tween(heartbeat, { alpha:1 }, 1.5, , { ease:FlxEase.elasticOut });
 				
 				factoryTransition.visible  = true;
 				factoryTransitionBack.visible  = true;
@@ -5028,13 +5068,15 @@ class PlayState extends MusicBeatState
 				factoryTransitionBack.animation.play('transition', false);
 				barTransition.animation.play('transition', false);
 				chainTransition.animation.play('transition', false);
+				
+				climax = true;
 			}
 			case 1621: healthFactor = 0.01;
-			case 1880: healthFactor = 0.02;
-			case 2160: healthFactor = 0.025;
+			case 1880: healthFactor = 0.015;
+			case 2160: healthFactor = 0.02;
 			case 2300: healthFactor = 0.01;
-			case 2560: healthFactor = 0.025;
-			case 3070: healthFactor = 0.035;
+			case 2560: healthFactor = 0.02;
+			case 3070: healthFactor = 0.03;
 		}
 
 		//camera movement
@@ -5179,11 +5221,17 @@ class PlayState extends MusicBeatState
 	override function stepHit()
 	{
 		super.stepHit();
-		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20)
+		if (FlxG.sound.music.time > Conductor.songPosition + 20 || FlxG.sound.music.time < Conductor.songPosition - 20) resyncVocals();
+		
+		switch(curStage)
 		{
-			resyncVocals();
+			case 'street-sunny': mischiefEvent();
+			case 'street-rain': ominousEvent();
+			case 'void': incidentEvent();
+			case 'street-abandon': loreEvent();
+			case 'street-unused': insanityEvent();
 		}
-
+		
 		#if windows
 		if (executeModchart && luaModchart != null)
 		{
@@ -5228,7 +5276,7 @@ class PlayState extends MusicBeatState
 		if (generatedMusic)
 		{
 			notes.sort(FlxSort.byY, (PlayStateChangeables.useDownscroll ? FlxSort.ASCENDING : FlxSort.DESCENDING));
-		}
+		 
 
 		#if windows
 		if (executeModchart && luaModchart != null)
@@ -5372,6 +5420,8 @@ class PlayState extends MusicBeatState
 			
 			case "street-sunny": if (climax) heartbeat.animation.play('beat', false);
 			case "street-rain": if (climax) heartbeat.animation.play('beat', false);
+			case "void": if (climax) heartbeat.animation.play('beat', false);
+		}
 		}
 
 		if (isHalloween && FlxG.random.bool(10) && curBeat > lightningStrikeBeat + lightningOffset)
