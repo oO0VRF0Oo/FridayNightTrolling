@@ -106,7 +106,7 @@ class CpuStrums extends Option
 
 	public override function press():Bool
 	{
-		FlxG.save.data.cpuStrums = !FlxG.save.data.cpuStrums;
+		FlxG.save.data.cpuStrums = true;
 		
 		display = updateDisplay();
 		return true;
@@ -114,7 +114,7 @@ class CpuStrums extends Option
 
 	private override function updateDisplay():String
 	{
-		return  FlxG.save.data.cpuStrums ? "Light CPU Strums" : "CPU Strums stay static";
+		return  FlxG.save.data.cpuStrums ? "Light CPU Strums" : "Light CPU Strums";
 	}
 
 }

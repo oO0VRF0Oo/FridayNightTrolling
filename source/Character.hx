@@ -480,6 +480,60 @@ class Character extends FlxSprite
 				addOffset("singDOWN", -4, 9);
 
 				playAnim('idle');
+				
+			case 'trollge_glitch':
+				frames = Paths.getSparrowAtlas('character/trollge_glitch','trollge');
+				animation.addByPrefix('idle', 'tg2 idle', 24, false);
+				animation.addByPrefix('singUP', 'tg2 U', 24, false);
+				animation.addByPrefix('singDOWN', 'tg2 D', 24, false);
+				animation.addByPrefix('singLEFT', 'tg2 L', 24, false);
+				animation.addByPrefix('singRIGHT', 'tg2 R', 24, false);
+
+				addOffset('idle', 0, -85);
+				addOffset("singUP", -19, 72);
+				addOffset("singRIGHT", -67, -50);
+				addOffset("singLEFT", 152, -45);
+				addOffset("singDOWN", -4, 9);
+
+				playAnim('idle');
+				
+			case 'trollge_RGB':
+				frames = Paths.getSparrowAtlas('character/trollge_RGB','trollge');
+				animation.addByPrefix('idle', 'tg2 idle', 24, false);
+				animation.addByPrefix('singUP', 'tg2 U', 24, false);
+				animation.addByPrefix('singDOWN', 'tg2 D', 24, false);
+				animation.addByPrefix('singLEFT', 'tg2 L', 24, false);
+				animation.addByPrefix('singRIGHT', 'tg2 R', 24, false);
+				
+				setGraphicSize(Std.int(width * 1.25));
+				updateHitbox();
+				antialiasing = true;
+
+				addOffset('idle', 0, -85);
+				addOffset("singUP", -19, 72);
+				addOffset("singRIGHT", -67, -50);
+				addOffset("singLEFT", 152, -45);
+				addOffset("singDOWN", -4, 9);
+
+				playAnim('idle');
+				
+			case 'trollge_eye':
+				antialiasing = false;
+				
+				frames = Paths.getSparrowAtlas('character/trollge_eye','trollge');
+				animation.addByPrefix('idle', 'tg2 idle', 24, false);
+				animation.addByPrefix('singUP', 'tg2 U', 24, false);
+				animation.addByPrefix('singDOWN', 'tg2 D', 24, false);
+				animation.addByPrefix('singLEFT', 'tg2 L', 24, false);
+				animation.addByPrefix('singRIGHT', 'tg2 R', 24, false);
+
+				addOffset('idle', 0, -85);
+				addOffset("singUP", -19, 72);
+				addOffset("singRIGHT", -67, -50);
+				addOffset("singLEFT", 152, -45);
+				addOffset("singDOWN", -4, 9);
+
+				playAnim('idle');
 			
 			case 'trollge02s':
 				frames = Paths.getSparrowAtlas('character/trollge_2s','trollge');
