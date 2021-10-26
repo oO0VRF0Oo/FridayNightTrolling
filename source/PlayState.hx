@@ -5253,11 +5253,44 @@ class PlayState extends MusicBeatState
 	{
 		switch(curStep)
 		{
-			case 0:
+			case 10:
 			{
 				healthFactor = 0;
 				if (climax) climax = false;
 			}
+			case 1024:
+			{
+				FlxTween.tween(heartbeat, { alpha:1 }, 2);
+				FlxTween.tween(hue, { alpha:0.15 }, 60);
+				healthFactor = 0.03;
+				climax = true;
+				defaultCamZoom = 0.8;
+				FlxG.camera.zoom = 0.85;
+				camHUD.zoom = 0.85;
+				
+				//Setup the arrow shake
+				arrowShakeInitialize = true;
+				commandOnX = 'sine';
+				commandOnY = 'jitter';
+				xPhaseDiff = [0, 0.3 * Math.PI, 0.6 * Math.PI, 0.9 * Math.PI];
+				xPeriod = 120;
+				xAmplitude = 1;
+				yAmplitude = 5;	
+			}
+			case 1152:
+			{
+				defaultCamZoom = 0.7;
+				FlxTween.tween(heartbeat, { alpha:0 }, 2);
+				healthFactor = 0.02;
+				climax = false;
+				FlxG.camera.zoom = 0.7;
+				
+				//turning off the arrow shake
+				commandOnX = '';
+				commandOnY = '';
+				arrowReturn(true, false);
+			}
+			{/*
 			case 959:
 			{
 				FlxTween.tween(heartbeat, { alpha:1 }, 2);
@@ -5296,7 +5329,7 @@ class PlayState extends MusicBeatState
 			case 1406: healthFactor = 0;
 			case 1592: healthFactor = 0.05;
 			case 1600: healthFactor = 0;
-			case 1664: healthFactor = 0.05;
+			case 1664: healthFactor = 0.05; */}
 		}
 	}
 	
@@ -5897,10 +5930,7 @@ class PlayState extends MusicBeatState
 				switch (curStage)
 				{
 					case 'street-sunny': 
-						if (!SONG.notes[Math.floor(curStep / 16)].mustHitSection)
-						{
-							FlxG.camera.shake(0.005, 0.5);
-						}
+						FlxG.camera.shake(0.005, 0.5);
 						heartbeat.animation.play('beat', false);
 					case "street-rain":
 						heartbeat.animation.play('beat', false);
