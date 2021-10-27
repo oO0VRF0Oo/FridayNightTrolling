@@ -1129,6 +1129,9 @@ class PlayState extends MusicBeatState
 			case 'trollge02':
 				dad.x -= 124;
 				dad.y -= 30;
+			case 'trollge02_soaked':
+				dad.x -= 124;
+				dad.y -= 30;
 			case 'trollge02s':
 				dad.x -= 124;
 				dad.y -= 30;
@@ -1799,6 +1802,9 @@ class PlayState extends MusicBeatState
 		//generateStaticArrows(0);
 		//generateStaticArrows(1);
 
+		playerStrums.forEach(function(spr:FlxSprite) {
+			trace(spr.y);
+		});
 		if (startTime != 0)
 		{
 			var toBeRemoved = [];
@@ -4966,15 +4972,19 @@ class PlayState extends MusicBeatState
 		var playerDeltaY:Array<Float> = [0, 0, 0, 0];
 		var cpuDeltaX:Array<Float> = [0, 0, 0, 0];
 		var cpuDeltaY:Array<Float> = [0, 0, 0, 0];
+		
+		var arrowY:Int = 40;
+		if (PlayStateChangeables.useDownscroll) arrowY = 545;
+		
 		playerStrums.forEach(function(spr:FlxSprite) {
 			playerDeltaX[spr.ID] = spr.x - playerCoordinateReference[spr.ID];
-			playerDeltaY[spr.ID] = spr.y - 50;
-			FlxTween.tween(spr, { x:playerCoordinateReference[spr.ID], y:50 }, 0.5, { ease:FlxEase.cubeOut });
+			playerDeltaY[spr.ID] = spr.y - arrowY;
+			FlxTween.tween(spr, { x:playerCoordinateReference[spr.ID], y:arrowY }, 0.5, { ease:FlxEase.cubeOut });
 		});
 		cpuStrums.forEach(function(spr:FlxSprite) {
 			cpuDeltaX[spr.ID] = spr.x - playerCoordinateReference[spr.ID];
-			cpuDeltaY[spr.ID] = spr.y - 50;
-			FlxTween.tween(spr, { x:cpuCoordinateReference[spr.ID], y:50 }, 0.5, { ease:FlxEase.cubeOut });
+			cpuDeltaY[spr.ID] = spr.y - arrowY;
+			FlxTween.tween(spr, { x:cpuCoordinateReference[spr.ID], y:arrowY }, 0.5, { ease:FlxEase.cubeOut });
 		});
 		notes.forEachAlive(function(daNote:Note) { FlxTween.tween(daNote, { x: daNote.x - playerDeltaX[daNote.noteData], y: daNote.y - playerDeltaY[daNote.noteData] }, 0.5, { ease:FlxEase.cubeOut }); });
 		commandOnXMemory = commandOnX;
@@ -5348,6 +5358,9 @@ class PlayState extends MusicBeatState
 				dad.x -= 124;
 				dad.y -= 20;
 			case 'trollge02':
+				dad.x -= 124;
+				dad.y -= 30;
+			case 'trollge02_soaked':
 				dad.x -= 124;
 				dad.y -= 30;
 			case 'trollge02s':

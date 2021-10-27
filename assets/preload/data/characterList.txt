@@ -21,5 +21,6 @@ trollge01
 trollge01ori
 trollge02
 trollge02s
+trollge02_soaked
 trollge03
 trollge01dark

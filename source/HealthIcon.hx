@@ -49,11 +49,12 @@ class HealthIcon extends FlxSprite
 		animation.add('parents-christmas', [17, 18, 18], 0, false, isPlayer);
 		animation.add('monster', [19, 20, 20], 0, false, isPlayer);
 		animation.add('monster-christmas', [19, 20, 20], 0, false, isPlayer);
-		animation.add('trollge01', [12, 12, 12], 0, false, isPlayer);
-		animation.add('trollge01ori', [12, 12, 12], 0, false, isPlayer);
-		animation.add('trollge02', [12, 12, 12], 0, false, isPlayer);
-		animation.add('trollge02s', [12, 12, 12], 0, false, isPlayer);
-		animation.add('trollge03', [12, 12, 12], 0, false, isPlayer);
+		animation.add('trollge01', [25, 26, 27], 0, false, isPlayer);
+		animation.add('trollge01ori', [25, 26, 27], 0, false, isPlayer);
+		animation.add('trollge02', [25, 26, 27], 0, false, isPlayer);
+		animation.add('trollge02s', [25, 26, 27], 0, false, isPlayer);
+		animation.add('trollge02_soaked', [25, 26, 27], 0, false, isPlayer);
+		animation.add('trollge03', [25, 26, 27], 0, false, isPlayer);
 		animation.play(char);
 
 		switch(char)

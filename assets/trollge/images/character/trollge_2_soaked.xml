@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TextureAtlas imagePath="TROLLGE2.png">
+<TextureAtlas imagePath="trollge2_soaked.png">
 	<!-- Created with Adobe Animate version 21.0.0.35450 -->
 	<!-- http://www.adobe.com/products/animate.html -->
 	<SubTexture name="tg2 D0000" x="0" y="0" width="548" height="829" frameX="-31" frameY="0" frameWidth="579" frameHeight="833"/>
@@ -74,24 +74,24 @@
 	<SubTexture name="tg2 U0015" x="0" y="2405" width="425" height="819" frameX="0" frameY="-24" frameWidth="458" frameHeight="843"/>
 	<SubTexture name="tg2 U0016" x="425" y="2405" width="427" height="816" frameX="-26" frameY="-27" frameWidth="458" frameHeight="843"/>
 	<SubTexture name="tg2 U0017" x="852" y="2405" width="427" height="821" frameX="0" frameY="-22" frameWidth="458" frameHeight="843"/>
-	<SubTexture name="tg2 idle0000" x="1374" y="3226" width="455" height="690" frameX="-11" frameY="0" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0001" x="1374" y="3226" width="455" height="690" frameX="-11" frameY="0" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0002" x="1279" y="2405" width="475" height="648" frameX="0" frameY="-43" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0003" x="1279" y="2405" width="475" height="648" frameX="0" frameY="-43" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0004" x="1754" y="2405" width="448" height="669" frameX="-19" frameY="-20" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0005" x="1754" y="2405" width="448" height="669" frameX="-19" frameY="-20" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0006" x="2202" y="2405" width="466" height="684" frameX="-7" frameY="-6" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0007" x="2202" y="2405" width="466" height="684" frameX="-7" frameY="-6" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0008" x="2668" y="2405" width="456" height="685" frameX="-10" frameY="-5" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0009" x="2668" y="2405" width="456" height="685" frameX="-10" frameY="-5" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0010" x="3124" y="2405" width="457" height="680" frameX="-11" frameY="-10" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0011" x="3124" y="2405" width="457" height="680" frameX="-11" frameY="-10" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0012" x="3581" y="2405" width="455" height="685" frameX="-9" frameY="-5" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0013" x="3581" y="2405" width="455" height="685" frameX="-9" frameY="-5" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0014" x="0" y="3226" width="458" height="679" frameX="-10" frameY="-11" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0015" x="0" y="3226" width="458" height="679" frameX="-10" frameY="-11" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0016" x="458" y="3226" width="458" height="682" frameX="-11" frameY="-8" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0017" x="458" y="3226" width="458" height="682" frameX="-11" frameY="-8" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0018" x="916" y="3226" width="458" height="682" frameX="-10" frameY="-8" frameWidth="475" frameHeight="691"/>
-	<SubTexture name="tg2 idle0019" x="916" y="3226" width="458" height="682" frameX="-10" frameY="-8" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0000" x="1279" y="2405" width="475" height="648" frameX="0" frameY="-43" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0001" x="1279" y="2405" width="475" height="648" frameX="0" frameY="-43" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0002" x="1754" y="2405" width="448" height="669" frameX="-19" frameY="-20" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0003" x="1754" y="2405" width="448" height="669" frameX="-19" frameY="-20" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0004" x="2202" y="2405" width="466" height="684" frameX="-7" frameY="-6" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0005" x="2202" y="2405" width="466" height="684" frameX="-7" frameY="-6" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0006" x="2668" y="2405" width="456" height="685" frameX="-10" frameY="-5" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0007" x="2668" y="2405" width="456" height="685" frameX="-10" frameY="-5" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0008" x="3124" y="2405" width="457" height="680" frameX="-11" frameY="-10" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0009" x="3124" y="2405" width="457" height="680" frameX="-11" frameY="-10" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0010" x="3581" y="2405" width="455" height="685" frameX="-9" frameY="-5" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0011" x="3581" y="2405" width="455" height="685" frameX="-9" frameY="-5" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0012" x="0" y="3226" width="458" height="679" frameX="-10" frameY="-11" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0013" x="0" y="3226" width="458" height="679" frameX="-10" frameY="-11" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0014" x="458" y="3226" width="458" height="682" frameX="-11" frameY="-8" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0015" x="458" y="3226" width="458" height="682" frameX="-11" frameY="-8" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0016" x="916" y="3226" width="458" height="682" frameX="-10" frameY="-8" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0017" x="916" y="3226" width="458" height="682" frameX="-10" frameY="-8" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0018" x="1374" y="3226" width="455" height="690" frameX="-11" frameY="0" frameWidth="475" frameHeight="691"/>
+	<SubTexture name="tg2 idle0019" x="1374" y="3226" width="455" height="690" frameX="-11" frameY="0" frameWidth="475" frameHeight="691"/>
 </TextureAtlas>
